@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">团队成员头像占位图</title>
+  <desc id="desc">团队成员照片待补充</desc>
+  <rect width="180" height="180" fill="#eef2f5"/>
+  <path d="M0 0H180V34C128 46 82 64 46 92C25 108 10 124 0 142V0Z" fill="#173f67" opacity="0.92"/>
+  <circle cx="90" cy="78" r="28" fill="none" stroke="#9caab6" stroke-width="3"/>
+  <path d="M42 154C49 124 66 110 90 110C114 110 131 124 138 154" fill="none" stroke="#9caab6" stroke-width="3" stroke-linecap="round"/>
+  <path d="M126 34C141 28 157 24 180 22" stroke="#b88a3b" stroke-width="4" stroke-linecap="round"/>
+</svg>

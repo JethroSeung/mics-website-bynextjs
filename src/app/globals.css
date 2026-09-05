@@ -1,26 +1,202 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * MICS 主题：源自旧站 style.css :root 的 design tokens（颜色值不改）
+ * 承载方式：shadcn 语义变量（组件自动换肤）+ Tailwind v4 @theme（utility 类）
+ */
 
 :root {
+  /* 品牌色（旧站原值） */
+  --primary: #173f67;
+  --primary-dark: #0f2e4d;
+  --primary-light: #e9f0f6;
+  --gold: #b88a3b;
+
+  /* 文字三级灰阶 */
+  --text-primary: #17212b;
+  --text-secondary: #596674;
+  --text-muted: #7b8792;
+
+  /* 背景与表面 */
   --background: #ffffff;
-  --foreground: #171717;
+  --surface: #f5f7f8;
+  --surface-strong: #eef2f5;
+  --surface-elevated: #fafbfc;
+
+  /* 边框 */
+  --border: #d9e0e5;
+  --border-dark: #b9c4cd;
+
+  /* 渐变（精致科技感，按需取用） */
+  --gradient-primary: linear-gradient(135deg, #1a4570 0%, #0f2e4d 100%);
+  --gradient-accent: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  --gradient-subtle: linear-gradient(180deg, #fafbfc 0%, #f5f7f8 100%);
+
+  /* 多层阴影 */
+  --shadow-card: 0 1px 3px rgba(15, 46, 77, 0.08), 0 1px 2px rgba(15, 46, 77, 0.06);
+  --shadow-elevated: 0 4px 12px rgba(15, 46, 77, 0.12), 0 2px 6px rgba(15, 46, 77, 0.08);
+  --shadow-strong: 0 8px 24px rgba(15, 46, 77, 0.16), 0 4px 8px rgba(15, 46, 77, 0.1);
+
+  /* shadcn 语义变量（吃旧站配色，组件自动换肤）
+   * 注意：--accent 在 shadcn 语义中是 hover 表面色，故映射浅蓝；
+   * 品牌金色是独立 token --gold（utility：text-gold / bg-gold）
+   */
+  --foreground: var(--text-primary);
+  --card: var(--background);
+  --card-foreground: var(--text-primary);
+  --popover: var(--background);
+  --popover-foreground: var(--text-primary);
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface-strong);
+  --secondary-foreground: var(--primary);
+  --muted: var(--surface);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--primary-light);
+  --accent-foreground: var(--primary-dark);
+  --destructive: oklch(0.577 0.245 27.325);
+  --input: var(--border);
+  --ring: rgba(23, 63, 103, 0.35);
+  --radius: 0.625rem;
 }
 
+/* Tailwind v4 主题：utility 类与断点
+ * @theme inline 引用 :root 变量；--color-* 生成 utility（bg-primary / text-gold 等）
+ */
 @theme inline {
+  /* shadcn 标准语义色 */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* MICS 扩展色（旧站细分 token）
+   * utility 如：bg-primary-dark / bg-primary-light / text-gold /
+   * text-body / text-body-secondary / bg-surface / border-border-dark
+   */
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-gold: var(--gold);
+  --color-body: var(--text-primary);
+  --color-body-secondary: var(--text-secondary);
+  --color-body-muted: var(--text-muted);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border-dark: var(--border-dark);
+
+  /* 品牌阴影（utility：shadow-card / shadow-elevated / shadow-strong） */
+  --shadow-card: var(--shadow-card);
+  --shadow-elevated: var(--shadow-elevated);
+  --shadow-strong: var(--shadow-strong);
+
+  /* 字体：中文系统字体栈（构建零网络依赖，加载零开销） */
+  --font-sans: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC",
+    "Source Han Sans SC", system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-heading: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC",
+    "Source Han Sans SC", system-ui, sans-serif;
+
+  /* 布局 token（utility：h-header / py-section / max-w-content） */
+  --spacing-header: 78px;
+  --spacing-section: clamp(72px, 9vw, 120px);
+  --container-content: 1180px;
+
+  /* 旧站断点 560 / 820 / 1040（覆盖 Tailwind 默认，820 为移动导航分界） */
+  --breakpoint-sm: 560px;
+  --breakpoint-md: 820px;
+  --breakpoint-lg: 1040px;
+  --breakpoint-xl: 1280px;
+
+  /* 圆角缩放（shadcn 组件依赖；基准 10px 贴合旧站卡片 12-16px 风格） */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+    scroll-padding-top: var(--spacing-header);
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ===== 动效（需求文档 §8 精简 4 项中的纯 CSS 部分） ===== */
+
+/* 3. 滚动进入动画：JS（IntersectionObserver）加 is-visible 后淡入上移。
+ * html.js 门控：JS 不可用时内容直接可见（脚本见 (zh)/layout.tsx）
+ */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 4. 卡片 hover 微抬升（配合 shadow 过渡） */
+.lift {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.lift:hover {
+  transform: translateY(-4px);
+}
+
+/* 统一降级：偏好减少动效时全部禁用（含 .js 门控态，避免优先级穿透） */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .js .reveal,
+  .reveal.is-visible,
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .lift,
+  .lift:hover {
+    transition: none;
+    transform: none;
+  }
 }
