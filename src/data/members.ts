@@ -138,7 +138,7 @@ export const members: Member[] = [
     role: "undergraduate",
     email: "jethrosong@163.com",
     photo: "/images/members/song-jiasheng.jpg",
-    featured: false,
+    featured: true,
   },
   {
     id: "ma-kai",

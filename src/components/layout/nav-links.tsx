@@ -2,25 +2,27 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { siteConfig, t, type Lang, type NavItem } from "@/data/site";
+import { siteConfig, t, hrefFor, type Lang, type NavItem } from "@/data/site";
 
 /** 桌面端主导航：当前路由高亮（aria-current） */
 export function NavLinks({ lang }: { lang: Lang }) {
   const pathname = usePathname() ?? "/";
 
-  const isActive = (item: NavItem) =>
-    item.href === "/"
-      ? pathname === "/" || pathname === ""
-      : pathname === item.href || pathname.startsWith(`${item.href}/`);
+  const isActive = (item: NavItem) => {
+    const href = hrefFor(item.href, lang);
+    return href === "/" || href === ""
+      ? pathname === "/" || pathname === "" || pathname === "/en"
+      : pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
-    <nav aria-label={lang === "zh" ? "主要导航" : "Primary"} className="hidden md:flex md:items-center md:gap-7">
+    <nav aria-label={lang === "zh" ? "主要导航" : "Primary"} className="hidden xl:flex xl:items-center xl:gap-5 min-[1440px]:gap-4">
       {siteConfig.nav.map((item) => (
         <Link
           key={item.href}
-          href={item.href}
+          href={hrefFor(item.href, lang)}
           aria-current={isActive(item) ? "page" : undefined}
-          className={`relative text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-ring ${
+          className={`relative text-base font-medium transition-colors focus-visible:outline-2 focus-visible:outline-ring ${
             isActive(item)
               ? "text-primary"
               : "text-body-secondary hover:text-primary"

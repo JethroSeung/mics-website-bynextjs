@@ -1,6 +1,6 @@
 /**
  * 研究方向数据（需求文档 §5：3 方向合并为 2）
- * - pain：自然灾害场景下的痛感计算（负责人：杨承轩）
+ * - pain：自然灾害场景下的通感计算（负责人：杨承轩）
  * - medeng：医工交叉-多模态感知（负责人：张栩闻）
  * 详情内容待周末与导师讨论（§13-W2），detail 为 null 时详情页渲染整页占位
  * 英文名与 cardIntro 为过渡占位，正式命名后仅改本文件
@@ -37,13 +37,13 @@ export const researchDirections: ResearchDirection[] = [
     slug: "pain",
     order: 1,
     name: {
-      zh: "自然灾害场景下的痛感计算",
-      en: "Pain Computing in Natural Disaster Scenarios",
+      zh: "自然灾害场景下的通感计算",
+      en: "Integrated Sensing and Communication in Natural Disaster Scenarios",
     },
     leadMemberId: "yang-chengxuan",
     cardIntro: {
-      zh: "面向地震、洪涝等自然灾害救援场景，研究多模态痛感信号的采集、表征与计算方法。",
-      en: "Researching multimodal pain signal acquisition, representation and computing for disaster rescue scenarios.",
+      zh: "面向地震、洪涝等自然灾害救援场景，研究通信感知一体化信号的采集、表征与计算方法。",
+      en: "Researching integrated sensing and communication (ISAC) signal acquisition, representation and computing for disaster rescue scenarios.",
     },
     detail: null,
   },

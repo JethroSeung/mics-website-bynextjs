@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { siteConfig, t, type Lang } from "@/data/site";
+import { siteConfig, t, hrefFor, type Lang } from "@/data/site";
 
 /**
  * 全站页脚：四列（课题组简介 / 快速链接 / 合作单位 / 联系方式）+ 版权行
@@ -12,7 +12,9 @@ export function SiteFooter({ lang }: { lang: Lang }) {
 
   return (
     <footer className="mt-section border-t border-border bg-surface">
+      {/* 页脚内容整体 -30%（导师反馈）：zoom 挂在内层，外层容器宽度与页头对齐 */}
       <div className="mx-auto w-full max-w-content px-6 py-14 md:px-8">
+        <div className="zoom-70">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* 1. 课题组简介 */}
           <div className="flex flex-col gap-3">
@@ -28,22 +30,22 @@ export function SiteFooter({ lang }: { lang: Lang }) {
                 {t(siteConfig.name, lang)}
               </strong>
             </div>
-            <p className="text-sm leading-relaxed text-body-secondary">
+            <p className="text-base leading-relaxed text-body-secondary">
               {t(siteConfig.intro, lang)}
             </p>
           </div>
 
           {/* 2. 快速链接 */}
           <nav aria-label={lang === "zh" ? "页脚快速链接" : "Quick links"}>
-            <h3 className="mb-3 text-sm font-bold tracking-wide text-foreground">
+            <h3 className="mb-3 text-base font-bold tracking-wide text-foreground">
               {lang === "zh" ? "快速链接" : "Quick Links"}
             </h3>
             <ul className="flex flex-col gap-2.5">
               {siteConfig.nav.map((item) => (
                 <li key={item.href}>
                   <Link
-                    href={item.href}
-                    className="text-sm text-body-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
+                    href={hrefFor(item.href, lang)}
+                    className="text-base text-body-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
                   >
                     {t(item.label, lang)}
                   </Link>
@@ -54,7 +56,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
 
           {/* 3. 合作单位 */}
           <div>
-            <h3 className="mb-3 text-sm font-bold tracking-wide text-foreground">
+            <h3 className="mb-3 text-base font-bold tracking-wide text-foreground">
               {lang === "zh" ? "合作单位" : "Partners"}
             </h3>
             <ul className="flex flex-col gap-3">
@@ -67,7 +69,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
                     height={40}
                     className="size-10 rounded-md border border-border object-contain p-1"
                   />
-                  <span className="text-sm text-body-secondary">
+                  <span className="text-base text-body-secondary">
                     {t(partner.name, lang)}
                   </span>
                 </li>
@@ -77,26 +79,26 @@ export function SiteFooter({ lang }: { lang: Lang }) {
 
           {/* 4. 联系方式 */}
           <div>
-            <h3 className="mb-3 text-sm font-bold tracking-wide text-foreground">
+            <h3 className="mb-3 text-base font-bold tracking-wide text-foreground">
               {lang === "zh" ? "联系方式" : "Contact"}
             </h3>
             <address className="flex flex-col gap-2.5 not-italic">
-              <p className="text-sm text-body-secondary">
+              <p className="text-base text-body-secondary">
                 <span className="text-body-muted">
                   {lang === "zh" ? "联系人：" : "Contact: "}
                 </span>
                 {lang === "zh" ? siteConfig.contact.person : siteConfig.contact.personEn}
               </p>
-              <p className="text-sm text-body-secondary">
+              <p className="text-base text-body-secondary">
                 <span className="text-body-muted">Email：</span>
-                <a
-                  href={`mailto:${siteConfig.contact.email}`}
-                  className="transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
-                >
-                  {siteConfig.contact.email}
-                </a>
+              <a
+                href={`mailto:${siteConfig.contact.email}`}
+                className="break-all transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                {siteConfig.contact.email}
+              </a>
               </p>
-              <p className="text-sm text-body-secondary">
+              <p className="text-base text-body-secondary">
                 <span className="text-body-muted">
                   {lang === "zh" ? "所属单位：" : "Affiliation: "}
                 </span>
@@ -111,6 +113,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
         <p className="text-center text-xs text-body-muted">
           © {year} {t(siteConfig.name, lang)} · {t(siteConfig.affiliation, lang)}
         </p>
+        </div>
       </div>
     </footer>
   );

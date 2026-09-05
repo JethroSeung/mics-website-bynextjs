@@ -13,7 +13,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import { t, type HeroSlide, type Lang } from "@/data/site";
+import { t, hrefFor, type HeroSlide, type Lang } from "@/data/site";
 
 interface HeroSliderProps {
   slides: readonly HeroSlide[];
@@ -22,7 +22,8 @@ interface HeroSliderProps {
 
 /**
  * 首页 hero 轮播（需求 §8-1）：
- * 自动播放 3200ms / hover 暂停移出恢复 / 点按后继续 /
+ * 自动播放 6000ms（放慢节奏）/ 切换过渡 duration 45（平滑）/
+ * hover 暂停移出恢复 / 点按后继续 /
  * 指示器 + 前后按钮 / aria 同步 / reduced-motion 停止自动播放
  */
 export function HeroSlider({ slides, lang }: HeroSliderProps) {
@@ -30,7 +31,7 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
   const [current, setCurrent] = useState(1); // 1 基，供指示器与 aria
   // 惰性初始化保存插件实例（useState 而非 useRef：渲染期读取 ref.current 违反 React Compiler 规则）
   const [autoplay] = useState(() =>
-    Autoplay({ delay: 3200, stopOnInteraction: false, stopOnMouseEnter: true })
+    Autoplay({ delay: 6000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
   // 偏好减少动效：停止自动播放（§8 统一降级规则）
@@ -58,7 +59,7 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
   return (
     <section aria-labelledby="hero-title" className="relative">
       <Carousel
-        opts={{ loop: true }}
+        opts={{ loop: true, duration: 45 }}
         plugins={[autoplay]}
         setApi={setApi}
         aria-label={lang === "zh" ? "课题组焦点轮播" : "Featured slides"}
@@ -85,16 +86,16 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
               >
                 <div className="flex min-h-[max(560px,calc(100svh_-_var(--spacing-header)))] items-center px-6 md:px-8">
                   <div className="mx-auto w-full max-w-content py-16 md:py-20">
-                    <p className="text-xs font-semibold tracking-[0.25em] text-gold uppercase">
+                    <p className="text-sm font-semibold tracking-[0.25em] text-gold uppercase">
                       {slide.eyebrow}
                     </p>
                     <Title
                       id={i === 0 ? "hero-title" : undefined}
-                      className="mt-4 max-w-3xl text-4xl leading-tight font-bold tracking-tight text-white md:text-6xl"
+                      className="mt-4 max-w-3xl text-5xl leading-tight font-bold tracking-tight break-words text-white md:text-7xl"
                     >
                       {t(slide.title, lang)}
                     </Title>
-                    <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
+                    <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
                       {t(slide.tagline, lang)}
                     </p>
 
@@ -103,7 +104,7 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
                         {slide.pills.map((pill) => (
                           <span
                             key={t(pill, lang)}
-                            className="rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-white/90 backdrop-blur-xs"
+                            className="rounded-full border border-white/25 bg-white/10 px-5 py-2 text-base text-white/90 backdrop-blur-xs"
                           >
                             {t(pill, lang)}
                           </span>
@@ -118,13 +119,14 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
                             key={action.href}
                             asChild
                             className={cn(
-                              "h-11 px-7 text-sm md:text-base",
+                              // 小屏（根字号放大后英文长文案）：允许换行并自适应高度，避免溢出
+                              "h-auto min-h-12 px-6 text-center text-base whitespace-normal md:h-12 md:px-8 md:text-lg md:whitespace-nowrap",
                               action.style === "primary"
                                 ? "bg-white text-primary-dark hover:bg-white/90"
                                 : "border-white/50 bg-transparent text-white hover:border-white hover:bg-white/10"
                             )}
                           >
-                            <Link href={action.href}>{t(action.label, lang)}</Link>
+                            <Link href={hrefFor(action.href, lang)}>{t(action.label, lang)}</Link>
                           </Button>
                         ))}
                       </div>

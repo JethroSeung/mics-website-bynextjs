@@ -114,10 +114,12 @@
   --font-heading: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC",
     "Source Han Sans SC", system-ui, sans-serif;
 
-  /* 布局 token（utility：h-header / py-section / max-w-content） */
-  --spacing-header: 78px;
-  --spacing-section: clamp(72px, 9vw, 120px);
-  --container-content: 1180px;
+  /* 布局 token（utility：h-header / py-section / max-w-content）
+   * 根字号放大 50% 后联动调整：页头加高、section 间距与内容宽度加大
+   */
+  --spacing-header: 108px;
+  --spacing-section: clamp(96px, 10vw, 152px);
+  --container-content: 1440px;
 
   /* 旧站断点 560 / 820 / 1040（覆盖 Tailwind 默认，820 为移动导航分界） */
   --breakpoint-sm: 560px;
@@ -139,11 +141,13 @@
   }
   html {
     @apply font-sans scroll-smooth;
+    /* 全站字号整体放大 50%：所有 rem 尺寸（文字/间距/图标）随根字号联动 */
+    font-size: 150%;
     scroll-padding-top: var(--spacing-header);
   }
   body {
     @apply bg-background text-foreground;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.75;
   }
   img {
@@ -182,6 +186,19 @@
 
 .lift:hover {
   transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* ===== 区域级缩放（导师反馈 2026-09-05） =====
+ * 根字号整体放大 50% 后，个别区块/子页面再按需回调：
+ * zoom 作用于块级容器保持全宽，内容（文字/间距/图片）同比例缩放
+ */
+.zoom-80 {
+  zoom: 0.8; /* 子页面（研究方向 / 团队 / 招新）内容 -20% */
+}
+
+.zoom-70 {
+  zoom: 0.7; /* 首页导师介绍、团队成员区块与页脚 -30% */
 }
 
 /* 统一降级：偏好减少动效时全部禁用（含 .js 门控态，避免优先级穿透） */

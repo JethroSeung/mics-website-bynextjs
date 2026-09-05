@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import "../globals.css";
+import "../../globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipLink } from "@/components/layout/skip-link";
@@ -8,21 +8,21 @@ import { SkipLink } from "@/components/layout/skip-link";
 import { alternatesFor } from "@/data/site";
 
 /**
- * 中文站根布局（路由组 (zh)，路径前缀为 /）。
- * 采用双根布局模式：英文站 app/en/ 拥有独立根布局以设置 <html lang="en">。
+ * 英文站根布局（路由组 (en) 下的 en 路径段，路径前缀 /en）。
+ * 双根布局模式：与中文站 (zh) 各自拥有独立根布局，以设置 <html lang="en">。
  */
 export const metadata: Metadata = {
   title: {
-    default: "多模态智能通信与感知课题组 · 南京邮电大学",
+    default: "Multimodal Intelligent Communication and Sensing Group · NJUPT",
     template: "%s · MICS",
   },
   description:
-    "南京邮电大学计算机学院多模态智能通信与感知（MICS）课题组官方网站，展示研究方向、团队成员与招新信息。",
+    "Official website of the MICS (Multimodal Intelligent Communication and Sensing) group at the College of Computer Science, NJUPT, presenting research directions, team members and recruitment information.",
   // 首页 hreflang/canonical（子页面各自覆盖）
-  alternates: alternatesFor("/", "zh"),
+  alternates: alternatesFor("/", "en"),
 };
 
-export default function ZhLayout({
+export default function EnLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -30,18 +30,18 @@ export default function ZhLayout({
   // suppressHydrationWarning：js-flag 脚本在 hydration 前给 <html> 加 js class；
   // body 上抑制浏览器扩展（如翻译插件）注入的属性，均为已知无害差异
   return (
-    <html lang="zh-CN" className="h-full antialiased" suppressHydrationWarning>
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <body className="flex min-h-full flex-col font-sans" suppressHydrationWarning>
         {/* JS 可用标记：滚动入场动画仅在 JS 可用时隐藏初始态（无 JS 直接可见） */}
-        <Script id="js-flag" strategy="beforeInteractive">
+        <Script id="js-flag-en" strategy="beforeInteractive">
           {`document.documentElement.classList.add("js")`}
         </Script>
-        <SkipLink lang="zh" />
-        <SiteHeader lang="zh" />
+        <SkipLink lang="en" />
+        <SiteHeader lang="en" />
         <main id="main-content" className="flex-1">
           {children}
         </main>
-        <SiteFooter lang="zh" />
+        <SiteFooter lang="en" />
       </body>
     </html>
   );
