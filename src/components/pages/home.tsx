@@ -207,9 +207,10 @@ export function HomePage({ lang }: { lang: Lang }) {
               desc={t(copy.teamDesc, lang)}
               align="center"
             />
-            {/* zoom-70 内部坐标系放大 1/0.7：max-w-[1344px] 经缩放后 ≈941px，
-                桌面端三列卡片随之缩小约 30%（移动端不受约束） */}
-            <div className="mx-auto mt-12 grid w-full max-w-[1344px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {/* zoom-70 内部坐标系放大 1/0.7：max-w-[1536px] 经缩放后 ≈1075px，
+                xl 起 4 列（4×4 共 16 人），卡片视觉宽 ≈250px（较原 3 列缩小约 15%），
+                卡片文字字号不变（MemberCard 内为固定 rem 类）；1040-1280 过渡为 3 列 */}
+            <div className="mx-auto mt-12 grid w-full max-w-[1536px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {featuredMembers.map((member) => (
                 <MemberCard key={member.id} member={member} lang={lang} />
               ))}

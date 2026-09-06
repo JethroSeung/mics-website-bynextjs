@@ -64,9 +64,9 @@ results.push({
     fonts.hero === "108px" &&
     fonts.h2 === "72px" &&
     fonts.logoW === 72 &&
-    fonts.teamCardCount === 9 &&
-    fonts.teamGridW > 930 &&
-    fonts.teamGridW < 950 &&
+    fonts.teamCardCount === 16 &&
+    fonts.teamGridW > 1065 &&
+    fonts.teamGridW < 1085 &&
     fonts.supervisorPhotoW > 395 &&
     fonts.supervisorPhotoW < 410 &&
     fonts.footerLogoW > 31 &&

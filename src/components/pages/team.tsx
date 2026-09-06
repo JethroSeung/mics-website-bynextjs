@@ -15,8 +15,8 @@ export function TeamPage({ lang }: { lang: Lang }) {
   const copy = {
     pageTitle: { zh: "团队成员", en: "Team Members" },
     pageDesc: {
-      zh: "课题组成员按研究生与本科生展示，成员信息将随团队变化持续更新。",
-      en: "Members are grouped as master students and undergraduate students. Information will be updated as the team changes.",
+      zh: "",
+      en: "",
     },
     masterTitle: { zh: "研究生", en: "Master Students" },
     undergraduateTitle: { zh: "本科生", en: "Undergraduate Students" },

@@ -15,7 +15,7 @@ export interface Member {
   /** null = 旧站"待补充" */
   email: string | null;
   photo: string;
-  /** 是否出现在首页精选（旧站首页 8 人） */
+  /** 是否出现在首页精选（首页 4×4 共 16 人：8 研究生 + 8 本科生） */
   featured: boolean;
   /** 研究方向负责人（需求文档 §5 确认：杨承轩-pain、张栩闻-medeng） */
   directionLead?: Exclude<Direction, "general">;
@@ -24,7 +24,7 @@ export interface Member {
 export const PLACEHOLDER_AVATAR = "/images/members/member-placeholder.svg";
 
 export const members: Member[] = [
-  // ===== 研究生（8）=====
+  // ===== 研究生（8，全部上首页精选）=====
   {
     id: "liu-jiaming",
     name: { zh: "刘佳铭", en: "Jiaming Liu" },
@@ -55,7 +55,7 @@ export const members: Member[] = [
     role: "master",
     email: "yuanquan2777800769@163.com",
     photo: "/images/members/yuan-quan.jpg",
-    featured: false,
+    featured: true,
   },
   {
     id: "wen-yuhang",
@@ -63,15 +63,15 @@ export const members: Member[] = [
     role: "master",
     email: "wyh1265456537@163.com",
     photo: "/images/members/wen-yuhang.jpg",
-    featured: false,
+    featured: true,
   },
   {
     id: "xu-bo",
     name: { zh: "徐博", en: "Bo Xu" },
     role: "master",
     email: "mountqingxubo@outlook.com",
-    photo: PLACEHOLDER_AVATAR,
-    featured: false,
+    photo: "/images/members/xu-bo.jpg",
+    featured: true,
   },
   {
     id: "ma-rui",
@@ -79,7 +79,7 @@ export const members: Member[] = [
     role: "master",
     email: "3305372418@qq.com",
     photo: "/images/members/ma-rui.jpg",
-    featured: false,
+    featured: true,
   },
   {
     id: "dou-jiangnan",
@@ -87,7 +87,7 @@ export const members: Member[] = [
     role: "master",
     email: "doujiangn@163.com",
     photo: "/images/members/dou-jiangnan.jpg",
-    featured: false,
+    featured: true,
   },
 
   // ===== 本科生（27）=====
@@ -104,7 +104,7 @@ export const members: Member[] = [
     name: { zh: "金楚惟", en: "Chuwei Jin" },
     role: "undergraduate",
     email: "b24013021@njupt.edu.cn",
-    photo: PLACEHOLDER_AVATAR,
+    photo: "/images/members/jin-chuwei.jpg",
     featured: true,
   },
   {
@@ -145,8 +145,8 @@ export const members: Member[] = [
     name: { zh: "马凯", en: "Kai Ma" },
     role: "undergraduate",
     email: "mk15598060419@outlook.com",
-    photo: PLACEHOLDER_AVATAR,
-    featured: false,
+    photo: "/images/members/ma-kai.jpg",
+    featured: true,
   },
   {
     id: "wang-yuehan",
@@ -168,8 +168,8 @@ export const members: Member[] = [
     id: "wu-zeyuan",
     name: { zh: "吴泽原", en: "Zeyuan Wu" },
     role: "undergraduate",
-    email: null,
-    photo: PLACEHOLDER_AVATAR,
+    email: "B24040512@njupt.deu.cn",
+    photo: "/images/members/wu-zeyuan.jpg",
     featured: false,
   },
   {
@@ -184,8 +184,8 @@ export const members: Member[] = [
     id: "qiu-rui",
     name: { zh: "邱锐", en: "Rui Qiu" },
     role: "undergraduate",
-    email: null,
-    photo: PLACEHOLDER_AVATAR,
+    email: "19881608170@163.com",
+    photo: "/images/members/qiu-rui.jpg",
     featured: false,
   },
   {
@@ -200,7 +200,7 @@ export const members: Member[] = [
     id: "wang-yihan",
     name: { zh: "王怡涵", en: "Yihan Wang" },
     role: "undergraduate",
-    email: null,
+    email: "B25040902@njupt.deu.cn",
     photo: PLACEHOLDER_AVATAR,
     featured: false,
   },
@@ -209,8 +209,8 @@ export const members: Member[] = [
     name: { zh: "杨承轩", en: "Chengxuan Yang" },
     role: "undergraduate",
     email: "ycxuan0517@gmail.com",
-    photo: PLACEHOLDER_AVATAR,
-    featured: false,
+    photo: "/images/members/yang-chengxuan.jpg",
+    featured: true,
     directionLead: "pain",
   },
   {
@@ -226,7 +226,7 @@ export const members: Member[] = [
     name: { zh: "陈语瞳", en: "Yutong Chen" },
     role: "undergraduate",
     email: "2965886547@qq.com",
-    photo: PLACEHOLDER_AVATAR,
+    photo: "/images/members/chen-yutong.jpg",
     featured: false,
   },
   {
@@ -266,15 +266,15 @@ export const members: Member[] = [
     name: { zh: "陈拓宇", en: "Tuoyu Chen" },
     role: "undergraduate",
     email: "chentuoyu1@outlook.com",
-    photo: PLACEHOLDER_AVATAR,
+    photo: "/images/members/chen-tuoyu.jpg",
     featured: false,
   },
   {
     id: "guo-anyou",
     name: { zh: "郭桉佑", en: "Anyou Guo" },
     role: "undergraduate",
-    email: null,
-    photo: PLACEHOLDER_AVATAR,
+    email: "15371023110@139.com",
+    photo: "/images/members/guo-anyou.jpg",
     featured: false,
   },
   {
@@ -311,7 +311,7 @@ export const members: Member[] = [
   },
 ];
 
-/** 首页精选成员（旧站首页顺序：3 研究生 + 5 本科生） */
+/** 首页精选成员（16 人：8 研究生全部 + 指定本科生 8 人，顺序与数据文件一致） */
 export const featuredMembers: Member[] = members.filter((m) => m.featured);
 
 /** 按角色分组（/team 页渲染用），顺序与数据文件一致 */
