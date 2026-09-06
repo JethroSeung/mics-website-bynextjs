@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer-core";
 
-const BASE = "http://localhost:3000";
+const BASE = "http://localhost:3001";
 const EDGE = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
 const widths = [320, 375, 560, 820, 1040, 1280, 1440, 1920];
 const results = [];

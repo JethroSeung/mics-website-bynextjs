@@ -54,10 +54,10 @@ export function HomePage({ lang }: { lang: Lang }) {
     <>
       <HeroSlider slides={siteConfig.heroSlides} lang={lang} />
 
-      {/* 01 课题组介绍 */}
+      {/* 01 课题组介绍（内容整体 -10%，2026-09-06 导师反馈；其余区块不动） */}
       <section id="about" aria-labelledby="about-title" className="bg-surface py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal>
+          <Reveal className="zoom-90">
             <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
               <div>
                 <SectionHeading

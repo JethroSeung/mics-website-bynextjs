@@ -140,10 +140,13 @@
     @apply border-border outline-ring/50;
   }
   html {
-    @apply font-sans scroll-smooth;
+    /* 不设 scroll-behavior:smooth：否则路由跳转的 scrollTo(0,0) 会变成
+       "先停在原滚动位置再动画滚回顶部"（2026-09-06 导师反馈），锚点跳转保持浏览器默认瞬移 */
+    @apply font-sans;
     /* 全站字号整体放大 50%：所有 rem 尺寸（文字/间距/图标）随根字号联动 */
     font-size: 150%;
-    scroll-padding-top: var(--spacing-header);
+    /* 页头内容已 zoom-90：锚点偏移按缩放后实际高度（108×0.9≈97px）联动 */
+    scroll-padding-top: calc(var(--spacing-header) * 0.9);
   }
   body {
     @apply bg-background text-foreground;

@@ -15,7 +15,8 @@ import { siteConfig, t, hrefFor, type Lang } from "@/data/site";
 export function SiteHeader({ lang }: { lang: Lang }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border/90 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="mx-auto flex h-header w-full max-w-content items-center justify-between gap-4 px-4 sm:px-6">
+      {/* 内容整体 -10%（2026-09-06 导师反馈）：zoom 挂内层，sticky 外层保持全宽遮底 */}
+      <div className="zoom-90 mx-auto flex h-header w-full max-w-content items-center justify-between gap-4 px-4 sm:px-6">
         {/* 双 Logo 品牌区 */}
         <Link
           href={hrefFor("/", lang)}
