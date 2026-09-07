@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Waves, Stethoscope, type LucideIcon } from "lucide-react";
+import { DirectionPartners } from "@/components/direction-partners";
 import { t, hrefFor, type Lang } from "@/data/site";
 import { getMemberById } from "@/data/members";
 import type { DirectionSlug, ResearchDirection } from "@/data/research";
@@ -52,7 +53,13 @@ export function ResearchCard({ direction, lang }: ResearchCardProps) {
         {lead.email ?? (lang === "zh" ? "待补充" : "To be updated")}
       </p>
 
-      <span className="mt-6 text-base font-medium text-gold transition-transform duration-200 group-hover:translate-x-1">
+      <DirectionPartners
+        partnerIds={direction.partnerIds}
+        lang={lang}
+        variant="compact"
+      />
+
+      <span className="mt-auto pt-6 text-base font-medium text-gold transition-transform duration-200 group-hover:translate-x-1">
         {lang === "zh" ? "了解更多" : "Learn more"} →
       </span>
     </Link>

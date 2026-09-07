@@ -48,7 +48,14 @@ export interface NavItem {
   href: string;
 }
 
+export type PartnerId =
+  | "futurecomm-lab"
+  | "jiangsu-province-hospital"
+  | "china-comservice"
+  | "china-telecom";
+
 export interface Partner {
+  id: PartnerId;
   name: Localized;
   logo: string;
 }
@@ -86,8 +93,8 @@ export const siteConfig = {
   /** 首页"课题组介绍"区块（正式文案 §13-W2 后调整） */
   about: {
     lead: {
-      zh: "面向自然灾害救援与健康监测场景，探索通感计算与多模态感知融合技术。",
-      en: "Exploring integrated sensing and communication (ISAC) and multimodal sensing for disaster rescue and health monitoring.",
+      zh: "面向健康监测场景与自然灾害感知救援，探索通感计算与多模态感知融合技术。",
+      en: "Exploring integrated sensing and communication (ISAC) and multimodal sensing‑fusion technologies for health monitoring and natural‑disaster perception‑aided rescue.",
     },
     note: {
       zh: "多模态智能通信与感知课题组隶属于南京邮电大学计算机学院，由左益平老师指导。课题组围绕自然灾害场景下的通感计算与医工交叉多模态感知开展研究，重视科研平台建设、跨学科合作与学生科研训练。",
@@ -100,12 +107,12 @@ export const siteConfig = {
       eyebrow: "Multimodal Intelligent Communication and Sensing",
       title: { zh: "多模态智能通信与感知", en: "Multimodal Intelligent Communication and Sensing" },
       tagline: {
-        zh: "面向自然灾害救援与健康监测场景，开展通感计算与医工交叉多模态感知研究。",
+        zh: "面向健康监测场景与自然灾害救援，开展医工交叉多模态感知与通感计算研究。",
         en: "Research on integrated sensing and communication (ISAC) in natural disaster scenarios and medical-engineering multimodal sensing.",
       },
       pills: [
-        { zh: "通感计算", en: "ISAC Computing" },
-        { zh: "多模态感知", en: "Multimodal Sensing" },
+        { zh: "医工多模态感知", en: "Multimodal Sensing" },
+        { zh: "灾害场景通感计算", en: "ISAC Computing" }
       ],
       actions: [
         { label: { zh: "了解课题组", en: "About the Group" }, href: "#about", style: "primary" },
@@ -116,13 +123,13 @@ export const siteConfig = {
       eyebrow: "Research Directions",
       title: { zh: "两大研究方向", en: "Two Research Directions" },
       tagline: {
-        zh: "聚焦自然灾害场景下的通感计算与医工交叉多模态感知，扎实推进基础研究与场景落地。",
+        zh: "聚焦医工交叉多模态感知与自然灾害场景下的通感计算，扎实推进基础研究与场景落地。",
         en: "Integrated sensing and communication (ISAC) in natural disaster scenarios and medical-engineering multimodal sensing.",
       },
       pills: [],
       actions: [
-        { label: { zh: "了解通感计算", en: "ISAC Computing" }, href: "/research/pain", style: "primary" },
-        { label: { zh: "了解多模态感知", en: "Multimodal Sensing" }, href: "/research/medeng", style: "secondary" },
+        { label: { zh: "了解医工多模态感知", en: "Multimodal Sensing" }, href: "/research/medeng", style: "primary" },
+        { label: { zh: "了解灾害场景通感计算", en: "ISAC Computing" }, href: "/research/pain", style: "secondary" },
       ],
     },
     {
@@ -170,24 +177,36 @@ export const siteConfig = {
   },
   partners: [
     {
+      id: "futurecomm-lab",
       name: { zh: "东南大学 FutureComm Lab", en: "FutureComm Lab, SEU" },
       logo: "/images/futurecomm-lab-logo.jpg",
     },
     {
+      id: "jiangsu-province-hospital",
       name: { zh: "江苏省人民医院", en: "Jiangsu Province Hospital" },
       logo: "/images/jiangsu-province-hospital-logo.jpg",
+    },
+    {
+      id: "china-comservice",
+      name: { zh: "中国通信服务", en: "China Comservice" },
+      logo: "/images/china-comservice.jpg",
+    },
+    {
+      id: "china-telecom",
+      name: { zh: "中国电信", en: "China Telecom" },
+      logo: "/images/china-telecom.jpg",
     },
   ] as Partner[],
   nav: [
     { label: { zh: "首页", en: "Home" }, href: "/" },
     // 方向短名导航（正式命名待周末讨论 W1，改这里即可）
     {
-      label: { zh: "通感计算", en: "ISAC Computing" },
-      href: "/research/pain",
-    },
-    {
       label: { zh: "多模态感知", en: "Multimodal Sensing" },
       href: "/research/medeng",
+    },
+    {
+      label: { zh: "通感计算", en: "ISAC Computing" },
+      href: "/research/pain",
     },
     { label: { zh: "团队成员", en: "Team" }, href: "/team" },
     { label: { zh: "加入我们", en: "Join Us" }, href: "/join" },
@@ -197,4 +216,13 @@ export const siteConfig = {
 /** 当前语言的取值辅助 */
 export function t(value: Localized, lang: Lang): string {
   return value[lang];
+}
+
+/** 按方向配置的 id 取合作单位，保持传入顺序并校验数据完整性。 */
+export function getPartnersByIds(ids: readonly PartnerId[]): Partner[] {
+  return ids.map((id) => {
+    const partner = siteConfig.partners.find((item) => item.id === id);
+    if (!partner) throw new Error(`合作单位不存在：${id}`);
+    return partner;
+  });
 }

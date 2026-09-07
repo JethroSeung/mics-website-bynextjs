@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Mail } from "lucide-react";
+import { DirectionPartners } from "@/components/direction-partners";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 import { t, hrefFor, type Lang } from "@/data/site";
@@ -131,6 +132,12 @@ export function ResearchPage({
                 </p>
               </div>
             </div>
+
+            <DirectionPartners
+              partnerIds={direction.partnerIds}
+              lang={lang}
+              variant="detail"
+            />
           </Reveal>
         </div>
       </section>

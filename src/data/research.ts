@@ -6,7 +6,7 @@
  * pain 详情待与导师讨论（§13-W2），detail 为 null 时详情页渲染整页占位
  */
 
-import type { Localized } from "./site";
+import type { Localized, PartnerId } from "./site";
 import { getMemberById } from "./members";
 
 export type DirectionSlug = "pain" | "medeng";
@@ -73,20 +73,23 @@ export interface ResearchDirection {
   name: Localized;
   /** 关联 members.ts 的成员 id，渲染负责人姓名 + 邮箱 */
   leadMemberId: string;
+  /** 与该研究方向直接关联的合作单位 */
+  partnerIds: readonly PartnerId[];
   cardIntro: Localized;
   /** null = "内容待发布" 整页占位态（Phase 1） */
   detail: ResearchDetail | null;
 }
 
-export const researchDirections: ResearchDirection[] = [
+export const researchDirections: ResearchDirection[] = ([
   {
     slug: "pain",
-    order: 1,
+    order: 2,
     name: {
       zh: "自然灾害场景下的通感计算",
       en: "Integrated Sensing and Communication in Natural Disaster Scenarios",
     },
     leadMemberId: "yang-chengxuan",
+    partnerIds: ["china-comservice", "china-telecom"],
     cardIntro: {
       zh: "面向地震、洪涝等自然灾害救援场景，研究通信感知一体化信号的采集、表征与计算方法。",
       en: "Researching integrated sensing and communication (ISAC) signal acquisition, representation and computing for disaster rescue scenarios.",
@@ -95,12 +98,13 @@ export const researchDirections: ResearchDirection[] = [
   },
   {
     slug: "medeng",
-    order: 2,
+    order: 1,
     name: {
       zh: "医工交叉-多模态感知",
       en: "Medical-Engineering Multimodal Sensing",
     },
     leadMemberId: "zhang-xuwen",
+    partnerIds: ["jiangsu-province-hospital"],
     cardIntro: {
       zh: "医工交叉视角下的多模态感知技术，探索面向健康监测与临床应用的智能感知方案。",
       en: "Multimodal sensing from a medical-engineering perspective for health monitoring and clinical applications.",
@@ -331,7 +335,7 @@ export const researchDirections: ResearchDirection[] = [
       ],
     },
   },
-];
+] satisfies ResearchDirection[]).sort((a, b) => a.order - b.order);
 
 /** 按 slug 取方向 */
 export function getDirection(slug: DirectionSlug): ResearchDirection {

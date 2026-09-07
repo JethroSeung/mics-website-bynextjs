@@ -22,7 +22,9 @@ export function NavLinks({ lang }: { lang: Lang }) {
           key={item.href}
           href={hrefFor(item.href, lang)}
           aria-current={isActive(item) ? "page" : undefined}
-          className={`relative text-base font-medium transition-colors focus-visible:outline-2 focus-visible:outline-ring ${
+          className={`relative font-medium transition-colors focus-visible:outline-2 focus-visible:outline-ring ${
+            lang === "en" ? "text-sm" : "text-base"
+          } ${
             isActive(item)
               ? "text-primary"
               : "text-body-secondary hover:text-primary"

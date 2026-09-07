@@ -16,7 +16,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border/90 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       {/* 内容整体 -10%（2026-09-06 导师反馈）：zoom 挂内层，sticky 外层保持全宽遮底 */}
-      <div className="zoom-90 mx-auto flex h-header w-full max-w-content items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="zoom-90 mx-auto flex h-header w-full max-w-[2000px] items-center justify-between gap-4 px-4 sm:px-6">
         {/* 双 Logo 品牌区 */}
         <Link
           href={hrefFor("/", lang)}
@@ -41,7 +41,11 @@ export function SiteHeader({ lang }: { lang: Lang }) {
             priority
           />
           <span className="hidden min-w-0 flex-col justify-center md:flex">
-            <strong className="truncate text-base font-bold text-primary">
+            <strong
+              className={`truncate font-bold text-primary ${
+                lang === "en" ? "text-sm" : "text-base"
+              }`}
+            >
               {t(siteConfig.name, lang)}
             </strong>
             <small className="hidden truncate text-xs text-body-muted min-[1440px]:block">
