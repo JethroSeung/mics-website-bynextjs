@@ -95,13 +95,16 @@ export function HomePage({ lang }: { lang: Lang }) {
       <section id="leader" aria-labelledby="leader-title" className="py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <Reveal className="zoom-70">
-            <div className="grid items-start gap-10 lg:grid-cols-[2fr_3fr] lg:gap-16">
+            {/* lg:gap-[143px]：zoom-70 后视觉间距 ≈100px（2026-09-07 导师定稿） */}
+            <div className="grid items-start gap-10 lg:grid-cols-[2fr_3fr] lg:gap-[143px]">
+              {/* 照片右对齐贴住文字列（原 justify-self-start 时列内留白 175px）；
+                  图源已裁掉顶部留白（960×1269），人物头部与眉题/标题对齐 */}
               <Image
                 src={supervisor.photo}
                 alt={t(copy.supervisorPhotoAlt, lang)}
                 width={520}
-                height={693}
-                className="w-full max-w-sm justify-self-center rounded-xl object-cover shadow-card lg:justify-self-start"
+                height={688}
+                className="w-full max-w-sm justify-self-center rounded-xl object-cover shadow-card lg:justify-self-end"
               />
               <div>
                 <SectionHeading
@@ -211,8 +214,15 @@ export function HomePage({ lang }: { lang: Lang }) {
                 xl 起 4 列（4×4 共 16 人），卡片视觉宽 ≈250px（较原 3 列缩小约 15%），
                 卡片文字字号不变（MemberCard 内为固定 rem 类）；1040-1280 过渡为 3 列 */}
             <div className="mx-auto mt-12 grid w-full max-w-[1536px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {featuredMembers.map((member) => (
-                <MemberCard key={member.id} member={member} lang={lang} />
+              {featuredMembers.map((member, i) => (
+                <MemberCard
+                  key={member.id}
+                  member={member}
+                  lang={lang}
+                  /* 手机端只展示前 8 张（恰好为 8 位研究生）：9+ 用 CSS 隐藏。
+                     不用 JS 按宽度切片：SSG 产出单份 HTML，切片会导致水合不匹配 */
+                  className={i >= 8 ? "max-sm:hidden" : undefined}
+                />
               ))}
             </div>
             <div className="mt-12 text-center">

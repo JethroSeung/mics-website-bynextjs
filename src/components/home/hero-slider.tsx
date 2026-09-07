@@ -91,7 +91,7 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
                     </p>
                     <Title
                       id={i === 0 ? "hero-title" : undefined}
-                      className="mt-4 max-w-3xl text-5xl leading-tight font-bold tracking-tight break-words text-white md:text-7xl"
+                      className="mt-4 max-w-3xl text-4xl leading-tight font-bold tracking-tight break-words text-white sm:text-5xl md:text-7xl"
                     >
                       {t(slide.title, lang)}
                     </Title>

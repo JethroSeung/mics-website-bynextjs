@@ -138,7 +138,8 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       ref={carouselRef}
-      className="overflow-hidden"
+      /* touch-pan-y：embla 触屏要求——横向拖拽切幻灯片、竖向手势保留给页面滚动 */
+      className="overflow-hidden touch-pan-y"
       data-slot="carousel-content"
     >
       <div

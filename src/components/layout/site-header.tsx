@@ -50,10 +50,10 @@ export function SiteHeader({ lang }: { lang: Lang }) {
           </span>
         </Link>
 
-        {/* 桌面导航 + 语言切换 / 移动端汉堡 */}
+        {/* 桌面导航 + 语言切换 / 移动端汉堡（语言切换 <820px 收纳进抽屉） */}
         <div className="flex items-center gap-5">
           <NavLinks lang={lang} />
-          <div className="hidden sm:block">
+          <div className="hidden md:block">
             <LanguageSwitch />
           </div>
           <MobileNav lang={lang} />

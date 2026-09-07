@@ -53,6 +53,14 @@ const fonts = await page.evaluate(() => {
     teamGridW: rectW(q("section#team .grid")),
     supervisorPhotoW: rectW(q("section#leader img")),
     footerLogoW: rectW(q("footer img")),
+    // 导师照片右缘到文字列左缘（lg:gap-[143px]×0.7 ≈100px，2026-09-07 导师定稿）
+    supervisorGap: (() => {
+      const img = q("section#leader img");
+      const text = img?.nextElementSibling;
+      return img && text
+        ? Math.round(text.getBoundingClientRect().left - img.getBoundingClientRect().right)
+        : -1;
+    })(),
   };
 });
 results.push({
@@ -70,12 +78,15 @@ results.push({
     fonts.supervisorPhotoW > 395 &&
     fonts.supervisorPhotoW < 410 &&
     fonts.footerLogoW > 31 &&
-    fonts.footerLogoW < 37,
+    fonts.footerLogoW < 37 &&
+    fonts.supervisorGap >= 99 &&
+    fonts.supervisorGap <= 101,
 });
 
 // 3. 页头断点行为
 for (const [w, expect] of [
   [375, { nav: false, burger: true, lang: false, brand: false, affil: false }],
+  [700, { nav: false, burger: true, lang: false, brand: false, affil: false }],
   [820, { nav: false, burger: true, lang: true, brand: true, affil: false }],
   [1300, { nav: true, burger: false, lang: true, brand: true, affil: false }],
   [1600, { nav: true, burger: false, lang: true, brand: true, affil: true }],

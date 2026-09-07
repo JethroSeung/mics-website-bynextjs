@@ -12,25 +12,31 @@ interface MemberCardProps {
   lang: Lang;
   /** /team 页传 true 显示邮箱；首页精选不显示（沿袭旧站） */
   showEmail?: boolean;
+  /** 附加类（首页第 9+ 张卡在手机端隐藏：max-sm:hidden） */
+  className?: string;
 }
 
 /**
  * 成员卡片（首页精选 + /team 页共用）
- * 照片通栏铺满卡片上半区（大图展示），邮箱为纯文本不跳转
+ * 手机端（<560px）横排：左侧小方图 + 右侧信息（纵向排列的横向卡片）；
+ * ≥560px 竖版：照片通栏铺满上半区（大图展示）
+ * 邮箱为纯文本不跳转；字号全断点一致（仅布局随断点切换）
  */
-export function MemberCard({ member, lang, showEmail = false }: MemberCardProps) {
+export function MemberCard({ member, lang, showEmail = false, className }: MemberCardProps) {
   const name = t(member.name, lang);
 
   return (
-    <article className="lift flex flex-col overflow-hidden rounded-xl border border-border bg-surface-elevated text-center shadow-card">
+    <article
+      className={`lift flex flex-row items-stretch overflow-hidden rounded-xl border border-border bg-surface-elevated text-left shadow-card sm:flex-col sm:text-center ${className ?? ""}`}
+    >
       <Image
         src={member.photo}
         alt={lang === "zh" ? `${name}照片` : `${name} photo`}
         width={380}
         height={380}
-        className="aspect-square w-full object-cover"
+        className="h-auto w-32 shrink-0 object-cover sm:aspect-square sm:w-full"
       />
-      <div className="flex flex-1 flex-col items-center px-4 py-5">
+      <div className="flex min-w-0 flex-1 flex-col justify-center px-4 py-3 sm:items-center sm:py-5">
         <p className="text-sm font-medium tracking-wide text-body-muted uppercase">
           {t(roleLabels[member.role], lang)}
         </p>

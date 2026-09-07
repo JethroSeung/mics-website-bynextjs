@@ -153,7 +153,7 @@ export const members: Member[] = [
     name: { zh: "王悦涵", en: "Yuehan Wang" },
     role: "undergraduate",
     email: "wyhwkwl@gmail.com",
-    photo: PLACEHOLDER_AVATAR,
+    photo: "/images/members/wang-yuehan.jpg",
     featured: false,
   },
   {
@@ -177,7 +177,7 @@ export const members: Member[] = [
     name: { zh: "龚玮乐", en: "Weile Gong" },
     role: "undergraduate",
     email: "phare111@163.com",
-    photo: PLACEHOLDER_AVATAR,
+    photo: "/images/members/gong-weile.jpg",
     featured: false,
   },
   {
@@ -201,7 +201,7 @@ export const members: Member[] = [
     name: { zh: "王怡涵", en: "Yihan Wang" },
     role: "undergraduate",
     email: "B25040902@njupt.deu.cn",
-    photo: PLACEHOLDER_AVATAR,
+    photo: "/images/members/wang-yihan.jpg",
     featured: false,
   },
   {
