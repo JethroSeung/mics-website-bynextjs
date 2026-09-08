@@ -7,21 +7,20 @@ import { siteConfig, t, hrefFor, type Lang } from "@/data/site";
 
 /**
  * 全站页头：sticky + 双 Logo（NJUPT 校徽 + MICS logo，细竖线分隔）
- * 响应式策略（根字号放大 50% 后按可用宽度渐进展示）：
+ * 响应式策略（按可用宽度渐进展示）：
  * - <560px：logo + 汉堡（语言切换在抽屉内）
  * - ≥560px：显示语言切换；≥820px：品牌名随汉堡菜单展示
- * - ≥1280px：桌面导航替换汉堡；≥1440px：品牌区补充单位副标题
+ * - ≥1440px：桌面导航替换汉堡，并补充单位副标题
  */
 export function SiteHeader({ lang }: { lang: Lang }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border/90 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      {/* 内容整体 -10%（2026-09-06 导师反馈）：zoom 挂内层，sticky 外层保持全宽遮底 */}
-      <div className="zoom-90 mx-auto flex h-header w-full max-w-[2000px] items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="mx-auto flex h-header w-full max-w-[2000px] items-center justify-between gap-4 px-4 sm:px-6">
         {/* 双 Logo 品牌区 */}
         <Link
           href={hrefFor("/", lang)}
           aria-label={`${siteConfig.shortName} ${t(siteConfig.name, lang)}`}
-          className="flex min-w-0 items-center gap-3 focus-visible:outline-2 focus-visible:outline-ring"
+          className="flex min-w-0 flex-1 items-center gap-3 overflow-hidden focus-visible:outline-2 focus-visible:outline-ring"
         >
           <Image
             src="/images/njupt-logo.png"
@@ -43,7 +42,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
           <span className="hidden min-w-0 flex-col justify-center md:flex">
             <strong
               className={`truncate font-bold text-primary ${
-                lang === "en" ? "text-sm" : "text-base"
+                lang === "en" ? "text-base" : "text-lg"
               }`}
             >
               {t(siteConfig.name, lang)}
@@ -55,9 +54,9 @@ export function SiteHeader({ lang }: { lang: Lang }) {
         </Link>
 
         {/* 桌面导航 + 语言切换 / 移动端汉堡（语言切换 <820px 收纳进抽屉） */}
-        <div className="flex items-center gap-5">
+        <div className="flex shrink-0 items-center gap-4 min-[1600px]:gap-5">
           <NavLinks lang={lang} />
-          <div className="hidden md:block">
+          <div className="hidden shrink-0 md:block">
             <LanguageSwitch />
           </div>
           <MobileNav lang={lang} />

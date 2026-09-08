@@ -54,10 +54,10 @@ export function HomePage({ lang }: { lang: Lang }) {
     <>
       <HeroSlider slides={siteConfig.heroSlides} lang={lang} />
 
-      {/* 01 课题组介绍（内容整体 -10%，2026-09-06 导师反馈；其余区块不动） */}
+      {/* 01 课题组介绍 */}
       <section id="about" aria-labelledby="about-title" className="bg-surface py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal className="zoom-90">
+          <Reveal className="mx-auto max-w-[1280px]">
             <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
               <div>
                 <SectionHeading
@@ -72,7 +72,6 @@ export function HomePage({ lang }: { lang: Lang }) {
                   {t(siteConfig.about.note, lang)}
                 </p>
               </div>
-              {/* 小屏单列：根字号放大后 3 列卡片的英文标签（如 Partners）无法换行会横向溢出 */}
               <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 {stats.map((stat) => (
                   <div
@@ -91,12 +90,11 @@ export function HomePage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 02 导师介绍（内容整体 -30%） */}
+      {/* 02 导师介绍 */}
       <section id="leader" aria-labelledby="leader-title" className="py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal className="zoom-70">
-            {/* lg:gap-[143px]：zoom-70 后视觉间距 ≈100px（2026-09-07 导师定稿） */}
-            <div className="grid items-start gap-10 lg:grid-cols-[2fr_3fr] lg:gap-[143px]">
+          <Reveal className="mx-auto max-w-[1080px]">
+            <div className="grid items-start gap-10 lg:grid-cols-[2fr_3fr] lg:gap-[100px]">
               {/* 照片右对齐贴住文字列（原 justify-self-start 时列内留白 175px）；
                   图源已裁掉顶部留白（960×1269），人物头部与眉题/标题对齐 */}
               <Image
@@ -199,10 +197,10 @@ export function HomePage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 04 团队成员（首页精选，内容整体 -30%） */}
+      {/* 04 团队成员（首页精选） */}
       <section id="team" aria-labelledby="team-title" className="py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal className="zoom-70">
+          <Reveal className="mx-auto max-w-[1080px]">
             <SectionHeading
               eyebrow="04 / Team Members"
               title={t(copy.teamTitle, lang)}
@@ -210,18 +208,13 @@ export function HomePage({ lang }: { lang: Lang }) {
               desc={t(copy.teamDesc, lang)}
               align="center"
             />
-            {/* zoom-70 内部坐标系放大 1/0.7：max-w-[1536px] 经缩放后 ≈1075px，
-                xl 起 4 列（4×4 共 16 人），卡片视觉宽 ≈250px（较原 3 列缩小约 15%），
-                卡片文字字号不变（MemberCard 内为固定 rem 类）；1040-1280 过渡为 3 列 */}
-            <div className="mx-auto mt-12 grid w-full max-w-[1536px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {featuredMembers.map((member, i) => (
+            {/* 1040-1280 三列，1280px 起四列；容器宽度保持紧凑，避免成员卡过宽。 */}
+            <div className="mx-auto mt-12 grid w-full max-w-[1080px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {featuredMembers.slice(0, 8).map((member) => (
                 <MemberCard
                   key={member.id}
                   member={member}
                   lang={lang}
-                  /* 手机端只展示前 8 张（恰好为 8 位研究生）：9+ 用 CSS 隐藏。
-                     不用 JS 按宽度切片：SSG 产出单份 HTML，切片会导致水合不匹配 */
-                  className={i >= 8 ? "max-sm:hidden" : undefined}
                 />
               ))}
             </div>

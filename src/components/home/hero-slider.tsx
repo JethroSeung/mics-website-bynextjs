@@ -119,7 +119,7 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
                             key={action.href}
                             asChild
                             className={cn(
-                              // 小屏（根字号放大后英文长文案）：允许换行并自适应高度，避免溢出
+                              // 小屏英文长文案允许换行并自适应高度，避免溢出
                               "h-auto min-h-12 px-6 text-center text-base whitespace-normal md:h-12 md:px-8 md:text-lg md:whitespace-nowrap",
                               action.style === "primary"
                                 ? "bg-white text-primary-dark hover:bg-white/90"

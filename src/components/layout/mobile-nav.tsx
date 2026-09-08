@@ -16,7 +16,7 @@ import { LanguageSwitch } from "@/components/layout/language-switch";
 import { siteConfig, t, hrefFor, type Lang } from "@/data/site";
 
 /**
- * 移动端导航（<1280px）：汉堡按钮唤起侧滑抽屉。
+ * 紧凑导航（<1440px）：汉堡按钮唤起侧滑抽屉。
  * Escape 关闭、焦点圈定、锁滚动由 Radix Sheet 内建；点链接后手动关闭。
  */
 export function MobileNav({ lang }: { lang: Lang }) {
@@ -36,7 +36,7 @@ export function MobileNav({ lang }: { lang: Lang }) {
         <button
           type="button"
           aria-label={lang === "zh" ? "打开导航菜单" : "Open menu"}
-          className="inline-flex size-10 items-center justify-center rounded-md text-body-secondary transition-colors hover:bg-surface hover:text-primary xl:hidden focus-visible:outline-2 focus-visible:outline-ring"
+          className="inline-flex size-10 items-center justify-center rounded-md text-body-secondary transition-colors hover:bg-surface hover:text-primary min-[1440px]:hidden focus-visible:outline-2 focus-visible:outline-ring"
         >
           <MenuIcon className="size-5" />
         </button>

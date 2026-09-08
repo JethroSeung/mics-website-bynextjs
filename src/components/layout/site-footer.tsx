@@ -12,9 +12,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
 
   return (
     <footer className="mt-section border-t border-border bg-surface">
-      {/* 页脚内容整体 -30%（导师反馈）：zoom 挂在内层，外层容器宽度与页头对齐 */}
-      <div className="mx-auto w-full max-w-content px-6 py-14 md:px-8">
-        <div className="zoom-70">
+      <div className="mx-auto w-full max-w-[1120px] px-6 py-14 md:px-8">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* 1. 课题组简介 */}
           <div className="flex flex-col gap-3">
@@ -113,7 +111,6 @@ export function SiteFooter({ lang }: { lang: Lang }) {
         <p className="text-center text-xs text-body-muted">
           © {year} {t(siteConfig.name, lang)} · {t(siteConfig.affiliation, lang)}
         </p>
-        </div>
       </div>
     </footer>
   );

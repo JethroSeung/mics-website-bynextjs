@@ -41,10 +41,10 @@ export function JoinPage({ lang }: { lang: Lang }) {
 
   return (
     <>
-      {/* 页头（子页面内容整体 -20%） */}
+      {/* 页头 */}
       <section aria-labelledby="join-page-title" className="bg-surface pt-14 pb-10 md:pt-18 md:pb-12">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <div className="zoom-80">
+          <div className="mx-auto max-w-[1152px]">
             <Link
               href={hrefFor("/#join", lang)}
               className="inline-flex items-center gap-1.5 text-base font-medium text-body-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
@@ -65,10 +65,10 @@ export function JoinPage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 招新说明（内容 -20%） */}
+      {/* 招新说明 */}
       <section aria-labelledby="overview-title" className="py-12 md:py-14">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal className="zoom-80">
+          <Reveal className="mx-auto max-w-[1152px]">
             <h2 id="overview-title" className="sr-only">
               {t(copy.overviewSr, lang)}
             </h2>
@@ -79,10 +79,10 @@ export function JoinPage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 研究题目：pending 占位 / open 任务列表（内容 -20%） */}
+      {/* 研究题目：pending 占位 / open 任务列表 */}
       <section aria-labelledby="topics-title" className="bg-surface py-14 md:py-16">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal className="zoom-80">
+          <Reveal className="mx-auto max-w-[1152px]">
             <SectionHeading
               eyebrow="Topics"
               title={t(copy.topicsTitle, lang)}
@@ -137,10 +137,10 @@ export function JoinPage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 联系方式（内容 -20%） */}
+      {/* 联系方式 */}
       <section aria-labelledby="contact-title" className="py-14 md:py-16">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal className="zoom-80">
+          <Reveal className="mx-auto max-w-[1152px]">
             <SectionHeading
               eyebrow="Contact"
               title={t(copy.contactTitle, lang)}

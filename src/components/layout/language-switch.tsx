@@ -21,7 +21,7 @@ export function LanguageSwitch() {
       href={target}
       lang={isEn ? "zh-CN" : "en"}
       aria-label={isEn ? "切换到中文" : "Switch to English"}
-      className="rounded-sm border border-border px-3 py-1 text-sm font-medium tracking-wide text-body-secondary transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
+      className="inline-flex shrink-0 items-center whitespace-nowrap rounded-sm border border-border px-3 py-1 text-sm font-medium tracking-wide text-body-secondary transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
     >
       {isEn ? "中文" : "EN"}
     </Link>

@@ -75,10 +75,10 @@ export function ResearchPage({
 
   return (
     <>
-      {/* 页头：返回 + 方向名（子页面内容整体 -20%） */}
+      {/* 页头：返回 + 方向名 */}
       <section aria-labelledby="direction-title" className="bg-surface pt-14 pb-10 md:pt-18 md:pb-12">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <div className="zoom-80">
+          <div className="mx-auto max-w-[1152px]">
             <Link
               href={hrefFor("/#research", lang)}
               className="inline-flex items-center gap-1.5 text-base font-medium text-body-secondary focus-visible:outline-2 focus-visible:outline-ring"
@@ -99,10 +99,10 @@ export function ResearchPage({
         </div>
       </section>
 
-      {/* 负责人卡片（内容 -20%，滚动淡入） */}
+      {/* 负责人卡片（滚动淡入） */}
       <section aria-labelledby="lead-title" className="py-12 md:py-14">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal className="zoom-80">
+          <Reveal className="mx-auto max-w-[1152px]">
             <h2 id="lead-title" className="sr-only">
               {t(copy.leadSr, lang)}
             </h2>
@@ -145,9 +145,9 @@ export function ResearchPage({
       {/* 正文：detail 双态渲染 */}
       {direction.detail ? (
         <section aria-labelledby="detail-title" className="bg-surface py-14 md:py-16">
-          {/* 正文窄容器：视觉 880px 对齐旧站 news-container（976 - padding 96 = 880 = zoom 内 1100） */}
+          {/* 正文窄容器：内容宽约 880px，对齐旧站与负责人参考页。 */}
           <div className="mx-auto w-full max-w-[976px] px-6 md:px-8">
-            <div className="zoom-80">
+            <div>
               {/* 概述（旧站 news-header：kicker + 大标题 + 导语 + 重点任务摘要框） */}
               <Reveal>
                 <header className="border-b border-border pb-8 md:pb-9">
@@ -320,7 +320,7 @@ export function ResearchPage({
       ) : (
         <section aria-labelledby="pending-title" className="bg-surface py-16 md:py-20">
           <div className="mx-auto w-full max-w-content px-6 md:px-8">
-            <div className="zoom-80">
+            <div className="mx-auto max-w-[1152px]">
               <div className="mx-auto flex max-w-xl flex-col items-center rounded-xl border border-dashed border-gold/50 bg-primary-light/50 px-8 py-14 text-center">
                 <span aria-hidden="true" className="size-3 rounded-full bg-gold" />
                 <h2

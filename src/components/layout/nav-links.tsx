@@ -16,13 +16,16 @@ export function NavLinks({ lang }: { lang: Lang }) {
   };
 
   return (
-    <nav aria-label={lang === "zh" ? "主要导航" : "Primary"} className="hidden xl:flex xl:items-center xl:gap-5 min-[1440px]:gap-4">
+    <nav
+      aria-label={lang === "zh" ? "主要导航" : "Primary"}
+      className="hidden min-[1440px]:flex min-[1440px]:items-center min-[1440px]:gap-5"
+    >
       {siteConfig.nav.map((item) => (
         <Link
           key={item.href}
           href={hrefFor(item.href, lang)}
           aria-current={isActive(item) ? "page" : undefined}
-          className={`relative font-medium transition-colors focus-visible:outline-2 focus-visible:outline-ring ${
+          className={`relative shrink-0 whitespace-nowrap font-medium transition-colors focus-visible:outline-2 focus-visible:outline-ring ${
             lang === "en" ? "text-sm" : "text-base"
           } ${
             isActive(item)
