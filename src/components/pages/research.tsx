@@ -89,10 +89,10 @@ export function ResearchPage({
             <div className="mt-6">
               <SectionHeading
                 eyebrow={`Research Direction ${String(direction.order).padStart(2, "0")}`}
-                title={t(direction.name, lang)}
+                title={t(direction.detail?.pageTitle ?? direction.name, lang)}
                 titleId="direction-title"
                 as="h1"
-                desc={t(direction.cardIntro, lang)}
+                desc={t(direction.detail?.pageIntro ?? direction.cardIntro, lang)}
               />
             </div>
           </div>

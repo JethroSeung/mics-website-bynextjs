@@ -14,9 +14,10 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: ResearchRouteProps): Promise<Metadata> {
   const { slug } = await params;
+  const direction = getDirection(slug);
   return {
-    title: t(getDirection(slug).name, "zh"),
-    description: t(getDirection(slug).cardIntro, "zh"),
+    title: t(direction.detail?.pageTitle ?? direction.name, "zh"),
+    description: t(direction.detail?.pageIntro ?? direction.cardIntro, "zh"),
     alternates: alternatesFor(`/research/${slug}`, "zh"),
   };
 }
