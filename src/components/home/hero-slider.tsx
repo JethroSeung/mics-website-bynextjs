@@ -22,7 +22,7 @@ interface HeroSliderProps {
 
 /**
  * 首页 hero 轮播（需求 §8-1）：
- * 自动播放 6000ms（放慢节奏）/ 切换过渡 duration 45（平滑）/
+ * 自动播放 6000ms（放慢节奏）/ 切换过渡 duration 25（使用 Embla 默认物理参数）/
  * hover 暂停移出恢复 / 点按后继续 /
  * 指示器 + 前后按钮 / aria 同步 / reduced-motion 停止自动播放
  */
@@ -59,7 +59,7 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
   return (
     <section aria-labelledby="hero-title" className="relative">
       <Carousel
-        opts={{ loop: true, duration: 45 }}
+        opts={{ loop: true, duration: 25 }}
         plugins={[autoplay]}
         setApi={setApi}
         aria-label={lang === "zh" ? "课题组焦点轮播" : "Featured slides"}
