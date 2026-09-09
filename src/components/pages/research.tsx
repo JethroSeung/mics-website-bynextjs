@@ -252,7 +252,8 @@ export function ResearchPage({
               ))}
 
               {/* 代表成果（旧站 publication-list：编号 + 标题/作者/venue/链接/配图） */}
-              <Reveal>
+              {direction.detail.publications.length > 0 ? (
+                <Reveal>
                 <section aria-labelledby="publications-title" className="py-9 md:py-10">
                 <h3
                   id="publications-title"
@@ -313,7 +314,8 @@ export function ResearchPage({
                   ))}
                 </div>
                 </section>
-              </Reveal>
+                </Reveal>
+              ) : null}
             </div>
           </div>
         </section>

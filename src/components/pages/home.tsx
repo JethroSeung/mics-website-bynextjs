@@ -11,9 +11,48 @@ import { members, featuredMembers } from "@/data/members";
 import { researchDirections } from "@/data/research";
 import { joinConfig } from "@/data/join";
 
+const platforms = [
+  {
+    no: "01",
+    image: "/images/platform/wifi-csi-intel5300.png",
+    name: { zh: "WiFi CSI 采集平台", en: "WiFi CSI Acquisition Platform" },
+    description: {
+      zh: "基于 Intel 5300 WiFi 网卡获取多子载波幅度与相位信息，适合分析人体活动引起的细粒度信道变化。",
+      en: "Uses Intel 5300 WiFi cards to capture subcarrier amplitude and phase data for analyzing fine-grained channel changes caused by human activity.",
+    },
+  },
+  {
+    no: "02",
+    image: "/images/platform/bfi-capture-r7800-r9000.jpeg",
+    name: { zh: "BFI 采集平台", en: "BFI Acquisition Platform" },
+    description: {
+      zh: "由发射设备、接收节点与嗅探设备协同，捕获商用 WiFi 通信过程中产生的 BFI 数据包。",
+      en: "Coordinates transmitters, receiving nodes, and sniffing devices to capture BFI packets generated during commercial WiFi communication.",
+    },
+  },
+  {
+    no: "03",
+    image: "/images/platform/mmwave-awr1843.png",
+    name: { zh: "毫米波雷达平台", en: "Millimeter-Wave Radar Platform" },
+    description: {
+      zh: "基于 TI AWR1843 77GHz 雷达输出三维点云，为胸腔微动、姿态和步态感知提供高质量原始数据。",
+      en: "Uses a TI AWR1843 77 GHz radar to produce 3D point clouds for chest micro-motion, posture, and gait sensing.",
+    },
+  },
+  {
+    no: "04",
+    image: "/images/platform/turtlebot4-platform.jpeg",
+    name: { zh: "TurtleBot4 移动平台", en: "TurtleBot4 Mobile Platform" },
+    description: {
+      zh: "作为移动验证平台，支持搭载激光雷达、深度相机等传感器，在动态场景下验证多传感器融合算法。",
+      en: "Carries LiDAR, depth cameras, and other sensors to validate multisensor fusion algorithms in dynamic environments.",
+    },
+  },
+] as const;
+
 /**
- * 首页（zh/en 共享）：hero 轮播 → 课题组介绍 → 导师介绍 → 研究方向 → 成员精选 → 招新 CTA
- * 区块编号 01-05（学术成果区块去向待定 §13-W3，暂不展示）
+ * 首页（zh/en 共享）：hero 轮播 → 课题组介绍 → 导师介绍 → 研究方向 → 实验平台 → 成员精选 → 招新 CTA
+ * 区块编号 01-06（学术成果区块去向待定 §13-W3，暂不展示）
  */
 export function HomePage({ lang }: { lang: Lang }) {
   const supervisor = siteConfig.supervisor;
@@ -25,6 +64,11 @@ export function HomePage({ lang }: { lang: Lang }) {
     researchDesc: {
       zh: "点击卡片了解各方向详情。",
       en: "Click a card to view direction details.",
+    },
+    platformTitle: { zh: "实验平台", en: "Research Platforms" },
+    platformDesc: {
+      zh: "四类平台覆盖协议级无线感知、商用 WiFi 反馈信息、三维空间点云和移动场景验证，形成从信道微扰到空间运动的多模态实验链路。",
+      en: "Four platforms span protocol-level wireless sensing, commercial WiFi feedback, 3D point clouds, and mobile-scene validation, forming a multimodal pipeline from channel perturbations to spatial motion.",
     },
     teamTitle: { zh: "团队成员", en: "Team Members" },
     teamDesc: {
@@ -197,12 +241,56 @@ export function HomePage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 04 团队成员（首页精选） */}
+      {/* 04 实验平台（仅首页展示，不设导航或详情页） */}
+      <section id="platforms" aria-labelledby="platforms-title" className="bg-surface py-section">
+        <div className="mx-auto w-full max-w-content px-6 md:px-8">
+          <Reveal>
+            <SectionHeading
+              eyebrow="04 / Research Platforms"
+              title={t(copy.platformTitle, lang)}
+              titleId="platforms-title"
+              desc={t(copy.platformDesc, lang)}
+              align="center"
+            />
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+              {platforms.map((platform) => (
+                <article
+                  key={platform.no}
+                  className="overflow-hidden rounded-xl border border-border bg-surface-elevated shadow-card"
+                >
+                  <div className="relative aspect-[4/3] border-b border-border bg-white">
+                    <Image
+                      src={platform.image}
+                      alt={t(platform.name, lang)}
+                      fill
+                      sizes="(min-width: 1280px) 25vw, (min-width: 560px) 50vw, 100vw"
+                      className="object-contain p-4"
+                    />
+                  </div>
+                  <div className="px-5 py-6">
+                    <p className="text-sm font-bold tracking-widest text-gold">
+                      {platform.no}
+                    </p>
+                    <h3 className="mt-3 text-xl font-bold text-body">
+                      {t(platform.name, lang)}
+                    </h3>
+                    <p className="mt-3 text-base leading-relaxed text-body-secondary">
+                      {t(platform.description, lang)}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 05 团队成员（首页精选） */}
       <section id="team" aria-labelledby="team-title" className="py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <Reveal className="mx-auto max-w-[1080px]">
             <SectionHeading
-              eyebrow="04 / Team Members"
+              eyebrow="05 / Team Members"
               title={t(copy.teamTitle, lang)}
               titleId="team-title"
               desc={t(copy.teamDesc, lang)}
@@ -227,13 +315,13 @@ export function HomePage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 05 本科生招新 CTA */}
+      {/* 06 本科生招新 CTA */}
       <section id="join" aria-labelledby="join-title" className="bg-surface py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <Reveal>
             <div className="mx-auto max-w-2xl text-center">
               <SectionHeading
-                eyebrow="05 / Join Us"
+                eyebrow="06 / Join Us"
                 title={t(copy.joinTitle, lang)}
                 titleId="join-title"
               />

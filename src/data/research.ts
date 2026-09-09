@@ -3,7 +3,7 @@
  * - pain：自然灾害场景下的通感计算（负责人：杨承轩）
  * - medeng：医工交叉-多模态感知（负责人：张栩闻）
  * medeng 详情迁移自旧站 research-multimodal.html / en/research-multimodal.html（2026-09-06）
- * pain 详情待与导师讨论（§13-W2），detail 为 null 时详情页渲染整页占位
+ * pain 详情整理自 natural_disaster.md（2026-09-09）
  */
 
 import type { Localized, PartnerId } from "./site";
@@ -98,7 +98,121 @@ export const researchDirections: ResearchDirection[] = ([
       zh: "面向地震、洪涝等自然灾害救援场景，研究通信感知一体化信号的采集、表征与计算方法。",
       en: "Researching integrated sensing and communication (ISAC) signal acquisition, representation and computing for disaster rescue scenarios.",
     },
-    detail: null,
+    detail: {
+      pageTitle: {
+        zh: "通感算一体化，于山河未动时洞见风险",
+        en: "Integrated Communication, Sensing, and Computing: Seeing Risk Before the Mountains Move",
+      },
+      pageIntro: {
+        zh: "从无线信号中读取山体与环境变化，以深度学习和人工智能模型融合通信、感知与多源监测数据，面向山体滑坡、泥石流等自然灾害，探索低功耗、低成本、可落地的灾前监测与风险预测技术。",
+        en: "We read changes in mountains and their environment from wireless signals, using deep learning and AI models to fuse communication, sensing, and multisource monitoring data. For natural hazards such as landslides and debris flows, we explore low-power, low-cost, deployable technologies for pre-disaster monitoring and risk prediction.",
+      },
+      overviewTitle: {
+        zh: "通感算一体化",
+        en: "Integrated Communication, Sensing, and Computing",
+      },
+      heroLead: {
+        zh: "2026年8月26日10时30分许，因尼泊尔一侧发生泥石流灾害，造成西藏日喀则市吉隆县吉隆口岸重大人员伤亡和失联。如果灾害发生前，基站就能“看见”山体正在发生的变化，会不会不一样？山体滑坡、泥石流的发生并非毫无征兆。地表微小位移、土壤含水率变化、持续降雨与山体结构变化，都可能在灾害发生前留下长期、缓慢而细微的信号。问题在于，山区往往也是供电最困难、通信最薄弱、监测设备最难长期维护的地方。",
+        en: "At around 10:30 a.m. on August 26, 2026, a debris-flow disaster on the Nepal side caused major casualties and missing persons at Gyirong Port in Gyirong County, Shigatse, Tibet. What if a base station could have “seen” the mountain changing before the disaster? Landslides and debris flows do not occur entirely without warning. Tiny surface displacements, changes in soil moisture, prolonged rainfall, and changes in mountain structure can all leave slow, subtle, long-term signals before a disaster. Yet mountainous areas are often where power is hardest to supply, communications are weakest, and monitoring equipment is most difficult to maintain over time.",
+      },
+      summary: {
+        label: { zh: "重点任务", en: "Core mission" },
+        text: {
+          zh: "与中国通信服务、中国电信合作，从真实山区需求出发，研究自然灾害场景下的通信、感知与计算一体化。我们希望让原本用于传输数据的无线网络进一步承担环境感知任务，让通信信号本身成为观察山体变化的一种新型传感器，再借助人工智能从长期观测中识别异常、判断趋势、发现风险。",
+          en: "Working with China Comservice and China Telecom, we study integrated communication, sensing, and computing for natural-disaster scenarios based on the practical needs of mountainous regions. We aim to make wireless networks do more than carry data: communication signals themselves become a new kind of sensor for observing mountain changes, while AI identifies anomalies, assesses trends, and detects risks in long-term observations.",
+        },
+      },
+      sections: [
+        {
+          heading: { zh: "行业背景", en: "Industry background" },
+          paragraphs: [
+            {
+              zh: "自然灾害监测并不缺少传感器，真正困难的是如何让它们在偏远山区长期、稳定、低成本地工作。",
+              en: "Natural-hazard monitoring does not lack sensors. The real challenge is enabling them to operate reliably, affordably, and over long periods in remote mountainous areas.",
+            },
+            {
+              zh: "在西藏等山区，大量区域供电条件不足，通信信号也可能频繁中断。一旦链路失效，部署在山体上的感知节点就可能失联，监测数据无法及时回传。设备越多，供电、通信、施工和后期维护的压力也越大。",
+              en: "In mountainous regions such as Tibet, many areas have inadequate power supplies and communication links may be interrupted frequently. When a link fails, sensing nodes deployed on a slope can lose connectivity and monitoring data cannot be returned in time. The more devices are deployed, the greater the burden on power, communications, construction, and ongoing maintenance.",
+            },
+            {
+              zh: "传统方案往往分别建设通信网络与感知系统。我们的研究尝试进一步向前一步：既然4G、5G等无线信号已经持续传播在环境中，能否让同一束信号在完成通信的同时，也参与感知？",
+              en: "Traditional solutions usually build communication networks and sensing systems separately. Our research takes a further step: since wireless signals such as 4G and 5G already propagate continuously through the environment, can the same signal communicate and sense at the same time?",
+            },
+            {
+              zh: "无线信号在传播过程中会经历反射、散射、绕射与多径传播。山体、地表、植被、降雨以及周围环境的变化，都会改变信号传播路径，并进一步体现在CSI、RSSI、时延、相位、多径结构等无线特征中。深度学习模型则可以从长期信号中寻找人难以直接观察的变化规律。",
+              en: "Wireless signals undergo reflection, scattering, diffraction, and multipath propagation. Changes in mountains, ground surfaces, vegetation, rainfall, and the surrounding environment alter signal paths and are reflected in wireless features such as CSI, RSSI, delay, phase, and multipath structure. Deep learning models can then discover patterns of change in long-term signals that are difficult for people to observe directly.",
+            },
+            {
+              zh: "通信网络由此不再只是数据的“运输通道”，也可能成为感知自然环境的一部分。",
+              en: "The communication network therefore becomes more than a transport channel for data; it can also become part of how we sense the natural environment.",
+            },
+          ],
+        },
+        {
+          heading: { zh: "研究方向", en: "Research directions" },
+          paragraphs: [
+            {
+              zh: "通感算不是三个彼此独立的模块，而是三种能力之间的相互协同。围绕自然灾害灾前监测，我们重点从以下三个交叉方向展开研究，最终让通信、感知与计算形成一条完整技术链路。",
+              en: "Communication, sensing, and computing are not three isolated modules, but three mutually reinforcing capabilities. For pre-disaster monitoring, we focus on the following three intersecting directions so that communication, sensing, and computing ultimately form a complete technical pipeline.",
+            },
+          ],
+          focusList: [
+            {
+              no: "01",
+              title: { zh: "通信 + 感知", en: "Communication + Sensing" },
+              paragraphs: [
+                {
+                  zh: "研究如何让无线网络在保障山区可靠连接的同时参与环境感知。面向供电不足、信号易中断的场景，探索4G/5G、LoRa、卫星、无人机等低功耗通信与覆盖方案，并进一步利用CSI、RSSI、相位、多径等通信信号特征，感知山体、地表及周围环境的细微变化，实现“同一张网络，既通信又感知”。",
+                  en: "We study how wireless networks can sense the environment while maintaining reliable connectivity in mountainous areas. For scenarios with limited power and intermittent signals, we explore low-power communication and coverage solutions using 4G/5G, LoRa, satellites, and UAVs. We then use communication-signal features such as CSI, RSSI, phase, and multipath to detect subtle changes in mountains, ground surfaces, and the surrounding environment—one network for both communication and sensing.",
+                },
+              ],
+            },
+            {
+              no: "02",
+              title: { zh: "感知 + 计算", en: "Sensing + Computing" },
+              paragraphs: [
+                {
+                  zh: "研究如何把无线信号、位移、倾角、雨量、土壤含水率等多源观测转化为真正有意义的灾害风险信息。结合深度学习、时序预测、多模态融合与大模型等方法，从长期、复杂的数据中提取异常特征，识别山体状态变化及风险演化趋势，让系统从“感知到变化”进一步走向“理解变化、预测风险”。",
+                  en: "We study how to transform multisource observations—including wireless signals, displacement, inclination, rainfall, and soil moisture—into meaningful disaster-risk information. Deep learning, time-series forecasting, multimodal fusion, and large models extract anomalous features from complex long-term data, identify changes in mountain conditions and evolving risk, and move the system from sensing change to understanding change and predicting risk.",
+                },
+              ],
+            },
+            {
+              no: "03",
+              title: { zh: "通信 + 计算", en: "Communication + Computing" },
+              paragraphs: [
+                {
+                  zh: "研究弱覆盖、低功耗山区中的智能计算与网络协同。通过云边端协同和大小模型协同，将轻量模型部署在端侧或边缘节点，在通信受限甚至短时中断时仍能完成本地异常检测，云端则负责长期分析与复杂推理。同时利用计算结果辅助通信资源调度，在有限带宽和能源条件下保障关键监测信息优先传输。",
+                  en: "We study cooperation between intelligent computing and networks in mountainous areas with weak coverage and tight power budgets. Through cloud-edge-device collaboration and coordination between large and small models, lightweight models run on devices or edge nodes to detect local anomalies even when communications are constrained or briefly interrupted, while the cloud handles long-term analysis and complex reasoning. Computing results also guide communication-resource scheduling so critical monitoring information receives priority under limited bandwidth and energy.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          heading: { zh: "未来方向", en: "Future directions" },
+          paragraphs: [
+            {
+              zh: "未来的山区里，通信基站或许不再只是连接手机和传感器。无线信号持续穿过山谷与坡体，环境的细微变化被记录在信道中，少量低功耗传感节点补充关键地质与气象信息，边缘模型持续判断局部异常，云端模型从数周、数月甚至更长时间的观测中寻找山体变化规律。",
+              en: "In the mountains of the future, communication base stations may do more than connect phones and sensors. Wireless signals continuously cross valleys and slopes, recording subtle environmental changes in their channels. A small number of low-power sensing nodes supplement key geological and meteorological information, edge models continuously assess local anomalies, and cloud models search weeks, months, or longer periods of observation for patterns of mountain change.",
+            },
+            {
+              zh: "山体发生缓慢位移，信号首先出现变化，持续降雨改变土壤状态，多源数据开始呈现异常，风险尚未演变为灾害，系统已经给出了需要进一步关注的区域。监测由“部署更多设备”逐渐转向“让已有基础设施拥有更多能力”。",
+              en: "As a mountain slowly shifts, signals change first. Prolonged rainfall alters soil conditions and multisource data begins to show anomalies. Before risk develops into disaster, the system has already identified areas requiring closer attention. Monitoring gradually shifts from deploying more devices to giving existing infrastructure more capabilities.",
+            },
+            {
+              zh: "通信、感知与计算也不再是彼此独立的系统，而是在同一张网络中协同工作。当基站不仅能够连接山区，也能够理解山区正在发生什么，自然灾害监测就有可能从传统的设备驱动，进一步走向低成本、广覆盖和持续智能感知。",
+              en: "Communication, sensing, and computing likewise cease to be separate systems and instead work together within one network. When a base station can not only connect mountainous regions but also understand what is happening there, natural-hazard monitoring can move beyond traditional device-driven approaches toward low cost, broad coverage, and continuous intelligent sensing.",
+            },
+            {
+              zh: "而这一切，可以先从一束通信信号、一组长期数据、一个模型开始。",
+              en: "And all of this can begin with one communication signal, one long-term dataset, and one model.",
+            },
+          ],
+        },
+      ],
+      publications: [],
+    },
   },
   {
     slug: "medeng",
