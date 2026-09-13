@@ -7,7 +7,7 @@ import { MemberCard } from "@/components/member-card";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 import { siteConfig, t, hrefFor, type Lang } from "@/data/site";
-import { members, featuredMembers } from "@/data/members";
+import { members, getMemberById } from "@/data/members";
 import { researchDirections } from "@/data/research";
 import { joinConfig } from "@/data/join";
 
@@ -49,6 +49,23 @@ const platforms = [
     },
   },
 ] as const;
+
+const homepageMemberIds = [
+  "liu-jiaming",
+  "liu-hexin",
+  "zhang-fuwei",
+  "yuan-quan",
+  "zhang-xuwen",
+  "jin-chuwei",
+  "lu-zijian",
+  "yang-chengxuan",
+] as const;
+
+const homepageMembers = homepageMemberIds.map((id) => {
+  const member = getMemberById(id);
+  if (!member) throw new Error(`首页精选成员不存在：${id}`);
+  return member;
+});
 
 /**
  * 首页（zh/en 共享）：hero 轮播 → 课题组介绍 → 导师介绍 → 研究方向 → 实验平台 → 成员精选 → 招新 CTA
@@ -252,11 +269,11 @@ export function HomePage({ lang }: { lang: Lang }) {
               desc={t(copy.platformDesc, lang)}
               align="center"
             />
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 xl:grid-cols-4">
               {platforms.map((platform) => (
                 <article
                   key={platform.no}
-                  className="overflow-hidden rounded-xl border border-border bg-surface-elevated shadow-card"
+                  className="w-[84%] shrink-0 snap-start overflow-hidden rounded-xl border border-border bg-surface-elevated shadow-card sm:w-auto"
                 >
                   <div className="relative aspect-[4/3] border-b border-border bg-white">
                     <Image
@@ -297,8 +314,8 @@ export function HomePage({ lang }: { lang: Lang }) {
               align="center"
             />
             {/* 1040-1280 三列，1280px 起四列；容器宽度保持紧凑，避免成员卡过宽。 */}
-            <div className="mx-auto mt-12 grid w-full max-w-[1080px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {featuredMembers.slice(0, 8).map((member) => (
+            <div className="mx-auto mt-12 grid w-full max-w-[1080px] grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+              {homepageMembers.map((member) => (
                 <MemberCard
                   key={member.id}
                   member={member}

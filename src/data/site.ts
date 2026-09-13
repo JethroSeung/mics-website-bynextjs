@@ -51,8 +51,7 @@ export interface NavItem {
 export type PartnerId =
   | "futurecomm-lab"
   | "jiangsu-province-hospital"
-  | "china-comservice"
-  | "china-telecom";
+  | "china-comservice";
 
 export interface Partner {
   id: PartnerId;
@@ -190,11 +189,6 @@ export const siteConfig = {
       id: "china-comservice",
       name: { zh: "中国通信服务", en: "China Comservice" },
       logo: "/images/china-comservice.jpg",
-    },
-    {
-      id: "china-telecom",
-      name: { zh: "中国电信", en: "China Telecom" },
-      logo: "/images/china-telecom.jpg",
     },
   ] as Partner[],
   nav: [

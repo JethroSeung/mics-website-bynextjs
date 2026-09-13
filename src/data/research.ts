@@ -93,7 +93,7 @@ export const researchDirections: ResearchDirection[] = ([
       en: "Integrated Sensing and Communication in Natural Disaster Scenarios",
     },
     leadMemberId: "yang-chengxuan",
-    partnerIds: ["china-comservice", "china-telecom"],
+    partnerIds: ["china-comservice", "futurecomm-lab"],
     cardIntro: {
       zh: "面向地震、洪涝等自然灾害救援场景，研究通信感知一体化信号的采集、表征与计算方法。",
       en: "Researching integrated sensing and communication (ISAC) signal acquisition, representation and computing for disaster rescue scenarios.",
@@ -118,8 +118,8 @@ export const researchDirections: ResearchDirection[] = ([
       summary: {
         label: { zh: "重点任务", en: "Core mission" },
         text: {
-          zh: "与中国通信服务、中国电信合作，从真实山区需求出发，研究自然灾害场景下的通信、感知与计算一体化。我们希望让原本用于传输数据的无线网络进一步承担环境感知任务，让通信信号本身成为观察山体变化的一种新型传感器，再借助人工智能从长期观测中识别异常、判断趋势、发现风险。",
-          en: "Working with China Comservice and China Telecom, we study integrated communication, sensing, and computing for natural-disaster scenarios based on the practical needs of mountainous regions. We aim to make wireless networks do more than carry data: communication signals themselves become a new kind of sensor for observing mountain changes, while AI identifies anomalies, assesses trends, and detects risks in long-term observations.",
+          zh: "与中国通信服务、东南大学 FutureComm Lab 合作，从真实山区需求出发，研究自然灾害场景下的通信、感知与计算一体化。我们希望让原本用于传输数据的无线网络进一步承担环境感知任务，让通信信号本身成为观察山体变化的一种新型传感器，再借助人工智能从长期观测中识别异常、判断趋势、发现风险。",
+          en: "Working with China Comservice and FutureComm Lab at Southeast University, we study integrated communication, sensing, and computing for natural-disaster scenarios based on the practical needs of mountainous regions. We aim to make wireless networks do more than carry data: communication signals themselves become a new kind of sensor for observing mountain changes, while AI identifies anomalies, assesses trends, and detects risks in long-term observations.",
         },
       },
       sections: [
@@ -222,7 +222,7 @@ export const researchDirections: ResearchDirection[] = ([
       en: "Medical-Engineering Multimodal Sensing",
     },
     leadMemberId: "zhang-xuwen",
-    partnerIds: ["jiangsu-province-hospital"],
+    partnerIds: ["jiangsu-province-hospital", "futurecomm-lab"],
     cardIntro: {
       zh: "医工交叉视角下的多模态感知技术，探索面向健康监测与临床应用的智能感知方案。",
       en: "Multimodal sensing from a medical-engineering perspective for health monitoring and clinical applications.",

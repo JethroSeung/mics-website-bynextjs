@@ -53,7 +53,7 @@ export function TeamPage({ lang }: { lang: Lang }) {
               titleId="master-title"
               desc={copy.groupCount[lang](masters.length)}
             />
-            <div className="mx-auto mt-10 grid w-full max-w-[960px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mx-auto mt-10 grid w-full max-w-[960px] grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
               {masters.map((member) => (
                 <MemberCard key={member.id} member={member} lang={lang} showEmail />
               ))}
@@ -72,7 +72,7 @@ export function TeamPage({ lang }: { lang: Lang }) {
               titleId="undergraduate-title"
               desc={copy.groupCount[lang](undergraduates.length)}
             />
-            <div className="mx-auto mt-10 grid w-full max-w-[960px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mx-auto mt-10 grid w-full max-w-[960px] grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
               {undergraduates.map((member) => (
                 <MemberCard key={member.id} member={member} lang={lang} showEmail />
               ))}
