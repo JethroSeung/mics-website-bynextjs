@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/research/pain",
+      "destination": "/research/disaster",
+      "permanent": true
+    },
+    {
+      "source": "/en/research/pain",
+      "destination": "/en/research/disaster",
+      "permanent": true
+    }
+  ]
+}

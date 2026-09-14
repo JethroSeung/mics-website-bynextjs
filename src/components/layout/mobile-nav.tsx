@@ -13,6 +13,7 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { LanguageSwitch } from "@/components/layout/language-switch";
+import { mobileNavToggleEvent } from "@/components/layout/auto-hide-header";
 import { siteConfig, t, hrefFor, type Lang } from "@/data/site";
 
 /**
@@ -23,6 +24,13 @@ export function MobileNav({ lang }: { lang: Lang }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname() ?? "/";
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    window.dispatchEvent(
+      new CustomEvent(mobileNavToggleEvent, { detail: { open: nextOpen } })
+    );
+  };
+
   const isActive = (itemHref: string) => {
     const href = hrefFor(itemHref, lang);
     return href === "/" || href === ""
@@ -31,7 +39,7 @@ export function MobileNav({ lang }: { lang: Lang }) {
   };
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={open} onOpenChange={handleOpenChange}>
       <SheetTrigger asChild>
         <button
           type="button"
@@ -56,7 +64,7 @@ export function MobileNav({ lang }: { lang: Lang }) {
             <Link
               key={item.href}
               href={hrefFor(item.href, lang)}
-              onClick={() => setOpen(false)}
+              onClick={() => handleOpenChange(false)}
               aria-current={isActive(item.href) ? "page" : undefined}
               className={`rounded-md px-3 py-3 text-base font-medium transition-colors ${
                 isActive(item.href)

@@ -133,14 +133,14 @@ export function HomePage({ lang }: { lang: Lang }) {
                   {t(siteConfig.about.note, lang)}
                 </p>
               </div>
-              <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <dl className="grid grid-cols-3 gap-2 sm:gap-4">
                 {stats.map((stat) => (
                   <div
                     key={t(stat.label, lang)}
-                    className="rounded-xl border border-border bg-surface-elevated px-4 py-8 text-center"
+                    className="flex aspect-square min-w-0 flex-col justify-center rounded-xl border border-border bg-surface-elevated px-1 text-center sm:aspect-auto sm:px-4 sm:py-8"
                   >
-                    <dd className="text-5xl font-bold text-primary">{stat.value}</dd>
-                    <dt className="mt-3 text-sm text-body-secondary md:text-base">
+                    <dd className="text-3xl font-bold text-primary sm:text-5xl">{stat.value}</dd>
+                    <dt className="mt-1 text-[11px] leading-tight text-body-secondary sm:mt-3 sm:text-sm md:text-base">
                       {t(stat.label, lang)}
                     </dt>
                   </div>
@@ -155,7 +155,14 @@ export function HomePage({ lang }: { lang: Lang }) {
       <section id="leader" aria-labelledby="leader-title" className="py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <Reveal className="mx-auto max-w-[1080px]">
-            <div className="grid items-start gap-10 lg:grid-cols-[2fr_3fr] lg:gap-[100px]">
+            <div className="grid grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] items-start gap-x-4 gap-y-6 sm:gap-x-8 lg:grid-cols-[2fr_3fr] lg:gap-x-[100px] lg:gap-y-0">
+              <div className="col-span-2 row-start-1 [&>div>h2]:mt-2 [&>div>h2]:text-3xl [&>div>p]:text-xs sm:[&>div>h2]:mt-4 sm:[&>div>h2]:text-4xl sm:[&>div>p]:text-sm md:[&>div>h2]:text-5xl lg:col-span-1 lg:col-start-2">
+                <SectionHeading
+                  eyebrow="02 / Supervisor"
+                  title={t(copy.supervisorTitle, lang)}
+                  titleId="leader-title"
+                />
+              </div>
               {/* 照片右对齐贴住文字列（原 justify-self-start 时列内留白 175px）；
                   图源已裁掉顶部留白（960×1269），人物头部与眉题/标题对齐 */}
               <Image
@@ -163,71 +170,92 @@ export function HomePage({ lang }: { lang: Lang }) {
                 alt={t(copy.supervisorPhotoAlt, lang)}
                 width={520}
                 height={688}
-                className="w-full max-w-sm justify-self-center rounded-xl object-cover shadow-card lg:justify-self-end"
+                className="col-start-1 row-start-2 w-full max-w-36 justify-self-start rounded-xl object-cover shadow-card lg:row-span-3 lg:row-start-1 lg:max-w-sm lg:justify-self-end"
               />
-              <div>
-                <SectionHeading
-                  eyebrow="02 / Supervisor"
-                  title={t(copy.supervisorTitle, lang)}
-                  titleId="leader-title"
-                />
-                <div className="mt-6">
-                  <h3 className="text-3xl font-bold text-body">
-                    {t(supervisor.name, lang)}
-                  </h3>
-                  <p className="mt-1.5 text-base text-body-secondary">
-                    {t(supervisor.title, lang)} · {t(siteConfig.contact.affiliation, lang)}
-                  </p>
+              <div className="col-start-2 row-start-2 min-w-0 self-start lg:mt-6">
+                <h3 className="text-2xl font-bold text-body sm:text-3xl">
+                  {t(supervisor.name, lang)}
+                </h3>
+                <p className="mt-1 text-xs leading-relaxed text-body-secondary sm:mt-1.5 sm:text-base">
+                  {t(supervisor.title, lang)} · {t(siteConfig.contact.affiliation, lang)}
+                </p>
+                <div className="mt-4 flex flex-col gap-2 text-xs sm:text-sm lg:hidden">
+                  <a
+                    href={`mailto:${siteConfig.contact.email}`}
+                    className="break-all text-primary transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
+                  >
+                    {siteConfig.contact.email}
+                  </a>
+                  <a
+                    href={supervisor.homepage}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
+                  >
+                    {t(copy.homepage, lang)} ↗
+                  </a>
                 </div>
-                <dl className="mt-8 flex flex-col gap-7">
-                  <div>
-                    <dt className="text-sm font-semibold tracking-widest text-body-muted uppercase">
-                      {t(copy.profile, lang)}
-                    </dt>
-                    <dd className="mt-2.5 text-base leading-relaxed text-body-secondary md:text-lg">
-                      {t(supervisor.profile, lang)}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm font-semibold tracking-widest text-body-muted uppercase">
-                      {t(copy.interests, lang)}
-                    </dt>
-                    <dd className="mt-2.5 text-base leading-relaxed text-body-secondary md:text-lg">
-                      {t(supervisor.interests, lang)}
-                    </dd>
-                  </div>
-                  <div className="flex flex-wrap gap-x-12 gap-y-6">
-                    <div>
-                      <dt className="text-sm font-semibold tracking-widest text-body-muted uppercase">
-                        Email
-                      </dt>
-                      <dd className="mt-2.5 text-base md:text-lg">
-                        <a
-                          href={`mailto:${siteConfig.contact.email}`}
-                          className="break-all text-primary transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
-                        >
-                          {siteConfig.contact.email}
-                        </a>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-sm font-semibold tracking-widest text-body-muted uppercase">
-                        {t(copy.homepage, lang)}
-                      </dt>
-                      <dd className="mt-2.5 text-base md:text-lg">
-                        <a
-                          href={supervisor.homepage}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
-                        >
-                          {t(supervisor.homepageLabel, lang)} ↗
-                        </a>
-                      </dd>
-                    </div>
-                  </div>
-                </dl>
               </div>
+              <dl className="col-span-2 row-start-3 flex flex-col gap-5 lg:col-span-1 lg:col-start-2 lg:mt-8 lg:gap-7">
+                <div>
+                  <dt className="text-xs font-semibold tracking-widest text-body-muted uppercase sm:text-sm">
+                    {t(copy.profile, lang)}
+                  </dt>
+                  <dd className="mt-2 text-sm leading-relaxed text-body-secondary sm:text-base md:text-lg">
+                    {t(supervisor.profile, lang)}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold tracking-widest text-body-muted uppercase sm:text-sm">
+                    {t(copy.interests, lang)}
+                  </dt>
+                  <dd className="mt-2 flex flex-wrap gap-2 text-xs text-primary sm:text-sm lg:hidden">
+                    {t(supervisor.interests, lang)
+                      .split(lang === "zh" ? "、" : ", ")
+                      .map((interest) => (
+                        <span
+                          key={interest}
+                          className="rounded-full bg-primary-light px-3 py-1"
+                        >
+                          {interest}
+                        </span>
+                      ))}
+                  </dd>
+                  <dd className="mt-2.5 hidden text-base leading-relaxed text-body-secondary md:text-lg lg:block">
+                    {t(supervisor.interests, lang)}
+                  </dd>
+                </div>
+                <div className="hidden flex-wrap gap-x-12 gap-y-6 lg:flex">
+                  <div>
+                    <dt className="text-sm font-semibold tracking-widest text-body-muted uppercase">
+                      Email
+                    </dt>
+                    <dd className="mt-2.5 text-base md:text-lg">
+                      <a
+                        href={`mailto:${siteConfig.contact.email}`}
+                        className="break-all text-primary transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
+                      >
+                        {siteConfig.contact.email}
+                      </a>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm font-semibold tracking-widest text-body-muted uppercase">
+                      {t(copy.homepage, lang)}
+                    </dt>
+                    <dd className="mt-2.5 text-base md:text-lg">
+                      <a
+                        href={supervisor.homepage}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
+                      >
+                        {t(supervisor.homepageLabel, lang)} ↗
+                      </a>
+                    </dd>
+                  </div>
+                </div>
+              </dl>
             </div>
           </Reveal>
         </div>

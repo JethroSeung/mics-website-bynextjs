@@ -3,6 +3,7 @@ import Link from "next/link";
 import { NavLinks } from "@/components/layout/nav-links";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { LanguageSwitch } from "@/components/layout/language-switch";
+import { AutoHideHeader } from "@/components/layout/auto-hide-header";
 import { siteConfig, t, hrefFor, type Lang } from "@/data/site";
 
 /**
@@ -14,7 +15,7 @@ import { siteConfig, t, hrefFor, type Lang } from "@/data/site";
  */
 export function SiteHeader({ lang }: { lang: Lang }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-border/90 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <AutoHideHeader>
       <div className="mx-auto flex h-header w-full max-w-[2000px] items-center justify-between gap-4 px-4 sm:px-6">
         {/* 双 Logo 品牌区 */}
         <Link
@@ -62,6 +63,6 @@ export function SiteHeader({ lang }: { lang: Lang }) {
           <MobileNav lang={lang} />
         </div>
       </div>
-    </header>
+    </AutoHideHeader>
   );
 }

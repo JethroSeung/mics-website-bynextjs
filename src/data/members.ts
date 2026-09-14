@@ -5,7 +5,7 @@
  */
 
 export type Role = "master" | "undergraduate";
-export type Direction = "pain" | "medeng" | "general";
+export type Direction = "disaster" | "medeng" | "general";
 
 export interface Member {
   /** 拼音标识（与照片文件名一致） */
@@ -17,7 +17,7 @@ export interface Member {
   photo: string;
   /** 是否出现在首页精选（首页 4×4 共 16 人：8 研究生 + 8 本科生） */
   featured: boolean;
-  /** 研究方向负责人（需求文档 §5 确认：杨承轩-pain、张栩闻-medeng） */
+  /** 研究方向负责人（需求文档 §5 确认：杨承轩-disaster、张栩闻-medeng） */
   directionLead?: Exclude<Direction, "general">;
 }
 
@@ -211,7 +211,7 @@ export const members: Member[] = [
     email: "ycxuan0517@gmail.com",
     photo: "/images/members/yang-chengxuan.jpg",
     featured: true,
-    directionLead: "pain",
+    directionLead: "disaster",
   },
   {
     id: "zhang-xuanming",

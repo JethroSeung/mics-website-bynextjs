@@ -6,7 +6,7 @@ import { getMemberById } from "@/data/members";
 import type { DirectionSlug, ResearchDirection } from "@/data/research";
 
 const directionIcons: Record<DirectionSlug, LucideIcon> = {
-  pain: Waves,
+  disaster: Waves,
   medeng: Stethoscope,
 };
 

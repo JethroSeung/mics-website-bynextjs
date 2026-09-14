@@ -128,7 +128,7 @@ export const siteConfig = {
       pills: [],
       actions: [
         { label: { zh: "了解医工多模态感知", en: "Multimodal Sensing" }, href: "/research/medeng", style: "primary" },
-        { label: { zh: "了解灾害场景通感计算", en: "ISAC Computing" }, href: "/research/pain", style: "secondary" },
+        { label: { zh: "了解灾害场景通感计算", en: "ISAC Computing" }, href: "/research/disaster", style: "secondary" },
       ],
     },
     {
@@ -200,7 +200,7 @@ export const siteConfig = {
     },
     {
       label: { zh: "通感计算", en: "ISAC Computing" },
-      href: "/research/pain",
+      href: "/research/disaster",
     },
     { label: { zh: "团队成员", en: "Team" }, href: "/team" },
     { label: { zh: "加入我们", en: "Join Us" }, href: "/join" },

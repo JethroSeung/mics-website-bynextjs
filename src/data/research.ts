@@ -1,15 +1,15 @@
 /**
  * 研究方向数据（需求文档 §5：3 方向合并为 2）
- * - pain：自然灾害场景下的通感计算（负责人：杨承轩）
+ * - disaster：自然灾害场景下的通感计算（负责人：杨承轩）
  * - medeng：医工交叉-多模态感知（负责人：张栩闻）
  * medeng 详情迁移自旧站 research-multimodal.html / en/research-multimodal.html（2026-09-06）
- * pain 详情整理自 natural_disaster.md（2026-09-09）
+ * disaster 详情整理自 natural_disaster.md（2026-09-09）
  */
 
 import type { Localized, PartnerId } from "./site";
 import { getMemberById } from "./members";
 
-export type DirectionSlug = "pain" | "medeng";
+export type DirectionSlug = "disaster" | "medeng";
 
 /** 配图（news-note-media / publication-media），width/height 供 next/image 使用 */
 export interface ResearchFigure {
@@ -86,7 +86,7 @@ export interface ResearchDirection {
 
 export const researchDirections: ResearchDirection[] = ([
   {
-    slug: "pain",
+    slug: "disaster",
     order: 2,
     name: {
       zh: "自然灾害场景下的通感计算",

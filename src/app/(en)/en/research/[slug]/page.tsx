@@ -7,7 +7,7 @@ interface ResearchRouteProps {
   params: Promise<{ slug: DirectionSlug }>;
 }
 
-/** 静态导出：为每个研究方向生成独立页面（pain / medeng） */
+/** 静态导出：为每个研究方向生成独立页面（disaster / medeng） */
 export function generateStaticParams() {
   return researchDirections.map((dir) => ({ slug: dir.slug }));
 }
