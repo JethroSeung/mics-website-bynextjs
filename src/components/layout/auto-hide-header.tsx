@@ -80,7 +80,7 @@ export function AutoHideHeader({ children }: { children: ReactNode }) {
   return (
     <header
       onFocusCapture={() => setHidden(false)}
-      className={`sticky top-0 z-50 border-b border-border/90 bg-background/95 backdrop-blur transition-transform duration-300 ease-out motion-reduce:transition-none supports-[backdrop-filter]:bg-background/80 sm:translate-y-0 ${
+      className={`sticky top-0 z-50 border-b border-border/90 bg-background/95 backdrop-blur transition-transform duration-500 ease-out motion-reduce:transition-none supports-[backdrop-filter]:bg-background/80 sm:translate-y-0 ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >

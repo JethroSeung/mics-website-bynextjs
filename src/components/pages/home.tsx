@@ -14,7 +14,7 @@ import { joinConfig } from "@/data/join";
 const platforms = [
   {
     no: "01",
-    image: "/images/platform/wifi-csi-intel5300.png",
+    image: "/images/platform/wifi-csi-intel5300.webp",
     name: { zh: "WiFi CSI 采集平台", en: "WiFi CSI Acquisition Platform" },
     description: {
       zh: "基于 Intel 5300 WiFi 网卡获取多子载波幅度与相位信息，适合分析人体活动引起的细粒度信道变化。",
@@ -23,7 +23,7 @@ const platforms = [
   },
   {
     no: "02",
-    image: "/images/platform/bfi-capture-r7800-r9000.jpeg",
+    image: "/images/platform/bfi-capture-r7800-r9000.webp",
     name: { zh: "BFI 采集平台", en: "BFI Acquisition Platform" },
     description: {
       zh: "由发射设备、接收节点与嗅探设备协同，捕获商用 WiFi 通信过程中产生的 BFI 数据包。",
@@ -87,6 +87,7 @@ export function HomePage({ lang }: { lang: Lang }) {
       zh: "四类平台覆盖协议级无线感知、商用 WiFi 反馈信息、三维空间点云和移动场景验证，形成从信道微扰到空间运动的多模态实验链路。",
       en: "Four platforms span protocol-level wireless sensing, commercial WiFi feedback, 3D point clouds, and mobile-scene validation, forming a multimodal pipeline from channel perturbations to spatial motion.",
     },
+    platformSwipeHint: { zh: "左右滑动查看更多平台 →", en: "Swipe to see more platforms →" },
     teamTitle: { zh: "团队成员", en: "Team Members" },
     teamDesc: {
       zh: "首页展示部分课题组成员，完整名单可进入团队成员页面查看。",
@@ -297,11 +298,14 @@ export function HomePage({ lang }: { lang: Lang }) {
               desc={t(copy.platformDesc, lang)}
               align="center"
             />
-            <div className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 xl:grid-cols-4">
+            <p className="mt-6 text-center text-sm text-body-muted sm:hidden">
+              {t(copy.platformSwipeHint, lang)}
+            </p>
+            <div className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-12 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 xl:grid-cols-4">
               {platforms.map((platform) => (
                 <article
                   key={platform.no}
-                  className="w-[84%] shrink-0 snap-start overflow-hidden rounded-xl border border-border bg-surface-elevated shadow-card sm:w-auto"
+                  className="w-[80%] shrink-0 snap-start overflow-hidden rounded-xl border border-border bg-surface-elevated shadow-card sm:w-auto"
                 >
                   <div className="relative aspect-[4/3] border-b border-border bg-white">
                     <Image

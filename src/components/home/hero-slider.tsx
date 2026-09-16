@@ -84,27 +84,27 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
                 key={slide.eyebrow}
                 aria-label={`${lang === "zh" ? "幻灯片" : "Slide"} ${i + 1} / ${slides.length}`}
               >
-                <div className="flex min-h-[max(560px,calc(100svh_-_var(--spacing-header)))] items-center px-6 md:px-8">
-                  <div className="mx-auto w-full max-w-content py-16 md:py-20">
-                    <p className="text-sm font-semibold tracking-[0.25em] text-gold uppercase">
+                <div className="flex min-h-[clamp(440px,70svh,520px)] items-center px-6 sm:min-h-[max(560px,calc(100svh_-_var(--spacing-header)))] md:px-8">
+                  <div className="mx-auto w-full max-w-content pt-8 pb-12 sm:py-16 md:py-20">
+                    <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase sm:text-sm sm:tracking-[0.25em]">
                       {slide.eyebrow}
                     </p>
                     <Title
                       id={i === 0 ? "hero-title" : undefined}
-                      className="mt-4 max-w-3xl text-4xl leading-tight font-bold tracking-tight break-words text-white sm:text-5xl md:text-7xl"
+                      className="mt-3 max-w-3xl text-3xl leading-tight font-bold tracking-tight break-words text-white sm:mt-4 sm:text-5xl md:text-7xl"
                     >
                       {t(slide.title, lang)}
                     </Title>
-                    <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
+                    <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/80 sm:mt-5 sm:text-lg md:text-xl">
                       {t(slide.tagline, lang)}
                     </p>
 
                     {slide.pills.length > 0 ? (
-                      <div className="mt-7 flex flex-wrap gap-2.5">
+                      <div className="mt-5 flex flex-wrap gap-2 sm:mt-7 sm:gap-2.5">
                         {slide.pills.map((pill) => (
                           <span
                             key={t(pill, lang)}
-                            className="rounded-full border border-white/25 bg-white/10 px-5 py-2 text-base text-white/90 backdrop-blur-xs"
+                            className="rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm text-white/90 backdrop-blur-xs sm:px-5 sm:py-2 sm:text-base"
                           >
                             {t(pill, lang)}
                           </span>
@@ -113,14 +113,14 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
                     ) : null}
 
                     {slide.actions.length > 0 ? (
-                      <div className="mt-9 flex flex-wrap gap-3.5">
+                      <div className="mt-6 flex flex-wrap gap-3 sm:mt-9 sm:gap-3.5">
                         {slide.actions.map((action) => (
                           <Button
                             key={action.href}
                             asChild
                             className={cn(
                               // 小屏英文长文案允许换行并自适应高度，避免溢出
-                              "h-auto min-h-12 px-6 text-center text-base whitespace-normal md:h-12 md:px-8 md:text-lg md:whitespace-nowrap",
+                              "h-auto min-h-11 px-4 text-center text-sm whitespace-normal sm:min-h-12 sm:px-6 sm:text-base md:h-12 md:px-8 md:text-lg md:whitespace-nowrap",
                               action.style === "primary"
                                 ? "bg-white text-primary-dark hover:bg-white/90"
                                 : "border-white/50 bg-transparent text-white hover:border-white hover:bg-white/10"
@@ -140,11 +140,11 @@ export function HeroSlider({ slides, lang }: HeroSliderProps) {
 
         <CarouselPrevious
           aria-label={lang === "zh" ? "上一张幻灯片" : "Previous slide"}
-          className="left-3 size-11 rounded-full border-white/40 bg-white/10 text-white backdrop-blur-xs hover:bg-white/20 hover:text-white md:left-6"
+          className="left-3 hidden size-11 rounded-full border-white/40 bg-white/10 text-white backdrop-blur-xs hover:bg-white/20 hover:text-white sm:flex md:left-6"
         />
         <CarouselNext
           aria-label={lang === "zh" ? "下一张幻灯片" : "Next slide"}
-          className="right-3 size-11 rounded-full border-white/40 bg-white/10 text-white backdrop-blur-xs hover:bg-white/20 hover:text-white md:right-6"
+          className="right-3 hidden size-11 rounded-full border-white/40 bg-white/10 text-white backdrop-blur-xs hover:bg-white/20 hover:text-white sm:flex md:right-6"
         />
 
         {/* 指示器 */}
