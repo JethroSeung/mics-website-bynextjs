@@ -35,6 +35,19 @@ for (const route of routes) {
 await page.setViewport({ width: 1920, height: 1000, deviceScaleFactor: 1 });
 await page.goto(`${baseUrl}/join/medeng`, { waitUntil: "networkidle0" });
 assert.equal(await count("aside nav a"), 4, "desktop local navigation should list four tracks");
+assert.equal(await count("aside a[href^='mailto:barcaxu@outlook.com']"), 1, "desktop sidebar should show the shared application recipient");
+assert.match(await page.$eval("main", (element) => element.textContent ?? ""), /作品之外，也请让我们认识一下你/);
+const applicationOrderIsCorrect = await page.evaluate(() => {
+  const hero = document.querySelector("main .pl-hero");
+  const guide = document.querySelector("main [aria-labelledby^='application-guide-']");
+  const selector = document.querySelector("main .pl-selector");
+  if (!hero || !guide || !selector) return false;
+  return Boolean(
+    hero.compareDocumentPosition(guide) & Node.DOCUMENT_POSITION_FOLLOWING &&
+    guide.compareDocumentPosition(selector) & Node.DOCUMENT_POSITION_FOLLOWING
+  );
+});
+assert.equal(applicationOrderIsCorrect, true, "application guidance should sit between the hero and task selector");
 const desktopLayout = await page.evaluate(() => {
   const aside = document.querySelector("main aside");
   const article = document.querySelector("main article");
@@ -78,6 +91,9 @@ await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
 await page.goto(`${baseUrl}/join`, { waitUntil: "networkidle0" });
 assert.equal(await count("main a[href='/join/medeng']"), 1, "only the medical-engineering card should link onward");
 assert.equal(await count("main a[href*='/join/disaster']"), 0, "disaster card should not be interactive yet");
+assert.equal(await count("main a[href^='mailto:barcaxu@outlook.com']"), 1, "medical-engineering card should include the application email");
+assert.match(await page.$eval("main", (element) => element.textContent ?? ""), /报名需同时完成[\s\S]*任意一项招新任务[\s\S]*简历或文字自我介绍/);
+assert.equal(await count("a a"), 0, "the card should not contain nested interactive links");
 const joinOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 assert.ok(joinOverflow <= 1, `join page should not overflow horizontally (overflow: ${joinOverflow}px)`);
 await page.screenshot({ path: path.join(os.tmpdir(), "mics-join-mobile.png"), fullPage: true });
@@ -93,6 +109,10 @@ const detailOverflow = await page.evaluate(() => document.documentElement.scroll
 assert.ok(detailOverflow <= 1, `detail page should not overflow horizontally (overflow: ${detailOverflow}px)`);
 assert.equal(await count("img[src='/images/recruitment/vquala-face-quality.png']"), 1);
 await page.screenshot({ path: path.join(os.tmpdir(), "mics-recruitment-mobile.png"), fullPage: false });
+await page.$eval("[aria-labelledby^='application-guide-']", (element) =>
+  element.scrollIntoView({ block: "start" }),
+);
+await page.screenshot({ path: path.join(os.tmpdir(), "mics-application-guide-mobile.png"), fullPage: false });
 
 await page.goto(`${baseUrl}/`, { waitUntil: "networkidle0" });
 assert.equal(await count("main a[href='/join/medeng']"), 1, "homepage should link directly to medical-engineering recruitment");

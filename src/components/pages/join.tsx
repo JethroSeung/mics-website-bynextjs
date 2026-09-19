@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Activity, ArrowLeft, ArrowRight, RadioTower } from "lucide-react";
+import { Activity, ArrowLeft, ArrowRight, Mail, RadioTower } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 import { hrefFor, t, type Lang } from "@/data/site";
-import { recruitmentAreas, recruitmentIntro } from "@/data/join";
+import { medengApplication, recruitmentAreas, recruitmentIntro } from "@/data/join";
 
 export function JoinPage({ lang }: { lang: Lang }) {
   const copy = {
@@ -16,6 +16,17 @@ export function JoinPage({ lang }: { lang: Lang }) {
     open: { zh: "招新开放中", en: "Open now" },
     comingSoon: { zh: "即将开放", en: "Coming soon" },
     explore: { zh: "查看医工交叉招新计划", en: "Explore the medical-engineering plan" },
+    requirementsTitle: { zh: "报名需同时完成", en: "Complete both to apply" },
+    required: { zh: "报名必需", en: "Required" },
+    taskRequirement: {
+      zh: "四个方向中任意一项招新任务",
+      en: "One recruitment task from any of the four tracks",
+    },
+    profileRequirement: {
+      zh: "简历或文字自我介绍（二选一）",
+      en: "A résumé or a short written introduction (either is fine)",
+    },
+    submissionLabel: { zh: "个人介绍统一投递", en: "Send your introduction to" },
   } as const;
 
   return (
@@ -79,25 +90,56 @@ export function JoinPage({ lang }: { lang: Lang }) {
                       {t(area.detail, lang)}
                     </p>
                     {area.status === "open" ? (
-                      <span className="mt-auto inline-flex items-center gap-2 pt-8 text-base font-bold text-primary">
-                        {t(copy.explore, lang)}
-                        <ArrowRight className="size-4" aria-hidden="true" />
-                      </span>
+                      <>
+                        <div className="mt-6 rounded-xl border border-gold/30 bg-white p-5">
+                          <div className="flex flex-wrap items-center justify-between gap-2">
+                            <p className="text-sm font-bold text-primary">
+                              {t(copy.requirementsTitle, lang)}
+                            </p>
+                            <span className="rounded-full bg-primary-light px-2.5 py-1 text-xs font-semibold text-gold">
+                              {t(copy.required, lang)}
+                            </span>
+                          </div>
+                          <ol className="mt-3 divide-y divide-border text-sm leading-relaxed text-body-secondary">
+                            <li className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-2 py-2 first:pt-0">
+                              <span className="font-semibold text-gold" aria-hidden="true">01</span>
+                              <span>{t(copy.taskRequirement, lang)}</span>
+                            </li>
+                            <li className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-2 py-2 last:pb-0">
+                              <span className="font-semibold text-gold" aria-hidden="true">02</span>
+                              <span>{t(copy.profileRequirement, lang)}</span>
+                            </li>
+                          </ol>
+                          <div className="mt-4 border-t border-border pt-4">
+                            <p className="text-xs font-semibold tracking-wide text-body-muted uppercase">
+                              {t(copy.submissionLabel, lang)}
+                            </p>
+                            <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold text-body">
+                              <Mail className="size-4 shrink-0 text-gold" aria-hidden="true" />
+                              {t(medengApplication.recipient.name, lang)}
+                              <span aria-hidden="true" className="text-border-dark">·</span>
+                              <a
+                                href={`mailto:${medengApplication.recipient.email}?subject=${encodeURIComponent(t(medengApplication.subject, lang))}`}
+                                className="break-all text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-ring"
+                              >
+                                {medengApplication.recipient.email}
+                              </a>
+                            </p>
+                          </div>
+                        </div>
+                        <Link
+                          href={hrefFor("/join/medeng", lang)}
+                          className="mt-auto inline-flex items-center gap-2 self-start pt-8 text-base font-bold text-primary transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
+                        >
+                          {t(copy.explore, lang)}
+                          <ArrowRight className="size-4" aria-hidden="true" />
+                        </Link>
+                      </>
                     ) : null}
                   </article>
                 );
 
-                return area.status === "open" ? (
-                  <Link
-                    key={area.slug}
-                    href={hrefFor("/join/medeng", lang)}
-                    className="group rounded-2xl transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-                  >
-                    {content}
-                  </Link>
-                ) : (
-                  <div key={area.slug}>{content}</div>
-                );
+                return <div key={area.slug}>{content}</div>;
               })}
             </div>
           </Reveal>

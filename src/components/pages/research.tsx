@@ -74,7 +74,7 @@ export function ResearchPage({
     recruitmentLabel: { zh: "本科生科研招新", en: "Undergraduate Recruitment" },
     recruitmentTitle: { zh: "医工交叉招新计划已开放", en: "Medical-engineering recruitment is now open" },
     recruitmentDesc: {
-      zh: "查看毫米波、WiFi / CSI、计算机视觉与语音四个方向的具体任务。",
+      zh: "查看毫米波、Wi-Fi / CSI、计算机视觉与语音四个方向的具体任务。",
       en: "Explore specific tasks across millimeter-wave radar, WiFi / CSI, computer vision, and voice.",
     },
     recruitmentCta: { zh: "查看招新计划", en: "View recruitment plan" },

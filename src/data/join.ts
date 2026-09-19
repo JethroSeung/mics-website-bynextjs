@@ -1,4 +1,5 @@
 import type { Localized } from "./site";
+import { getMemberById } from "./members";
 
 export type RecruitmentStatus = "open" | "coming-soon";
 export type RecruitmentAreaSlug = "medeng" | "disaster";
@@ -27,6 +28,26 @@ export interface RecruitmentTrack {
     email: string;
   };
 }
+
+const applicationRecipient = getMemberById("zhang-xuwen");
+if (!applicationRecipient?.email) {
+  throw new Error("医工招新简历接收人张栩闻缺少邮箱");
+}
+
+/** 医工交叉四个方向共用的个人介绍投递规则。 */
+export const medengApplication = {
+  recipient: {
+    name: applicationRecipient.name,
+    email: applicationRecipient.email,
+  },
+  subject: {
+    zh: "MICS医工招新-意向方向-姓名-年级",
+    en: "MICS Medical-Engineering Recruitment - Track - Name - Year",
+  },
+} satisfies {
+  recipient: { name: Localized; email: string };
+  subject: Localized;
+};
 
 export const recruitmentIntro: Localized = {
   zh: "课题组面向全校本科生开放科研招新。你可以先按研究方向了解计划，再进入具体赛题，选择最适合自己的参与方式。",
@@ -77,8 +98,8 @@ export const recruitmentTracks: RecruitmentTrack[] = [
   },
   {
     slug: "wifi-csi",
-    shortTitle: { zh: "WiFi / CSI", en: "WiFi / CSI" },
-    title: { zh: "WiFi / CSI 方向招新", en: "WiFi / CSI Track Recruitment" },
+    shortTitle: { zh: "Wi-Fi / CSI", en: "Wi-Fi / CSI" },
+    title: { zh: "Wi-Fi / CSI 方向招新", en: "Wi-Fi / CSI Track Recruitment" },
     description: {
       zh: "无线信道驱动的人体活动与健康感知",
       en: "Wireless-channel-based activity and health sensing",
