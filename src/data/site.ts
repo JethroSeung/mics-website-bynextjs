@@ -199,7 +199,7 @@ export const siteConfig = {
       href: "/research/medeng",
     },
     {
-      label: { zh: "通感计算", en: "ISAC Computing" },
+      label: { zh: "通感算", en: "ISAC Computing" },
       href: "/research/disaster",
     },
     { label: { zh: "团队成员", en: "Team" }, href: "/team" },

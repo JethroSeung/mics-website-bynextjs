@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
 import { DirectionPartners } from "@/components/direction-partners";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
@@ -71,6 +71,13 @@ export function ResearchPage({
       zh: "该方向的详细研究内容、研究计划与进展正在整理中，稍后发布。如需了解，欢迎通过上方邮箱与负责人联系。",
       en: "Detailed research content, plans and progress are being prepared. Feel free to contact the lead via email above.",
     },
+    recruitmentLabel: { zh: "本科生科研招新", en: "Undergraduate Recruitment" },
+    recruitmentTitle: { zh: "医工交叉招新计划已开放", en: "Medical-engineering recruitment is now open" },
+    recruitmentDesc: {
+      zh: "查看毫米波、WiFi / CSI、计算机视觉与语音四个方向的具体任务。",
+      en: "Explore specific tasks across millimeter-wave radar, WiFi / CSI, computer vision, and voice.",
+    },
+    recruitmentCta: { zh: "查看招新计划", en: "View recruitment plan" },
   } as const;
 
   return (
@@ -174,6 +181,31 @@ export function ResearchPage({
                   </div>
                 </header>
               </Reveal>
+
+              {direction.slug === "medeng" ? (
+                <Reveal>
+                  <aside className="my-8 flex flex-col gap-5 rounded-xl border border-gold/35 bg-white px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-xs font-bold tracking-[0.14em] text-gold uppercase">
+                        {t(copy.recruitmentLabel, lang)}
+                      </p>
+                      <h3 className="mt-1.5 text-xl font-bold text-primary md:text-2xl">
+                        {t(copy.recruitmentTitle, lang)}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-body-secondary md:text-base">
+                        {t(copy.recruitmentDesc, lang)}
+                      </p>
+                    </div>
+                    <Link
+                      href={hrefFor("/join/medeng", lang)}
+                      className="inline-flex shrink-0 items-center gap-2 self-start rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:self-center"
+                    >
+                      {t(copy.recruitmentCta, lang)}
+                      <ArrowRight className="size-4" aria-hidden="true" />
+                    </Link>
+                  </aside>
+                </Reveal>
+              ) : null}
 
               {/* 分节正文（行业背景 / 研究方向 / 未来方向） */}
               {direction.detail.sections.map((section, i) => (

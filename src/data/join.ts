@@ -1,48 +1,120 @@
-/**
- * 招新配置（需求文档 §6：纯展示，无表单/无提交/无 API）
- * - status "pending"：渲染"招新任务待发布"占位（Phase 1 现状）
- * - status "open"：渲染任务卡片列表（Phase 2 填充 tasks 后切换）
- * 学生通过页面展示的导师邮箱自行咨询
- */
-
 import type { Localized } from "./site";
-import type { DirectionSlug } from "./research";
 
-export type JoinStatus = "pending" | "open";
-export type JoinDirection = DirectionSlug | "general";
+export type RecruitmentStatus = "open" | "coming-soon";
+export type RecruitmentAreaSlug = "medeng" | "disaster";
+export type RecruitmentTrackSlug =
+  | "mmwave"
+  | "wifi-csi"
+  | "computer-vision"
+  | "voice";
 
-export interface JoinTask {
-  index: 1 | 2 | 3;
-  direction: JoinDirection;
-  fields: {
-    title: Localized;
-    intro: Localized;
-    work: Localized;
-    requirements: Localized;
+export interface RecruitmentArea {
+  slug: RecruitmentAreaSlug;
+  status: RecruitmentStatus;
+  eyebrow: string;
+  title: Localized;
+  description: Localized;
+  detail: Localized;
+}
+
+export interface RecruitmentTrack {
+  slug: RecruitmentTrackSlug;
+  shortTitle: Localized;
+  title: Localized;
+  description: Localized;
+  contact: {
+    name: Localized;
+    email: string;
   };
 }
 
-export interface JoinConfig {
-  status: JoinStatus;
-  contactEmail: string;
-  /** Phase 2 填充；空数组时渲染"任务待发布"占位 */
-  tasks: JoinTask[];
-  /** 招新导语（首页招新区块与 /join 页复用，迁移自旧站） */
-  intro: Localized;
-  /** status === "pending" 时的提示文案 */
-  pendingNote: Localized;
+export const recruitmentIntro: Localized = {
+  zh: "课题组面向全校本科生开放科研招新。你可以先按研究方向了解计划，再进入具体赛题，选择最适合自己的参与方式。",
+  en: "The group welcomes undergraduate students across NJUPT. Start with a research area, then explore its tracks and choose the participation route that best fits your background.",
+};
+
+export const recruitmentAreas: RecruitmentArea[] = [
+  {
+    slug: "medeng",
+    status: "open",
+    eyebrow: "Medical Engineering",
+    title: { zh: "医工交叉", en: "Medical Engineering" },
+    description: {
+      zh: "从毫米波、WiFi CSI、计算机视觉和语音四个方向进入无接触健康感知研究。",
+      en: "Explore contactless health sensing through millimeter-wave radar, WiFi, computer vision, and voice.",
+    },
+    detail: {
+      zh: "本轮招新计划已发布，包含挑战赛、论文复现、论文汇报与开放式任务。",
+      en: "The current plan is open, with challenges, paper reproduction, presentations, and open-ended tasks.",
+    },
+  },
+  {
+    slug: "disaster",
+    status: "coming-soon",
+    eyebrow: "Disaster Sensing",
+    title: { zh: "灾害感知", en: "Disaster Sensing" },
+    description: {
+      zh: "面向自然灾害场景，探索通信、感知与智能分析协同的科研问题。",
+      en: "Study the coordination of communication, sensing, and intelligent analysis in natural-disaster scenarios.",
+    },
+    detail: {
+      zh: "招新计划正在整理，发布后将在此处直接开放。",
+      en: "The recruitment plan is being prepared and will open here once published.",
+    },
+  },
+];
+
+export const recruitmentTracks: RecruitmentTrack[] = [
+  {
+    slug: "mmwave",
+    shortTitle: { zh: "毫米波", en: "mmWave" },
+    title: { zh: "毫米波方向招新", en: "Millimeter-Wave Track Recruitment" },
+    description: {
+      zh: "无接触生命体征感知与生成式 AI",
+      en: "Contactless vital-sign sensing and generative AI",
+    },
+    contact: { name: { zh: "代宇佳", en: "Yujia Dai" }, email: "zoeydai.cn@gmail.com" },
+  },
+  {
+    slug: "wifi-csi",
+    shortTitle: { zh: "WiFi / CSI", en: "WiFi / CSI" },
+    title: { zh: "WiFi / CSI 方向招新", en: "WiFi / CSI Track Recruitment" },
+    description: {
+      zh: "无线信道驱动的人体活动与健康感知",
+      en: "Wireless-channel-based activity and health sensing",
+    },
+    contact: { name: { zh: "谯霄霄", en: "Xiaoxiao Qiao" }, email: "b24041308@njupt.edu.cn" },
+  },
+  {
+    slug: "computer-vision",
+    shortTitle: { zh: "计算机视觉", en: "Computer Vision" },
+    title: { zh: "计算机视觉方向招新", en: "Computer Vision Track Recruitment" },
+    description: {
+      zh: "面向医疗健康的视觉质量评估与生理测量",
+      en: "Visual quality assessment and physiological measurement for healthcare",
+    },
+    contact: { name: { zh: "文宇航", en: "Yuhang Wen" }, email: "wentian040318@gmail.com" },
+  },
+  {
+    slug: "voice",
+    shortTitle: { zh: "语音", en: "Voice" },
+    title: { zh: "语音方向招新", en: "Voice Track Recruitment" },
+    description: {
+      zh: "多模态表征学习与可信可解释推理",
+      en: "Multimodal representation learning and trustworthy explainable reasoning",
+    },
+    contact: { name: { zh: "陆梓健", en: "Zijian Lu" }, email: "18818732360@163.com" },
+  },
+];
+
+export const nestedRecruitmentTrackSlugs = recruitmentTracks
+  .filter((track) => track.slug !== "mmwave")
+  .map((track) => track.slug);
+
+export function getRecruitmentTrack(slug: string) {
+  return recruitmentTracks.find((track) => track.slug === slug);
 }
 
-export const joinConfig: JoinConfig = {
-  status: "pending",
-  contactEmail: "zuoyiping@njupt.edu.cn",
-  tasks: [],
-  intro: {
-    zh: "课题组常年招募对多模态智能通信与感知技术感兴趣的本科生，具体研究题目与申请要求请查看详细招新页面。",
-    en: "The group welcomes undergraduate students interested in multimodal intelligent communication and sensing. Detailed topics and application requirements are available on the recruitment page.",
-  },
-  pendingNote: {
-    zh: "招新任务整理中，敬请期待",
-    en: "Recruitment tasks are being prepared — stay tuned",
-  },
-};
+export function recruitmentTrackPath(slug: RecruitmentTrackSlug) {
+  return slug === "mmwave" ? "/join/medeng" : `/join/medeng/${slug}`;
+}

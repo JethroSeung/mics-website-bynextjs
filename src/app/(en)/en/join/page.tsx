@@ -5,7 +5,7 @@ import { alternatesFor } from "@/data/site";
 export const metadata: Metadata = {
   title: "Join Us",
   description:
-    "Undergraduate research recruitment of the MICS group: topics, requirements and contact information.",
+    "MICS undergraduate research recruitment across medical engineering and disaster sensing.",
   alternates: alternatesFor("/join", "en"),
 };
 

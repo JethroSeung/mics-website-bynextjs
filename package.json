@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "generate:recruitment": "node scripts/generate-recruitment-content.mjs",
     "start": "next start",
     "lint": "eslint"
   },

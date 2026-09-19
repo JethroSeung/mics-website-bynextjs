@@ -4,7 +4,7 @@ import { alternatesFor } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "加入我们",
-  description: "MICS 课题组本科生科研招新：研究题目、申请要求与联系方式。",
+  description: "MICS 课题组本科生科研招新：医工交叉与灾害感知方向计划。",
   alternates: alternatesFor("/join", "zh"),
 };
 

@@ -1,47 +1,25 @@
 import Link from "next/link";
-import { ArrowLeft, Mail, University } from "lucide-react";
+import { Activity, ArrowLeft, ArrowRight, RadioTower } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
-import { t, siteConfig, hrefFor, type Lang } from "@/data/site";
-import { joinConfig } from "@/data/join";
+import { hrefFor, t, type Lang } from "@/data/site";
+import { recruitmentAreas, recruitmentIntro } from "@/data/join";
 
-/**
- * 招新页（zh/en 共享，纯展示，无表单无提交 §6）
- * status === "pending" → 渲染"任务待发布"占位（Phase 1）
- * Phase 2 填充 tasks 并切 "open" 后渲染任务卡片列表
- */
 export function JoinPage({ lang }: { lang: Lang }) {
-  const supervisor = siteConfig.supervisor;
-
   const copy = {
-    backToJoin: { zh: "返回首页招新区块", en: "Back to recruitment section" },
-    pageTitle: { zh: "本科生科研招新", en: "Undergraduate Research Recruitment" },
-    pageDesc: {
-      zh: "诚邀对多模态智能通信与感知技术感兴趣的本科生加入课题组。",
-      en: "We welcome undergraduate students interested in multimodal intelligent communication and sensing to join the group.",
+    back: { zh: "返回首页招新区块", en: "Back to the homepage recruitment section" },
+    title: { zh: "本科生科研招新", en: "Undergraduate Research Recruitment" },
+    desc: {
+      zh: "先选择你感兴趣的研究方向，再查看具体任务、参与方式与提交要求。",
+      en: "Choose a research area first, then review its tasks, participation routes, and submission requirements.",
     },
-    overviewSr: { zh: "招新说明", en: "Recruitment overview" },
-    topicsTitle: { zh: "研究题目", en: "Research Topics" },
-    topicsPendingDesc: { zh: "招新任务整理中，敬请期待。", en: "Recruitment tasks are being prepared — stay tuned." },
-    pendingLead: {
-      zh: "研究题目与申请要求发布前，欢迎先通过下方联系方式与导师沟通咨询。",
-      en: "Before topics and requirements are published, feel free to contact the supervisor via the details below.",
-    },
-    taskLabel: { zh: (i: number) => `题目 ${String(i).padStart(2, "0")}`, en: (i: number) => `Topic ${String(i).padStart(2, "0")}` },
-    workLabel: { zh: "工作内容", en: "Work" },
-    reqLabel: { zh: "申请要求", en: "Requirements" },
-    contactTitle: { zh: "申请联系方式", en: "Contact" },
-    contactDesc: {
-      zh: "请通过邮箱与导师联系，简要介绍个人情况并说明感兴趣的研究题目。",
-      en: "Please contact the supervisor by email with a brief introduction and the topic you are interested in.",
-    },
-    mentorLabel: { zh: (name: string) => `导师：${name}`, en: (name: string) => `Supervisor: ${name}` },
-    affiliation: { zh: "所属单位", en: "Affiliation" },
+    open: { zh: "招新开放中", en: "Open now" },
+    comingSoon: { zh: "即将开放", en: "Coming soon" },
+    explore: { zh: "查看医工交叉招新计划", en: "Explore the medical-engineering plan" },
   } as const;
 
   return (
     <>
-      {/* 页头 */}
       <section aria-labelledby="join-page-title" className="bg-surface pt-14 pb-10 md:pt-18 md:pb-12">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <div className="mx-auto max-w-[1152px]">
@@ -50,139 +28,77 @@ export function JoinPage({ lang }: { lang: Lang }) {
               className="inline-flex items-center gap-1.5 text-base font-medium text-body-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
             >
               <ArrowLeft className="size-4" aria-hidden="true" />
-              {t(copy.backToJoin, lang)}
+              {t(copy.back, lang)}
             </Link>
             <div className="mt-6">
               <SectionHeading
                 eyebrow="Join Our Team"
-                title={t(copy.pageTitle, lang)}
+                title={t(copy.title, lang)}
                 titleId="join-page-title"
                 as="h1"
-                desc={t(copy.pageDesc, lang)}
+                desc={t(copy.desc, lang)}
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 招新说明 */}
-      <section aria-labelledby="overview-title" className="py-12 md:py-14">
+      <section aria-labelledby="join-directions-title" className="py-14 md:py-18">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <Reveal className="mx-auto max-w-[1152px]">
-            <h2 id="overview-title" className="sr-only">
-              {t(copy.overviewSr, lang)}
+            <h2 id="join-directions-title" className="sr-only">
+              {lang === "zh" ? "招新方向" : "Recruitment areas"}
             </h2>
-            <p className="max-w-2xl text-base leading-relaxed text-body-secondary md:text-lg">
-              {t(joinConfig.intro, lang)}
+            <p className="max-w-3xl text-base leading-relaxed text-body-secondary md:text-lg">
+              {t(recruitmentIntro, lang)}
             </p>
-          </Reveal>
-        </div>
-      </section>
 
-      {/* 研究题目：pending 占位 / open 任务列表 */}
-      <section aria-labelledby="topics-title" className="bg-surface py-14 md:py-16">
-        <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal className="mx-auto max-w-[1152px]">
-            <SectionHeading
-              eyebrow="Topics"
-              title={t(copy.topicsTitle, lang)}
-              titleId="topics-title"
-              desc={joinConfig.status === "pending" ? t(copy.topicsPendingDesc, lang) : undefined}
-            />
-            {joinConfig.status === "pending" ? (
-              <div className="mt-12 flex max-w-xl flex-col items-center rounded-xl border border-dashed border-gold/50 bg-primary-light/50 px-8 py-14 text-center">
-                <span aria-hidden="true" className="size-3 animate-pulse rounded-full bg-gold" />
-                <p className="mt-6 text-xl font-bold text-primary">
-                  {t(joinConfig.pendingNote, lang)}
-                </p>
-                <p className="mt-3 text-base leading-relaxed text-body-secondary">
-                  {t(copy.pendingLead, lang)}
-                </p>
-              </div>
-            ) : (
-              <div className="mt-12 grid gap-6 md:grid-cols-3">
-                {joinConfig.tasks.map((task) => (
-                  <article
-                    key={task.index}
-                    className="rounded-xl border border-border bg-surface-elevated p-7 shadow-card"
-                  >
-                    <p className="text-sm font-semibold tracking-widest text-gold">
-                      {copy.taskLabel[lang](task.index)}
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {recruitmentAreas.map((area, index) => {
+                const Icon = index === 0 ? Activity : RadioTower;
+                const content = (
+                  <article className="flex h-full min-h-[360px] flex-col rounded-2xl border border-border bg-surface-elevated p-7 shadow-card md:p-9">
+                    <div className="flex items-start justify-between gap-5">
+                      <span className="flex size-14 items-center justify-center rounded-xl bg-primary-light text-primary">
+                        <Icon className="size-7" aria-hidden="true" />
+                      </span>
+                      <span className="rounded-full border border-gold/40 bg-primary-light px-3 py-1 text-sm font-semibold text-gold">
+                        {area.status === "open" ? t(copy.open, lang) : t(copy.comingSoon, lang)}
+                      </span>
+                    </div>
+                    <p className="mt-8 text-xs font-bold tracking-[0.16em] text-gold uppercase">
+                      {area.eyebrow}
                     </p>
-                    <h3 className="mt-3 text-xl font-bold text-primary">
-                      {t(task.fields.title, lang)}
+                    <h3 className="mt-2 text-3xl font-bold text-primary md:text-4xl">
+                      {t(area.title, lang)}
                     </h3>
-                    <p className="mt-3 text-base leading-relaxed text-body-secondary">
-                      {t(task.fields.intro, lang)}
+                    <p className="mt-5 text-lg leading-relaxed text-body">
+                      {t(area.description, lang)}
                     </p>
-                    <dl className="mt-6 flex flex-col gap-5 text-base">
-                      <div>
-                        <dt className="font-semibold text-body">{t(copy.workLabel, lang)}</dt>
-                        <dd className="mt-1.5 leading-relaxed text-body-secondary">
-                          {t(task.fields.work, lang)}
-                        </dd>
-                      </div>
-                      <div>
-                        <dt className="font-semibold text-body">{t(copy.reqLabel, lang)}</dt>
-                        <dd className="mt-1.5 leading-relaxed text-body-secondary">
-                          {t(task.fields.requirements, lang)}
-                        </dd>
-                      </div>
-                    </dl>
+                    <p className="mt-3 text-base leading-relaxed text-body-secondary">
+                      {t(area.detail, lang)}
+                    </p>
+                    {area.status === "open" ? (
+                      <span className="mt-auto inline-flex items-center gap-2 pt-8 text-base font-bold text-primary">
+                        {t(copy.explore, lang)}
+                        <ArrowRight className="size-4" aria-hidden="true" />
+                      </span>
+                    ) : null}
                   </article>
-                ))}
-              </div>
-            )}
-          </Reveal>
-        </div>
-      </section>
+                );
 
-      {/* 联系方式 */}
-      <section aria-labelledby="contact-title" className="py-14 md:py-16">
-        <div className="mx-auto w-full max-w-content px-6 md:px-8">
-          <Reveal className="mx-auto max-w-[1152px]">
-            <SectionHeading
-              eyebrow="Contact"
-              title={t(copy.contactTitle, lang)}
-              titleId="contact-title"
-              desc={t(copy.contactDesc, lang)}
-            />
-            <div className="mt-12 grid gap-6 sm:grid-cols-2">
-              <div className="flex items-start gap-4 rounded-xl border border-border bg-surface-elevated px-7 py-7 shadow-card">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
-                  <Mail className="size-6" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="text-sm font-semibold tracking-widest text-body-muted uppercase">
-                    Email
-                  </p>
-                  <a
-                    href={`mailto:${joinConfig.contactEmail}`}
-                    className="mt-1 inline-block text-xl font-bold text-primary break-all transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
+                return area.status === "open" ? (
+                  <Link
+                    key={area.slug}
+                    href={hrefFor("/join/medeng", lang)}
+                    className="group rounded-2xl transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
                   >
-                    {joinConfig.contactEmail}
-                  </a>
-                  <p className="mt-1.5 text-base text-body-secondary">
-                    {copy.mentorLabel[lang](t(supervisor.name, lang))}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 rounded-xl border border-border bg-surface-elevated px-7 py-7 shadow-card">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
-                  <University className="size-6" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="text-sm font-semibold tracking-widest text-body-muted uppercase">
-                    {t(copy.affiliation, lang)}
-                  </p>
-                  <p className="mt-1 text-xl font-bold text-body">
-                    {t(siteConfig.contact.affiliation, lang)}
-                  </p>
-                  <p className="mt-1.5 text-base text-body-secondary">
-                    {t(supervisor.title, lang)}
-                  </p>
-                </div>
-              </div>
+                    {content}
+                  </Link>
+                ) : (
+                  <div key={area.slug}>{content}</div>
+                );
+              })}
             </div>
           </Reveal>
         </div>

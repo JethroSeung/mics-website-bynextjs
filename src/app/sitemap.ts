@@ -1,17 +1,24 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/data/site";
 import { researchDirections } from "@/data/research";
+import { recruitmentTracks, recruitmentTrackPath } from "@/data/join";
 
 // 静态导出模式下元路由需显式声明为纯静态
 export const dynamic = "force-static";
 
 /**
- * 站点地图：中英双语 10 页，每页带 hreflang 互指。
+ * 站点地图：中英双语页面，每页带 hreflang 互指。
  * 静态导出时输出 out/sitemap.xml。
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   // 全站页面路径（中文站路径，英文站自动加 /en 前缀）
-  const paths = ["", "/team", "/join", ...researchDirections.map((dir) => `/research/${dir.slug}`)];
+  const paths = [
+    "",
+    "/team",
+    "/join",
+    ...researchDirections.map((dir) => `/research/${dir.slug}`),
+    ...recruitmentTracks.map((track) => recruitmentTrackPath(track.slug)),
+  ];
   const lastModified = new Date();
 
   return paths.flatMap((path) => {
