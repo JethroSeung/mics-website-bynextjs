@@ -208,7 +208,7 @@ export const members: Member[] = [
     id: "yang-chengxuan",
     name: { zh: "杨承轩", en: "Chengxuan Yang" },
     role: "undergraduate",
-    email: "ycxuan0517@gmail.com",
+    email: "ycxuan4work@gmail.com",
     photo: "/images/members/yang-chengxuan.jpg",
     featured: true,
     directionLead: "disaster",

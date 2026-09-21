@@ -72,13 +72,33 @@ export function ResearchPage({
       en: "Detailed research content, plans and progress are being prepared. Feel free to contact the lead via email above.",
     },
     recruitmentLabel: { zh: "本科生科研招新", en: "Undergraduate Recruitment" },
-    recruitmentTitle: { zh: "医工交叉招新计划已开放", en: "Medical-engineering recruitment is now open" },
-    recruitmentDesc: {
+    medengRecruitmentTitle: { zh: "医工交叉招新计划已开放", en: "Medical-engineering recruitment is now open" },
+    medengRecruitmentDesc: {
       zh: "查看毫米波、Wi-Fi / CSI、计算机视觉与语音四个方向的具体任务。",
       en: "Explore specific tasks across millimeter-wave radar, WiFi / CSI, computer vision, and voice.",
     },
+    disasterRecruitmentTitle: { zh: "灾害感知招新计划已开放", en: "Disaster-sensing recruitment is now open" },
+    disasterRecruitmentDesc: {
+      zh: "通感与感算方向现已开放，可查看挑战赛、论文复现与论文汇报任务；通算方向正在整理。",
+      en: "Communication-Sensing and Sensing-Computing are now open with challenge, paper reproduction, and presentation routes; Communication-Computing is being prepared.",
+    },
     recruitmentCta: { zh: "查看招新计划", en: "View recruitment plan" },
   } as const;
+
+  const recruitmentCallout =
+    direction.slug === "medeng"
+      ? {
+          title: copy.medengRecruitmentTitle,
+          desc: copy.medengRecruitmentDesc,
+          href: "/join/medeng",
+        }
+      : direction.slug === "disaster"
+        ? {
+            title: copy.disasterRecruitmentTitle,
+            desc: copy.disasterRecruitmentDesc,
+            href: "/join/disaster",
+          }
+        : null;
 
   return (
     <>
@@ -182,7 +202,7 @@ export function ResearchPage({
                 </header>
               </Reveal>
 
-              {direction.slug === "medeng" ? (
+              {recruitmentCallout ? (
                 <Reveal>
                   <aside className="my-8 flex flex-col gap-5 rounded-xl border border-gold/35 bg-white px-6 py-6 shadow-card sm:flex-row sm:items-center sm:justify-between">
                     <div>
@@ -190,14 +210,14 @@ export function ResearchPage({
                         {t(copy.recruitmentLabel, lang)}
                       </p>
                       <h3 className="mt-1.5 text-xl font-bold text-primary md:text-2xl">
-                        {t(copy.recruitmentTitle, lang)}
+                        {t(recruitmentCallout.title, lang)}
                       </h3>
                       <p className="mt-2 text-sm leading-relaxed text-body-secondary md:text-base">
-                        {t(copy.recruitmentDesc, lang)}
+                        {t(recruitmentCallout.desc, lang)}
                       </p>
                     </div>
                     <Link
-                      href={hrefFor("/join/medeng", lang)}
+                      href={hrefFor(recruitmentCallout.href, lang)}
                       className="inline-flex shrink-0 items-center gap-2 self-start rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:self-center"
                     >
                       {t(copy.recruitmentCta, lang)}

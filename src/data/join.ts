@@ -16,6 +16,7 @@ export interface RecruitmentArea {
   title: Localized;
   description: Localized;
   detail: Localized;
+  trackLabels: Localized[];
 }
 
 export interface RecruitmentTrack {
@@ -68,10 +69,16 @@ export const recruitmentAreas: RecruitmentArea[] = [
       zh: "本轮招新计划已发布，包含挑战赛、论文复现、论文汇报与开放式任务。",
       en: "The current plan is open, with challenges, paper reproduction, presentations, and open-ended tasks.",
     },
+    trackLabels: [
+      { zh: "毫米波", en: "mmWave" },
+      { zh: "Wi-Fi / CSI", en: "Wi-Fi / CSI" },
+      { zh: "计算机视觉", en: "Computer Vision" },
+      { zh: "语音", en: "Voice" },
+    ],
   },
   {
     slug: "disaster",
-    status: "coming-soon",
+    status: "open",
     eyebrow: "Disaster Sensing",
     title: { zh: "灾害感知", en: "Disaster Sensing" },
     description: {
@@ -79,9 +86,14 @@ export const recruitmentAreas: RecruitmentArea[] = [
       en: "Study the coordination of communication, sensing, and intelligent analysis in natural-disaster scenarios.",
     },
     detail: {
-      zh: "招新计划正在整理，发布后将在此处直接开放。",
-      en: "The recruitment plan is being prepared and will open here once published.",
+      zh: "通感与感算方向现已开放，通算方向的详细任务正在整理。",
+      en: "Communication-Sensing and Sensing-Computing are now open; detailed tasks for Communication-Computing are being prepared.",
     },
+    trackLabels: [
+      { zh: "通感", en: "Communication-Sensing" },
+      { zh: "感算", en: "Sensing-Computing" },
+      { zh: "通算", en: "Communication-Computing" },
+    ],
   },
 ];
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Activity, ArrowLeft, ArrowRight, Mail, RadioTower } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
+import { disasterApplication } from "@/data/disaster-recruitment";
 import { hrefFor, t, type Lang } from "@/data/site";
 import { medengApplication, recruitmentAreas, recruitmentIntro } from "@/data/join";
 
@@ -16,11 +17,16 @@ export function JoinPage({ lang }: { lang: Lang }) {
     open: { zh: "招新开放中", en: "Open now" },
     comingSoon: { zh: "即将开放", en: "Coming soon" },
     explore: { zh: "查看医工交叉招新计划", en: "Explore the medical-engineering plan" },
+    exploreDisaster: { zh: "查看灾害感知招新计划", en: "Explore the disaster-sensing plan" },
     requirementsTitle: { zh: "报名需同时完成", en: "Complete both to apply" },
     required: { zh: "报名必需", en: "Required" },
     taskRequirement: {
       zh: "四个方向中任意一项招新任务",
       en: "One recruitment task from any of the four tracks",
+    },
+    disasterTaskRequirement: {
+      zh: "完成通感方向的一项招新任务",
+      en: "One recruitment task from the Communication-Sensing track",
     },
     profileRequirement: {
       zh: "简历或文字自我介绍（二选一）",
@@ -67,6 +73,13 @@ export function JoinPage({ lang }: { lang: Lang }) {
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               {recruitmentAreas.map((area, index) => {
                 const Icon = index === 0 ? Activity : RadioTower;
+                const isDisaster = area.slug === "disaster";
+                const application = isDisaster ? disasterApplication : medengApplication;
+                const destination = isDisaster ? "/join/disaster" : "/join/medeng";
+                const taskRequirement = isDisaster
+                  ? copy.disasterTaskRequirement
+                  : copy.taskRequirement;
+                const exploreLabel = isDisaster ? copy.exploreDisaster : copy.explore;
                 const content = (
                   <article className="flex h-full min-h-[360px] flex-col rounded-2xl border border-border bg-surface-elevated p-7 shadow-card md:p-9">
                     <div className="flex items-start justify-between gap-5">
@@ -89,6 +102,13 @@ export function JoinPage({ lang }: { lang: Lang }) {
                     <p className="mt-3 text-base leading-relaxed text-body-secondary">
                       {t(area.detail, lang)}
                     </p>
+                    <ul className="mt-5 flex flex-wrap gap-2" aria-label={lang === "zh" ? "招新方向" : "Recruitment tracks"}>
+                      {area.trackLabels.map((label) => (
+                        <li key={t(label, lang)} className="rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold text-body-secondary">
+                          {t(label, lang)}
+                        </li>
+                      ))}
+                    </ul>
                     {area.status === "open" ? (
                       <>
                         <div className="mt-6 rounded-xl border border-gold/30 bg-white p-5">
@@ -103,7 +123,7 @@ export function JoinPage({ lang }: { lang: Lang }) {
                           <ol className="mt-3 divide-y divide-border text-sm leading-relaxed text-body-secondary">
                             <li className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-2 py-2 first:pt-0">
                               <span className="font-semibold text-gold" aria-hidden="true">01</span>
-                              <span>{t(copy.taskRequirement, lang)}</span>
+                              <span>{t(taskRequirement, lang)}</span>
                             </li>
                             <li className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-2 py-2 last:pb-0">
                               <span className="font-semibold text-gold" aria-hidden="true">02</span>
@@ -116,22 +136,22 @@ export function JoinPage({ lang }: { lang: Lang }) {
                             </p>
                             <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold text-body">
                               <Mail className="size-4 shrink-0 text-gold" aria-hidden="true" />
-                              {t(medengApplication.recipient.name, lang)}
+                              {t(application.recipient.name, lang)}
                               <span aria-hidden="true" className="text-border-dark">·</span>
                               <a
-                                href={`mailto:${medengApplication.recipient.email}?subject=${encodeURIComponent(t(medengApplication.subject, lang))}`}
+                                href={`mailto:${application.recipient.email}?subject=${encodeURIComponent(t(application.subject, lang))}`}
                                 className="break-all text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-ring"
                               >
-                                {medengApplication.recipient.email}
+                                {application.recipient.email}
                               </a>
                             </p>
                           </div>
                         </div>
                         <Link
-                          href={hrefFor("/join/medeng", lang)}
+                          href={hrefFor(destination, lang)}
                           className="mt-auto inline-flex items-center gap-2 self-start pt-8 text-base font-bold text-primary transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
                         >
-                          {t(copy.explore, lang)}
+                          {t(exploreLabel, lang)}
                           <ArrowRight className="size-4" aria-hidden="true" />
                         </Link>
                       </>

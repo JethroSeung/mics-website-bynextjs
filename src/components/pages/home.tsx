@@ -96,9 +96,8 @@ export function HomePage({ lang }: { lang: Lang }) {
     joinTitle: { zh: "本科生招新", en: "Undergraduate Recruitment" },
     viewAllMembers: { zh: "查看更多成员", en: "View all members" },
     viewMedengRecruitment: { zh: "详细了解医工交叉招新", en: "Explore medical-engineering recruitment" },
-    medengOpen: { zh: "招新开放中", en: "Open now" },
-    disasterComing: { zh: "灾害感知招新计划", en: "Disaster-sensing recruitment" },
-    comingSoon: { zh: "即将发布", en: "Coming soon" },
+    viewDisasterRecruitment: { zh: "详细了解灾害感知招新", en: "Explore disaster-sensing recruitment" },
+    recruitmentOpen: { zh: "招新开放中", en: "Open now" },
     profile: { zh: "个人简介", en: "Profile" },
     interests: { zh: "研究兴趣", en: "Research Interests" },
     homepage: { zh: "个人主页", en: "Homepage" },
@@ -369,7 +368,7 @@ export function HomePage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 06 本科生招新：医工直接入口 + 灾害方向发布状态 */}
+      {/* 06 本科生招新：两个研究大方向均直接进入各自详情页。 */}
       <section id="join" aria-labelledby="join-title" className="bg-surface py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <Reveal className="mx-auto max-w-[980px]">
@@ -382,33 +381,42 @@ export function HomePage({ lang }: { lang: Lang }) {
               />
             </div>
             <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-white shadow-card">
-              <div className="grid items-center gap-7 p-7 md:grid-cols-[minmax(0,1fr)_auto] md:p-9">
-                <div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="text-2xl font-bold text-primary md:text-3xl">
-                      {t(medengRecruitment.title, lang)}
-                    </h3>
-                    <span className="rounded-full border border-gold/40 bg-primary-light px-3 py-1 text-sm font-semibold text-gold">
-                      {t(copy.medengOpen, lang)}
-                    </span>
+              {[
+                {
+                  area: medengRecruitment,
+                  href: "/join/medeng",
+                  action: copy.viewMedengRecruitment,
+                },
+                {
+                  area: disasterRecruitment,
+                  href: "/join/disaster",
+                  action: copy.viewDisasterRecruitment,
+                },
+              ].map((entry, index) => (
+                <div
+                  key={entry.area.slug}
+                  className={`grid items-center gap-6 p-7 md:grid-cols-[minmax(0,1fr)_auto] md:p-9 ${
+                    index > 0 ? "border-t border-border" : ""
+                  }`}
+                >
+                  <div>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <h3 className="text-2xl font-bold text-primary md:text-3xl">
+                        {t(entry.area.title, lang)}
+                      </h3>
+                      <span className="rounded-full border border-gold/40 bg-primary-light px-3 py-1 text-sm font-semibold text-gold">
+                        {t(copy.recruitmentOpen, lang)}
+                      </span>
+                    </div>
+                    <p className="mt-3 max-w-2xl text-base leading-relaxed text-body-secondary md:text-lg">
+                      {t(entry.area.description, lang)}
+                    </p>
                   </div>
-                  <p className="mt-3 max-w-2xl text-base leading-relaxed text-body-secondary md:text-lg">
-                    {t(medengRecruitment.description, lang)}
-                  </p>
+                  <Button asChild className="h-auto min-h-12 px-6 text-center text-base whitespace-normal md:whitespace-nowrap">
+                    <Link href={hrefFor(entry.href, lang)}>{t(entry.action, lang)} →</Link>
+                  </Button>
                 </div>
-                <Button asChild className="h-auto min-h-12 px-6 text-center text-base whitespace-normal md:whitespace-nowrap">
-                  <Link href={hrefFor("/join/medeng", lang)}>
-                    {t(copy.viewMedengRecruitment, lang)} →
-                  </Link>
-                </Button>
-              </div>
-              <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-surface px-7 py-4 md:px-9">
-                <p className="text-sm font-semibold text-body-secondary">
-                  {t(copy.disasterComing, lang)}
-                </p>
-                <span className="text-sm font-bold text-gold">{t(copy.comingSoon, lang)}</span>
-                <span className="sr-only">{t(disasterRecruitment.detail, lang)}</span>
-              </div>
+              ))}
             </div>
           </Reveal>
         </div>

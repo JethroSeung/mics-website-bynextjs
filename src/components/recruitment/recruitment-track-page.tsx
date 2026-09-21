@@ -265,8 +265,8 @@ export function RecruitmentTrackPage({
 
       {/* 桌面端采用左锚定双列网格：侧栏靠近视口左侧，正文宽度保持稳定。 */}
       <div className="grid w-full lg:grid-cols-[196px_minmax(0,1fr)] lg:gap-x-6 lg:pl-[clamp(24px,3vw,64px)]">
-        <aside className="hidden py-10 lg:block">
-          <div className="sticky top-[104px] flex max-h-[calc(100vh-128px)] min-h-[calc(100vh-128px)] flex-col overflow-y-auto pr-1 pb-2">
+        <aside className="hidden pb-10 lg:block">
+          <div className="sticky top-[104px] flex max-h-[calc(100vh-152px)] min-h-[calc(100vh-152px)] flex-col overflow-y-auto pt-8 pr-1 pb-2">
             <Link
               href={hrefFor("/join", lang)}
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-body-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
