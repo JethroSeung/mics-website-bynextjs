@@ -1,6 +1,42 @@
 import type { DisasterPaper } from "./disaster-recruitment";
 import type { Localized } from "./site";
 
+export const sensingComputingOrientation = {
+  topics: [
+    {
+      title: { zh: "降雨感知", en: "Rainfall sensing" },
+      description: { zh: "利用通信信号在降雨中的衰减与多径变化判断降雨强度。", en: "Estimate rainfall intensity from attenuation and multipath changes in communication signals." },
+    },
+    {
+      title: { zh: "滑坡位移预测", en: "Landslide displacement forecasting" },
+      description: { zh: "使用长期监测数据预测滑坡未来的位移变化。", en: "Forecast future landslide displacement from long-running monitoring data." },
+    },
+    {
+      title: { zh: "滑坡检测", en: "Landslide detection" },
+      description: { zh: "从高分辨率卫星或无人机影像中自动提取滑坡范围。", en: "Extract landslide extents from high-resolution satellite or UAV imagery." },
+    },
+    {
+      title: { zh: "泥石流编目", en: "Debris-flow inventory" },
+      description: { zh: "分析震后泥石流的降雨阈值、易发性与工程防治效果。", en: "Analyse rainfall thresholds, susceptibility, and mitigation effects for post-earthquake debris flows." },
+    },
+  ],
+  preparation: [
+    { zh: "掌握 Python 的变量、列表、循环与函数，以及 NumPy、pandas、Matplotlib 的基本使用。", en: "Know Python variables, lists, loops, and functions, plus basic NumPy, pandas, and Matplotlib." },
+    { zh: "理解训练集、验证集、测试集、过拟合、Accuracy、F1 和混淆矩阵。", en: "Understand train, validation, and test sets, overfitting, accuracy, F1, and confusion matrices." },
+    { zh: "先跑通现成代码，再复现指标，最后记录命令、参数、结果与差异。", en: "Run existing code first, reproduce the metrics, then record commands, parameters, results, and discrepancies." },
+  ] satisfies Localized[],
+  selection: [
+    { zh: "希望最快得到结果：优先考虑复现 4，数据很小，传统机器学习即可完成。", en: "For the quickest result, consider Reproduction 4; the data are small and classical machine learning is enough." },
+    { zh: "希望体验完整深度学习流程：优先考虑复现 3，数据划分和开源代码较完整。", en: "For a full deep-learning workflow, consider Reproduction 3, which has prepared splits and open code." },
+    { zh: "希望贴近通信感知：优先考虑复现 1。", en: "For the closest connection to communication sensing, consider Reproduction 1." },
+    { zh: "时间紧、希望练习论文阅读与表达：从四项论文汇报中任选一项。", en: "If time is tight and you want to practise reading and presenting papers, choose any presentation task." },
+  ] satisfies Localized[],
+  closing: {
+    zh: "八项任务不需要全部完成。选择一项做透，比同时浅尝多项更重要。",
+    en: "You do not need to complete all eight tasks. Doing one task thoroughly matters more than sampling several.",
+  },
+};
+
 export const sensingComputingReproductionPapers: DisasterPaper[] = [
   {
     id: "sensing-computing-reproduction-rain-gauge-net",

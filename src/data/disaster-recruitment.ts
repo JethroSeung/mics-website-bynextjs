@@ -8,17 +8,16 @@ export type DisasterDirectionSlug =
 
 export interface DisasterDirection {
   slug: DisasterDirectionSlug;
+  navigationTitle: Localized;
   shortTitle: Localized;
   fullTitle: Localized;
   description: Localized;
   status: "open" | "preparing";
+  themeColor: string;
   contact: { name: Localized; email: string };
 }
 
-export type PublishedDisasterDirectionSlug = Exclude<
-  DisasterDirectionSlug,
-  "communication-computing"
->;
+export type PublishedDisasterDirectionSlug = DisasterDirectionSlug;
 
 export interface DisasterPaper {
   id: string;
@@ -59,17 +58,26 @@ export function disasterDirectionPath(slug: DisasterDirectionSlug) {
 export const disasterDirections: DisasterDirection[] = [
   {
     slug: "communication-sensing",
-    shortTitle: { zh: "通感", en: "Communication-Sensing" },
+    navigationTitle: {
+      zh: "通信感知一体化",
+      en: "Integrated Communication and Sensing",
+    },
+    shortTitle: { zh: "通感", en: "ISAC" },
     fullTitle: { zh: "通信与感知", en: "Communication and Sensing" },
     description: {
       zh: "利用通信基站、无线波形与传播信息感知山区环境变化。",
       en: "Use base stations, wireless waveforms, and propagation information to sense environmental changes in mountainous areas.",
     },
     status: "open",
+    themeColor: "#12395b",
     contact: { name: applicationRecipient.name, email: applicationRecipient.email },
   },
   {
     slug: "sensing-computing",
+    navigationTitle: {
+      zh: "灾害感知与智能分析",
+      en: "Disaster Sensing and Intelligent Analysis",
+    },
     shortTitle: { zh: "感算", en: "Sensing-Computing" },
     fullTitle: { zh: "感知与计算", en: "Sensing and Computing" },
     description: {
@@ -77,17 +85,23 @@ export const disasterDirections: DisasterDirection[] = [
       en: "Model and analyse rainfall, landslide, and debris-flow monitoring data with intelligent methods.",
     },
     status: "open",
+    themeColor: "#235247",
     contact: { name: { zh: "徐博", en: "Bo Xu" }, email: "mountqingxubo@outlook.com" },
   },
   {
     slug: "communication-computing",
+    navigationTitle: {
+      zh: "AI 驱动的通信与计算",
+      en: "AI-Driven Communication and Computing",
+    },
     shortTitle: { zh: "通算", en: "Communication-Computing" },
     fullTitle: { zh: "通信与计算", en: "Communication and Computing" },
     description: {
       zh: "让智能体根据环境、链路与能源状态自主决定通信时机。",
       en: "Let intelligent agents decide when to communicate from environmental, link, and energy states.",
     },
-    status: "preparing",
+    status: "open",
+    themeColor: "#3e426f",
     contact: { name: { zh: "龚玮乐", en: "Weile Gong" }, email: "phare111@163.com" },
   },
 ];

@@ -16,8 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/team",
     "/join",
+    "/join/getting-started",
     "/join/disaster",
     "/join/disaster/sensing-computing",
+    "/join/disaster/communication-computing",
     ...researchDirections.map((dir) => `/research/${dir.slug}`),
     ...recruitmentTracks.map((track) => recruitmentTrackPath(track.slug)),
   ];

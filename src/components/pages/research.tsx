@@ -79,8 +79,8 @@ export function ResearchPage({
     },
     disasterRecruitmentTitle: { zh: "灾害感知招新计划已开放", en: "Disaster-sensing recruitment is now open" },
     disasterRecruitmentDesc: {
-      zh: "通感与感算方向现已开放，可查看挑战赛、论文复现与论文汇报任务；通算方向正在整理。",
-      en: "Communication-Sensing and Sensing-Computing are now open with challenge, paper reproduction, and presentation routes; Communication-Computing is being prepared.",
+      zh: "三个方向均已开放，可查看实验挑战、论文复现、论文汇报与通算系统赛题。",
+      en: "All three tracks are open, with experimental challenges, paper reproduction and presentation, and a communication-computing systems challenge.",
     },
     recruitmentCta: { zh: "查看招新计划", en: "View recruitment plan" },
   } as const;

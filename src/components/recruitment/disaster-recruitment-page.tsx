@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Mail } from "lucide-react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { ActiveTrackScroller } from "./active-track-scroller";
 import { RecruitmentContentController } from "./content-controller";
 import {
@@ -14,17 +14,25 @@ import {
   type PublishedDisasterDirectionSlug,
 } from "@/data/disaster-recruitment";
 import {
+  sensingComputingOrientation,
   sensingComputingAvailabilityNote,
   sensingComputingPresentationPapers,
   sensingComputingReproductionPapers,
   sensingComputingSubmission,
 } from "@/data/sensing-computing-recruitment";
+import {
+  communicationComputingAvailabilityNote,
+  communicationComputingChallenge,
+  communicationComputingPaperSubmission,
+  communicationComputingPapers,
+  communicationComputingPrimer,
+} from "@/data/communication-computing-recruitment";
 import { hrefFor, t, type Lang, type Localized } from "@/data/site";
 
 const copy = {
   back: { zh: "返回招新方向", en: "Back to recruitment areas" },
   directionHeading: { zh: "灾害招新方向", en: "Disaster Recruitment Tracks" },
-  openNote: { zh: "通感、感算方向已开放", en: "Communication-Sensing and Sensing-Computing are open" },
+  openNote: { zh: "三个方向均已开放", en: "All three tracks are open" },
   preparing: { zh: "整理中", en: "Preparing" },
   lead: { zh: "方向负责人", en: "Track lead" },
   heroEyebrow: { zh: "自然灾害 · 通感方向", en: "Natural Disasters · Communication-Sensing" },
@@ -114,6 +122,34 @@ const copy = {
   },
   taskRecipient: { zh: "方向负责人", en: "Track lead" },
   schedulePending: { zh: "时间安排", en: "Schedule" },
+  directionLead: { zh: "本方向负责人", en: "Track lead" },
+  sensingOverviewEyebrow: { zh: "开始之前", en: "Before you begin" },
+  sensingOverviewTitle: { zh: "先找到适合自己的切入点", en: "Find a practical starting point" },
+  sensingTopics: { zh: "四类研究问题", en: "Four problem areas" },
+  sensingPreparation: { zh: "最低准备", en: "Minimum preparation" },
+  sensingSelection: { zh: "怎么选题", en: "How to choose" },
+  starterGuide: { zh: "查看新生起步指南", en: "Open the beginner guide" },
+  computingPrimerEyebrow: { zh: "本方向的核心任务", en: "The core task" },
+  observedState: { zh: "系统看到什么", en: "What the system observes" },
+  orchestrator: { zh: "模型选择与通信调度", en: "Model selection and communication policy" },
+  availableActions: { zh: "系统决定什么", en: "What the system decides" },
+  evaluationOutputs: { zh: "系统需要评价什么", en: "What the system evaluates" },
+  systemChallenge: { zh: "通信与计算协同挑战", en: "Communication-Computing Coordination Challenge" },
+  systemChallengeDesc: { zh: "设计多模型智能系统，并决定何时通信", en: "Design a multi-model system that decides when to communicate" },
+  paperStudy: { zh: "论文精讲", en: "Paper Study" },
+  paperStudyDesc: { zh: "从四篇论文中选择一篇", en: "Choose one of four papers" },
+  technicalRoutes: { zh: "你可以怎样组织这套系统？", en: "How can you organise the system?" },
+  datasetTitle: { zh: "数据与实验起点", en: "Data and experimental starting point" },
+  minimumTitle: { zh: "最低完成要求", en: "Minimum requirements" },
+  simulationTitle: { zh: "系统每个时间步如何运行", en: "How the system runs at each time step" },
+  systemResults: { zh: "运行结束后需要统计", en: "What to measure after the run" },
+  weakLinkTitle: { zh: "模拟弱连接或丢包", en: "Simulating weak connectivity or packet loss" },
+  dataContent: { zh: "数据包含什么", en: "What the data contain" },
+  dataCode: { zh: "读取数据并按时间划分", en: "Load and split the data chronologically" },
+  environmentTitle: { zh: "推荐开发环境", en: "Recommended development environment" },
+  requiredTools: { zh: "基础方案", en: "Basic solution" },
+  optionalTools: { zh: "按需增加", en: "Optional additions" },
+  furtherTitle: { zh: "完成基础系统后，可以继续思考", en: "Questions to explore after the basic system" },
 } as const;
 
 const directionPageCopy = {
@@ -155,6 +191,32 @@ const directionPageCopy = {
     taskSubject: {
       zh: "MICS自然灾害招新-感算任务-姓名-学号",
       en: "MICS Disaster Recruitment - Sensing-Computing Task - Name - Student ID",
+    },
+  },
+  "communication-computing": {
+    heroEyebrow: { zh: "自然灾害 · 通算方向", en: "Natural Disasters · Communication-Computing" },
+    heroTitle: { zh: "AI 驱动的通信与计算方向招新", en: "AI-Driven Communication and Computing Recruitment" },
+    heroLead: {
+      zh: "让智能系统在有限带宽、算力与能源下，决定使用什么模型、交换什么信息，以及什么时候值得通信。",
+      en: "Design intelligent systems that decide which model to use, what information to exchange, and when communication is worthwhile under limited bandwidth, compute, and energy.",
+    },
+    background: {
+      zh: [
+        "偏远地区的长期监测节点需要持续理解环境，但上传每一条数据会消耗带宽与能源，在弱连接时也未必可靠；与此同时，始终调用最复杂的模型同样会浪费计算资源。",
+        "通算方向研究智能如何分布在设备、边缘与网络之间。重点不是追求单个模型的最高精度，而是让多个能力和成本不同的模型互相协作，并与通信过程联合决策。",
+      ],
+      en: [
+        "Remote monitoring nodes must understand their environment continuously, yet uploading every sample consumes bandwidth and energy and may be unreliable under weak connectivity. Always invoking the most complex model also wastes compute.",
+        "This track studies how intelligence is distributed across devices, edges, and networks. The goal is not the best standalone model, but collaboration among models with different capabilities and costs together with communication decisions.",
+      ],
+    },
+    applicationSubject: {
+      zh: "MICS自然灾害招新-通算-姓名-学号",
+      en: "MICS Disaster Recruitment - Communication-Computing - Name - Student ID",
+    },
+    taskSubject: {
+      zh: "MICS自然灾害招新-通算任务-姓名-学号",
+      en: "MICS Disaster Recruitment - Communication-Computing Task - Name - Student ID",
     },
   },
 } as const;
@@ -207,7 +269,10 @@ function DirectionLinks({
                 {String(index + 1).padStart(2, "0")}
               </span>
               <span className="min-w-0">
-                <span className="block">{t(direction.shortTitle, lang)}</span>
+                <span className="block leading-relaxed">
+                  {t(direction.navigationTitle, lang)}{" "}
+                  <span className="whitespace-nowrap">/ {t(direction.shortTitle, lang)}</span>
+                </span>
                 {direction.status === "preparing" ? (
                   <span className="mt-0.5 block text-[10px] font-medium text-body-muted">
                     {t(direction.contact.name, lang)} · {t(copy.preparing, lang)}
@@ -225,7 +290,7 @@ function DirectionLinks({
                   aria-current={direction.slug === active ? "page" : undefined}
                   className={`flex min-w-max items-center gap-3 rounded-lg border px-3 py-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-ring lg:min-w-0 ${
                     isActive
-                      ? "border-primary bg-primary text-white"
+                      ? "border-[var(--track-color)] bg-[var(--track-color)] text-white"
                       : "border-border bg-white text-body-secondary transition-colors hover:border-primary/40 hover:text-primary"
                   }`}
                 >
@@ -394,6 +459,393 @@ function SectionCard({ title, children }: { title: string; children: ReactNode }
   );
 }
 
+function SensingComputingOverview({ lang }: { lang: Lang }) {
+  return (
+    <section className="border-b border-border bg-[#f5f8f6] px-6 py-10 md:py-14">
+      <div className="w-full max-w-[1100px]">
+        <p className="text-xs font-bold tracking-[0.14em] text-gold uppercase">
+          {t(copy.sensingOverviewEyebrow, lang)}
+        </p>
+        <h2 className="mt-2 max-w-3xl text-3xl font-bold text-[var(--track-color)] md:text-4xl">
+          {t(copy.sensingOverviewTitle, lang)}
+        </h2>
+
+        <div className="mt-9 grid gap-10 xl:grid-cols-[1.08fr_0.92fr] xl:gap-14">
+          <div>
+            <h3 className="text-sm font-bold tracking-[0.1em] text-body-muted uppercase">
+              {t(copy.sensingTopics, lang)}
+            </h3>
+            <ol className="mt-4 border-y border-[var(--track-color)]/20">
+              {sensingComputingOrientation.topics.map((topic, index) => (
+                <li
+                  key={t(topic.title, lang)}
+                  className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-3 border-b border-border py-4 last:border-b-0"
+                >
+                  <span className="font-semibold text-gold">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <p className="font-bold text-[var(--track-color)]">{t(topic.title, lang)}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-body-secondary">
+                      {t(topic.description, lang)}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-sm font-bold tracking-[0.1em] text-body-muted uppercase">
+                {t(copy.sensingPreparation, lang)}
+              </h3>
+              <div className="mt-4">
+                <NumberedList items={sensingComputingOrientation.preparation} lang={lang} />
+              </div>
+              <Link
+                href={hrefFor("/join/getting-started", lang)}
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--track-color)] underline decoration-[var(--track-color)]/25 underline-offset-4 hover:decoration-[var(--track-color)] focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                {t(copy.starterGuide, lang)}
+                <ExternalLink className="size-3.5" aria-hidden="true" />
+              </Link>
+            </div>
+
+            <div className="border-t border-border pt-7">
+              <h3 className="text-sm font-bold tracking-[0.1em] text-body-muted uppercase">
+                {t(copy.sensingSelection, lang)}
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {sensingComputingOrientation.selection.map((item) => (
+                  <li key={t(item, lang)} className="flex gap-3 text-sm leading-relaxed text-body-secondary md:text-base">
+                    <span className="mt-[0.65em] size-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
+                    <span>{t(item, lang)}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 border-l-2 border-[var(--track-color)] pl-4 text-sm font-semibold leading-relaxed text-body">
+                {t(sensingComputingOrientation.closing, lang)}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CommunicationComputingPrimer({ lang }: { lang: Lang }) {
+  return (
+    <section className="border-b border-border bg-[#f6f6fa] px-6 py-10 md:py-14">
+      <div className="w-full max-w-[1100px]">
+        <p className="text-sm font-bold text-gold">
+          {t(copy.computingPrimerEyebrow, lang)}
+        </p>
+        <h2 className="mt-2 max-w-4xl text-3xl font-bold text-[var(--track-color)] md:text-4xl">
+          {t(communicationComputingChallenge.taskTitle, lang)}
+        </h2>
+        <p className="mt-4 max-w-4xl text-base leading-relaxed text-body-secondary md:text-lg">
+          {t(communicationComputingPrimer.lead, lang)}
+        </p>
+
+        <div className="mt-9 grid border-y border-border bg-white lg:grid-cols-3">
+          <div className="border-b border-border px-5 py-5 lg:border-r lg:border-b-0">
+            <p className="text-sm font-bold text-[var(--track-color)]">{t(copy.observedState, lang)}</p>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-body-secondary">
+              {communicationComputingPrimer.inputs.map((item) => <li key={t(item, lang)}>— {t(item, lang)}</li>)}
+            </ul>
+          </div>
+          <div className="border-b border-border bg-[var(--track-color)] px-5 py-5 text-white lg:border-b-0">
+            <p className="text-sm font-bold text-white">{t(copy.availableActions, lang)}</p>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-white/80">
+              {communicationComputingPrimer.decisions.map((item) => <li key={t(item, lang)}>— {t(item, lang)}</li>)}
+            </ul>
+          </div>
+          <div className="px-5 py-5 lg:border-l lg:border-border">
+            <p className="text-sm font-bold text-[var(--track-color)]">{t(copy.evaluationOutputs, lang)}</p>
+            <ul className="mt-4 space-y-2 text-sm leading-relaxed text-body-secondary">
+              {communicationComputingPrimer.outputs.map((item) => <li key={t(item, lang)}>— {t(item, lang)}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <blockquote className="mt-7 max-w-4xl border-l-2 border-[var(--track-color)] pl-5 text-base leading-relaxed font-semibold text-body md:text-lg">
+          {t(communicationComputingPrimer.question, lang)}
+        </blockquote>
+
+        <div className="mt-8 grid gap-x-8 gap-y-4 border-t border-border pt-6 md:grid-cols-3">
+          {communicationComputingPrimer.notes.map((note, index) => (
+            <p key={t(note, lang)} className="text-sm leading-relaxed text-body-secondary">
+              <span className="mr-2 font-semibold text-gold">{String(index + 1).padStart(2, "0")}</span>
+              {t(note, lang)}
+            </p>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RecruitmentCodeBlock({ label, code }: { label: string; code: string }) {
+  return (
+    <div className="overflow-hidden border border-[#555a87] bg-[#252947] text-white">
+      <div className="border-b border-white/15 px-4 py-2 text-xs font-semibold text-white/65">
+        {label}
+      </div>
+      <pre
+        tabIndex={0}
+        className="overflow-x-auto p-4 text-[13px] leading-6 text-[#f0f1ff] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-white md:p-5 md:text-sm"
+      >
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+}
+
+function CommunicationComputingChallengePanel({ lang }: { lang: Lang }) {
+  return (
+    <div id="disaster-panel-systems" role="tabpanel" aria-labelledby="disaster-tab-systems" className="pl-enter">
+      <p className="text-sm font-bold text-gold">{t(copy.systemChallenge, lang)}</p>
+      <h2 className="mt-3 max-w-4xl text-3xl font-bold leading-tight text-primary md:text-4xl">
+        {t(communicationComputingChallenge.taskTitle, lang)}
+      </h2>
+      <p className="mt-5 max-w-4xl text-base leading-relaxed text-body-secondary md:text-lg">
+        {t(communicationComputingChallenge.taskLead, lang)}
+      </p>
+      <p className="mt-5 border-l-2 border-gold pl-4 text-sm leading-relaxed text-body-muted">
+        <span className="font-semibold text-body">{lang === "zh" ? "赛题原题：" : "Original challenge title: "}</span>
+        {t(communicationComputingChallenge.title, lang)}
+      </p>
+
+      <section className="mt-10 border-t border-border pt-8">
+        <h3 className="text-xl font-bold text-primary md:text-2xl">{t(copy.simulationTitle, lang)}</h3>
+        <p className="mt-3 max-w-4xl text-sm leading-relaxed text-body-secondary md:text-base">
+          {t(communicationComputingChallenge.simulation.lead, lang)}
+        </p>
+        <div className="mt-6 grid gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:items-stretch">
+          <ol className="border-y border-border bg-[#f6f6fa]">
+            {communicationComputingChallenge.simulation.steps.map((step, index) => (
+              <li key={t(step, lang)} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 border-b border-border px-4 py-4 last:border-b-0">
+                <span className="font-semibold text-gold">{String(index + 1).padStart(2, "0")}</span>
+                <span className="text-sm font-semibold leading-relaxed text-body md:text-base">{t(step, lang)}</span>
+              </li>
+            ))}
+          </ol>
+          <RecruitmentCodeBlock
+            label={lang === "zh" ? "负责人材料中的基础仿真框架" : "Basic simulation framework from the supplied brief"}
+            code={communicationComputingChallenge.simulation.code}
+          />
+        </div>
+        <div className="mt-7">
+          <h4 className="text-base font-bold text-primary">{t(copy.systemResults, lang)}</h4>
+          <ul className="mt-4 grid border-y border-border sm:grid-cols-2 xl:grid-cols-5">
+            {communicationComputingChallenge.simulation.results.map((result, index) => (
+              <li key={t(result, lang)} className="border-b border-border px-4 py-4 text-sm leading-relaxed text-body-secondary last:border-b-0 sm:border-r sm:[&:nth-last-child(-n+2)]:border-b-0 xl:border-b-0 xl:last:border-r-0">
+                <span className="mr-2 font-semibold text-gold">{String(index + 1).padStart(2, "0")}</span>
+                {t(result, lang)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <div className="mt-10 grid gap-8 border-y border-border py-8 lg:grid-cols-2">
+        <section>
+          <h3 className="text-xl font-bold text-primary md:text-2xl">{t(copy.minimumTitle, lang)}</h3>
+          <div className="mt-5"><NumberedList items={communicationComputingChallenge.minimum} lang={lang} /></div>
+          <p className="mt-5 border-l-2 border-[var(--track-color)] pl-4 text-sm font-semibold leading-relaxed text-body-secondary">
+            {lang === "zh"
+              ? "当程序能够读取状态、选择模型、完成分析、决定是否通信，并输出完整评价结果时，一套基础系统就形成了。"
+              : "A basic system is complete when it can read state, select a model, perform analysis, decide whether to communicate, and produce a complete evaluation."}
+          </p>
+        </section>
+        <section>
+          <h3 className="text-xl font-bold text-primary md:text-2xl">{t(copy.environmentTitle, lang)}</h3>
+          <p className="mt-4 text-sm leading-relaxed text-body-secondary md:text-base">
+            {t(communicationComputingChallenge.environment.lead, lang)}
+          </p>
+          <div className="mt-5 grid gap-5 sm:grid-cols-2">
+            <div>
+              <p className="text-sm font-bold text-body">{t(copy.requiredTools, lang)}</p>
+              <p className="mt-2 text-sm leading-relaxed text-body-secondary">
+                {communicationComputingChallenge.environment.required.join(" · ")}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm font-bold text-body">{t(copy.optionalTools, lang)}</p>
+              <p className="mt-2 text-sm leading-relaxed text-body-secondary">
+                {communicationComputingChallenge.environment.optional.join(" · ")}
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section className="mt-10 bg-[#f6f6fa] p-5 md:p-8">
+        <p className="text-sm font-bold text-gold">{t(copy.datasetTitle, lang)}</p>
+        <h3 className="mt-2 text-xl font-bold text-primary md:text-2xl">
+          {t(communicationComputingChallenge.dataset.title, lang)}
+        </h3>
+        <p className="mt-3 max-w-4xl text-sm leading-relaxed text-body-secondary md:text-base">
+          {t(communicationComputingChallenge.dataset.description, lang)}
+        </p>
+        <div className="mt-7 grid gap-8 lg:grid-cols-2">
+          <div>
+            <h4 className="text-base font-bold text-primary">{t(copy.dataContent, lang)}</h4>
+            <ul className="mt-3 divide-y divide-border border-y border-border">
+              {communicationComputingChallenge.dataset.categories.map((category) => (
+                <li key={t(category, lang)} className="py-3 text-sm leading-relaxed text-body-secondary">
+                  {t(category, lang)}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-base font-bold text-primary">{t(copy.dataCode, lang)}</h4>
+            <div className="mt-3 space-y-4">
+              <RecruitmentCodeBlock label="data.csv" code={communicationComputingChallenge.dataset.loadCode} />
+              <RecruitmentCodeBlock
+                label={lang === "zh" ? "按时间划分训练集与测试集" : "Chronological train-test split"}
+                code={communicationComputingChallenge.dataset.splitCode}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-7"><NumberedList items={communicationComputingChallenge.dataset.facts} lang={lang} /></div>
+        <p className="mt-6 border-l-2 border-gold pl-4 text-sm leading-relaxed text-body-secondary">
+          {t(communicationComputingChallenge.dataset.labelNote, lang)}
+        </p>
+        <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3 border-t border-border pt-5">
+          {communicationComputingChallenge.dataset.links.map((link) => (
+            <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline decoration-primary/25 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-ring">
+              {t(link.label, lang)}<ExternalLink className="size-3.5" aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10 border-t border-border pt-8">
+        <h3 className="text-xl font-bold text-primary md:text-2xl">{t(copy.technicalRoutes, lang)}</h3>
+        <p className="mt-3 max-w-4xl text-sm leading-relaxed text-body-secondary md:text-base">
+          {lang === "zh"
+            ? "方案应围绕以下一种或多种路线展开。重点是模型组织、信息传递和通信调度，而不是是否使用复杂的大语言模型。"
+            : "Use one or more of the following routes. The focus is model organisation, information transfer, and communication scheduling—not whether a complex language model is used."}
+        </p>
+        <div className="mt-5 grid gap-0 border-y border-border lg:grid-cols-3">
+          {communicationComputingChallenge.routes.map((route, index) => (
+            <div key={t(route.title, lang)} className="border-b border-border px-0 py-5 last:border-b-0 lg:border-r lg:border-b-0 lg:px-5 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0">
+              <p className="text-xs font-bold tracking-widest text-gold">{String(index + 1).padStart(2, "0")}</p>
+              <h4 className="mt-2 text-lg font-bold text-primary">{t(route.title, lang)}</h4>
+              <p className="mt-2 text-sm leading-relaxed text-body-secondary">{t(route.description, lang)}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10 grid gap-6 border-y border-border py-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div>
+          <h3 className="text-xl font-bold text-primary md:text-2xl">{t(copy.weakLinkTitle, lang)}</h3>
+          <p className="mt-3 text-sm leading-relaxed text-body-secondary md:text-base">
+            {t(communicationComputingChallenge.simulation.weakLinkLead, lang)}
+          </p>
+        </div>
+        <RecruitmentCodeBlock
+          label={lang === "zh" ? "负责人材料中的弱连接仿真示例" : "Weak-link simulation example from the supplied brief"}
+          code={communicationComputingChallenge.simulation.weakLinkCode}
+        />
+      </section>
+
+      <section className="mt-10">
+        <h3 className="text-xl font-bold text-primary md:text-2xl">{t(copy.furtherTitle, lang)}</h3>
+        <div className="mt-5 grid gap-x-10 border-y border-border md:grid-cols-2">
+          {communicationComputingChallenge.further.map((question, index) => (
+            <div key={t(question, lang)} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 border-b border-border py-4 md:[&:nth-last-child(-n+2)]:border-b-0">
+              <span className="font-semibold text-gold">{String(index + 1).padStart(2, "0")}</span>
+              <p className="text-sm leading-relaxed text-body-secondary md:text-base">{t(question, lang)}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="mt-10 grid gap-6 xl:grid-cols-2">
+        <SectionCard title={t(copy.criteria, lang)}>
+          <NumberedList items={communicationComputingChallenge.criteria} lang={lang} />
+        </SectionCard>
+        <SectionCard title={t(copy.submission, lang)}>
+          <NumberedList items={communicationComputingChallenge.submission} lang={lang} />
+        </SectionCard>
+      </div>
+    </div>
+  );
+}
+
+function CommunicationComputingPaperPanel({ lang }: { lang: Lang }) {
+  return (
+    <div id="disaster-panel-paper-study" role="tabpanel" aria-labelledby="disaster-tab-paper-study" hidden className="pl-enter">
+      <h2 className="text-2xl font-bold leading-tight text-primary md:text-3xl">
+        {lang === "zh" ? "选择一篇论文完成精讲" : "Choose One Paper for an In-depth Presentation"}
+      </h2>
+      <p className="mt-4 max-w-3xl text-base leading-relaxed text-body-secondary md:text-lg">
+        {lang === "zh"
+          ? "四篇论文分别从无人机协同、模型仓库、事件触发卸载与大小模型协作切入。选择一篇，重点讲清系统为什么这样组织智能。"
+          : "The four papers approach the problem through UAV collaboration, model repositories, event-triggered offloading, and large-small model collaboration. Choose one and explain why the system organises intelligence in that way."}
+      </p>
+      <div className="mt-6 space-y-4">
+        {communicationComputingPapers.map((paper) => <PaperCard key={paper.id} paper={paper} lang={lang} />)}
+      </div>
+      <div className="mt-6">
+        <SectionCard title={t(copy.submission, lang)}>
+          <NumberedList items={communicationComputingPaperSubmission} lang={lang} />
+        </SectionCard>
+      </div>
+    </div>
+  );
+}
+
+function CommunicationComputingTaskSelector({ lang }: { lang: Lang }) {
+  const tabs = [
+    { id: "systems", label: copy.systemChallenge, description: copy.systemChallengeDesc },
+    { id: "paper-study", label: copy.paperStudy, description: copy.paperStudyDesc },
+  ];
+  return (
+    <section aria-labelledby="disaster-task-selector" className="bg-white px-6 py-10 md:py-14">
+      <div className="w-full max-w-[1100px]">
+        <p className="text-xs font-bold tracking-[0.14em] text-gold uppercase">{t(copy.selectorEyebrow, lang)}</p>
+        <h2 id="disaster-task-selector" className="mt-2 text-3xl font-bold text-primary md:text-4xl">
+          {t(copy.selectorTitle, lang)}
+        </h2>
+        <p className="mt-4 max-w-3xl text-base leading-relaxed text-body-secondary md:text-lg">
+          {lang === "zh"
+            ? "通信与计算协同挑战与论文精讲并列设置，任选其一即可。前者需要设计并实现一套多模型智能系统，后者适合希望先理解前沿研究脉络的同学。"
+            : "Choose either the communication-computing coordination challenge or the paper study. The former asks you to design and implement a multi-model intelligent system; the latter is for understanding current research first."}
+        </p>
+        <div role="tablist" aria-label={t(copy.selectorTitle, lang)} className="mt-8 grid gap-3 md:grid-cols-2">
+          {tabs.map((tab, index) => (
+            <button
+              key={tab.id}
+              id={`disaster-tab-${tab.id}`}
+              type="button"
+              role="tab"
+              aria-selected={index === 0}
+              aria-controls={`disaster-panel-${tab.id}`}
+              tabIndex={index === 0 ? 0 : -1}
+              className="group rounded-xl border border-border bg-surface px-5 py-4 text-left transition-colors hover:border-[var(--track-color)]/40 focus-visible:outline-2 focus-visible:outline-ring aria-selected:border-[var(--track-color)] aria-selected:bg-[var(--track-color)] aria-selected:text-white"
+            >
+              <span className="block text-xs font-bold tracking-widest text-gold group-aria-selected:text-white/70">{String(index + 1).padStart(2, "0")}</span>
+              <span className="mt-2 block text-lg font-bold">{t(tab.label, lang)}</span>
+              <span className="mt-1 block text-sm opacity-75">{t(tab.description, lang)}</span>
+            </button>
+          ))}
+        </div>
+        <div className="mt-10">
+          <CommunicationComputingChallengePanel lang={lang} />
+          <CommunicationComputingPaperPanel lang={lang} />
+        </div>
+        <TaskSubmission lang={lang} directionSlug="communication-computing" />
+      </div>
+    </section>
+  );
+}
+
 function ChallengePanel({ lang }: { lang: Lang }) {
   return (
     <div id="disaster-panel-challenge" role="tabpanel" aria-labelledby="disaster-tab-challenge" className="pl-enter">
@@ -515,11 +967,16 @@ function TaskSubmission({
           <p className="mt-1 text-sm leading-relaxed font-medium text-body">
             {t(directionPageCopy[directionSlug].taskSubject, lang)}
           </p>
-          {directionSlug === "sensing-computing" ? (
+          {directionSlug === "sensing-computing" || directionSlug === "communication-computing" ? (
             <>
               <p className="mt-4 text-xs font-semibold text-body-muted">{t(copy.schedulePending, lang)}</p>
               <p className="mt-1 text-sm leading-relaxed text-body-secondary">
-                {t(sensingComputingAvailabilityNote, lang)}
+                {t(
+                  directionSlug === "sensing-computing"
+                    ? sensingComputingAvailabilityNote
+                    : communicationComputingAvailabilityNote,
+                  lang,
+                )}
               </p>
             </>
           ) : null}
@@ -536,6 +993,10 @@ function TaskSelector({
   lang: Lang;
   directionSlug: PublishedDisasterDirectionSlug;
 }) {
+  if (directionSlug === "communication-computing") {
+    return <CommunicationComputingTaskSelector lang={lang} />;
+  }
+
   const sensingComputing = directionSlug === "sensing-computing";
   const tabs = sensingComputing
     ? [
@@ -585,7 +1046,7 @@ function TaskSelector({
               aria-selected={index === 0}
               aria-controls={`disaster-panel-${tab.id}`}
               tabIndex={index === 0 ? 0 : -1}
-              className="group rounded-xl border border-border bg-surface px-5 py-4 text-left transition-colors hover:border-primary/40 focus-visible:outline-2 focus-visible:outline-ring aria-selected:border-primary aria-selected:bg-primary aria-selected:text-white"
+              className="group rounded-xl border border-border bg-surface px-5 py-4 text-left transition-colors hover:border-[var(--track-color)]/40 focus-visible:outline-2 focus-visible:outline-ring aria-selected:border-[var(--track-color)] aria-selected:bg-[var(--track-color)] aria-selected:text-white"
             >
               <span className="block text-xs font-bold tracking-widest text-gold group-aria-selected:text-white/70">
                 {String(index + 1).padStart(2, "0")}
@@ -619,8 +1080,11 @@ export function DisasterRecruitmentPage({
   directionSlug?: PublishedDisasterDirectionSlug;
 }) {
   const pageCopy = directionPageCopy[directionSlug];
+  const direction = disasterDirections.find((item) => item.slug === directionSlug);
+  if (!direction) throw new Error(`灾害招新方向不存在：${directionSlug}`);
+  const pageStyle = { "--track-color": direction.themeColor } as CSSProperties;
   return (
-    <>
+    <div style={pageStyle}>
       <div className="border-b border-border bg-white px-6 py-4 lg:hidden">
         <div className="mx-auto max-w-[1280px]">
           <Link href={hrefFor("/join", lang)} className="inline-flex items-center gap-1.5 text-sm font-semibold text-body-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring">
@@ -634,7 +1098,7 @@ export function DisasterRecruitmentPage({
         <div className="mt-3"><ActiveTrackScroller><DirectionLinks lang={lang} active={directionSlug} /></ActiveTrackScroller></div>
       </div>
 
-      <div className="grid w-full lg:grid-cols-[196px_minmax(0,1fr)] lg:gap-x-6 lg:pl-[clamp(24px,3vw,64px)]">
+      <div className="grid w-full lg:grid-cols-[232px_minmax(0,1fr)] lg:gap-x-5 lg:pl-[clamp(16px,2vw,40px)]">
         <aside className="hidden pb-10 lg:block">
           <div className="sticky top-[104px] flex max-h-[calc(100vh-152px)] min-h-[calc(100vh-152px)] flex-col overflow-y-auto pt-8 pr-1 pb-2">
             <Link href={hrefFor("/join", lang)} className="inline-flex items-center gap-1.5 text-sm font-semibold text-body-secondary transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring">
@@ -651,12 +1115,24 @@ export function DisasterRecruitmentPage({
 
         <article className="recruitment-track-enter min-w-0 overflow-hidden border-l border-border/70 bg-white">
           <RecruitmentContentController>
-            <section className="bg-primary-dark px-6 py-14 text-white md:py-20">
+            <section className="bg-[var(--track-color)] px-6 py-14 text-white md:py-20">
               <div className="w-full max-w-[1100px]">
                 <p className="text-xs font-bold tracking-[0.16em] text-gold-light uppercase">{t(pageCopy.heroEyebrow, lang)}</p>
                 <h1 className="mt-4 max-w-4xl text-4xl font-bold leading-tight md:text-6xl">{t(pageCopy.heroTitle, lang)}</h1>
                 <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/80 md:text-xl">{t(pageCopy.heroLead, lang)}</p>
-                <div className="mt-10 rounded-2xl border border-white/15 bg-white/5 p-6 md:p-8">
+                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-white/20 py-4">
+                  <span className="text-xs font-bold tracking-[0.12em] text-gold-light uppercase">
+                    {t(copy.directionLead, lang)}
+                  </span>
+                  <strong className="text-base">{t(direction.contact.name, lang)}</strong>
+                  <a
+                    href={`mailto:${direction.contact.email}`}
+                    className="break-all text-sm font-semibold text-white/80 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white focus-visible:outline-2 focus-visible:outline-white"
+                  >
+                    {direction.contact.email}
+                  </a>
+                </div>
+                <div className="mt-8 rounded-2xl border border-white/15 bg-white/5 p-6 md:p-8">
                   <p className="text-sm font-bold tracking-widest text-gold-light uppercase">{t(copy.backgroundTitle, lang)}</p>
                   <div className="mt-4 space-y-4 text-base leading-relaxed text-white/75 md:text-lg">
                     {pageCopy.background[lang].map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -665,10 +1141,12 @@ export function DisasterRecruitmentPage({
               </div>
             </section>
             <ApplicationGuide lang={lang} directionSlug={directionSlug} />
+            {directionSlug === "sensing-computing" ? <SensingComputingOverview lang={lang} /> : null}
+            {directionSlug === "communication-computing" ? <CommunicationComputingPrimer lang={lang} /> : null}
             <TaskSelector lang={lang} directionSlug={directionSlug} />
           </RecruitmentContentController>
         </article>
       </div>
-    </>
+    </div>
   );
 }

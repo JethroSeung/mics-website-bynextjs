@@ -86,8 +86,8 @@ export const recruitmentAreas: RecruitmentArea[] = [
       en: "Study the coordination of communication, sensing, and intelligent analysis in natural-disaster scenarios.",
     },
     detail: {
-      zh: "通感与感算方向现已开放，通算方向的详细任务正在整理。",
-      en: "Communication-Sensing and Sensing-Computing are now open; detailed tasks for Communication-Computing are being prepared.",
+      zh: "通信感知一体化、灾害感知与智能分析、AI 驱动的通信与计算三个方向现已开放。",
+      en: "Integrated Communication and Sensing, Disaster Sensing and Intelligent Analysis, and AI-Driven Communication and Computing are now open.",
     },
     trackLabels: [
       { zh: "通感", en: "Communication-Sensing" },

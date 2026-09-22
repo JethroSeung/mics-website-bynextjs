@@ -14,6 +14,7 @@ const routes = [
   "/join",
   "/join/disaster",
   "/join/disaster/sensing-computing",
+  "/join/disaster/communication-computing",
   "/join/medeng",
   "/join/medeng/wifi-csi",
   "/join/medeng/computer-vision",
@@ -21,6 +22,7 @@ const routes = [
   "/en/join",
   "/en/join/disaster",
   "/en/join/disaster/sensing-computing",
+  "/en/join/disaster/communication-computing",
   "/en/join/medeng",
   "/en/join/medeng/wifi-csi",
   "/en/join/medeng/computer-vision",
@@ -102,8 +104,8 @@ await page.screenshot({ path: path.join(os.tmpdir(), "mics-recruitment-desktop.p
 await page.goto(`${baseUrl}/join/disaster`, { waitUntil: "networkidle0" });
 assert.equal(await count("aside nav li"), 3, "disaster sidebar should list three research tracks");
 assert.equal(await count("aside nav a[aria-current='page']"), 1, "Communication-Sensing should be active");
-assert.equal(await count("aside nav a"), 2, "Communication-Sensing and Sensing-Computing should be open");
-assert.equal(await count("aside nav [aria-disabled='true']"), 1, "only Communication-Computing should remain disabled");
+assert.equal(await count("aside nav a"), 3, "all three disaster recruitment tracks should be open");
+assert.equal(await count("aside nav [aria-disabled='true']"), 0, "no disaster recruitment track should remain disabled");
 assert.equal(await count("aside a[href^='mailto:ycxuan4work@gmail.com']"), 1, "disaster sidebar should show the shared application recipient");
 assert.equal(await count("[role='tab']"), 3, "Communication-Sensing should expose three participation routes");
 assert.equal(await count("a[href='https://doi.org/10.1109/WCNC61545.2025.10978429']"), 1, "the corrected dual-band paper DOI should be present");
@@ -132,13 +134,32 @@ assert.match(await page.$eval("h1", (element) => element.textContent ?? ""), /�
 assert.equal(await count("aside nav a[aria-current='page']"), 1, "Sensing-Computing should be active in the direction navigation");
 assert.equal(await count("[role='tab']"), 2, "Sensing-Computing should expose reproduction and presentation routes");
 assert.equal(await count("details"), 8, "Sensing-Computing should expose all eight paper tasks");
-assert.equal(await count("main article a[href^='mailto:mountqingxubo@outlook.com']"), 1, "task results should go to the Sensing-Computing lead");
+assert.equal(await count("main article a[href^='mailto:mountqingxubo@outlook.com']") >= 2, true, "the hero and task submission should identify the Sensing-Computing lead");
 assert.equal(await count("aside a[href^='mailto:ycxuan4work@gmail.com']"), 1, "the sidebar should keep the shared personal-introduction recipient");
 assert.equal(await page.$eval("#disaster-panel-reproduction", (element) => !element.hasAttribute("hidden")), true);
 await page.$$eval("[role='tab']", (tabs) => tabs[1].click());
 assert.equal(await page.$eval("#disaster-panel-presentation", (element) => !element.hasAttribute("hidden")), true);
 assert.doesNotMatch(await page.$eval("main", (element) => element.textContent ?? ""), /痛感一体化/);
 await page.screenshot({ path: path.join(os.tmpdir(), "mics-sensing-computing-desktop.png"), fullPage: false });
+
+await page.goto(`${baseUrl}/join/disaster/communication-computing`, { waitUntil: "networkidle0" });
+assert.match(await page.$eval("h1", (element) => element.textContent ?? ""), /AI 驱动的通信与计算方向招新/);
+assert.equal(await count("aside nav a[aria-current='page']"), 1, "Communication-Computing should be active in the direction navigation");
+assert.equal(await count("[role='tab']"), 2, "Communication-Computing should expose the systems challenge and paper study routes");
+assert.equal(await count("details"), 4, "Communication-Computing should expose four paper-study tasks");
+assert.equal(await count("main article a[href^='mailto:phare111@163.com']") >= 2, true, "the hero and task submission should identify the Communication-Computing lead");
+const communicationComputingText = await page.$eval("main", (element) => element.textContent ?? "");
+assert.match(communicationComputingText, /设计并实现一套通信—计算协同的多模型智能系统/);
+assert.match(communicationComputingText, /8,760/);
+assert.match(communicationComputingText, /普通笔记本/);
+assert.match(communicationComputingText, /for t in range\(len\(test\)\)/);
+assert.match(communicationComputingText, /pd\.read_csv\("data\.csv"\)/);
+assert.match(communicationComputingText, /if link_quality < threshold/);
+assert.match(communicationComputingText, /一个 Agent 能否根据环境状态重新组织这些模型/);
+assert.equal(await page.$eval("#disaster-panel-systems", (element) => !element.hasAttribute("hidden")), true);
+await page.$$eval("[role='tab']", (tabs) => tabs[1].click());
+assert.equal(await page.$eval("#disaster-panel-paper-study", (element) => !element.hasAttribute("hidden")), true);
+await page.screenshot({ path: path.join(os.tmpdir(), "mics-communication-computing-desktop.png"), fullPage: false });
 
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
 await page.goto(`${baseUrl}/join`, { waitUntil: "networkidle0" });
@@ -170,7 +191,7 @@ await page.screenshot({ path: path.join(os.tmpdir(), "mics-application-guide-mob
 
 await page.goto(`${baseUrl}/join/disaster`, { waitUntil: "networkidle0" });
 assert.equal(await count("main [class~='lg:hidden'] nav li"), 3, "mobile disaster navigation should list all three tracks");
-assert.equal(await count("main [class~='lg:hidden'] nav [aria-disabled='true']"), 1, "only the unpublished Communication-Computing track should be disabled on mobile");
+assert.equal(await count("main [class~='lg:hidden'] nav [aria-disabled='true']"), 0, "all disaster tracks should be available on mobile");
 const disasterOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 assert.ok(disasterOverflow <= 1, `disaster detail should not overflow horizontally (overflow: ${disasterOverflow}px)`);
 await page.screenshot({ path: path.join(os.tmpdir(), "mics-disaster-recruitment-mobile.png"), fullPage: false });
@@ -184,6 +205,16 @@ assert.equal(activeDisasterTrackVisible, true, "the active Sensing-Computing mob
 const sensingComputingOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 assert.ok(sensingComputingOverflow <= 1, `Sensing-Computing detail should not overflow horizontally (overflow: ${sensingComputingOverflow}px)`);
 await page.screenshot({ path: path.join(os.tmpdir(), "mics-sensing-computing-mobile.png"), fullPage: false });
+
+await page.goto(`${baseUrl}/join/disaster/communication-computing`, { waitUntil: "networkidle0" });
+const activeCommunicationComputingTrackVisible = await page.$eval("main [class~='lg:hidden'] nav a[aria-current='page']", (element) => {
+  const rect = element.getBoundingClientRect();
+  return rect.left >= 0 && rect.right <= document.documentElement.clientWidth;
+});
+assert.equal(activeCommunicationComputingTrackVisible, true, "the active Communication-Computing mobile track should be fully visible");
+const communicationComputingOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+assert.ok(communicationComputingOverflow <= 1, `Communication-Computing detail should not overflow horizontally (overflow: ${communicationComputingOverflow}px)`);
+await page.screenshot({ path: path.join(os.tmpdir(), "mics-communication-computing-mobile.png"), fullPage: false });
 
 await page.goto(`${baseUrl}/`, { waitUntil: "networkidle0" });
 assert.equal(await count("main a[href='/join/medeng']"), 1, "homepage should link directly to medical-engineering recruitment");

@@ -25,14 +25,24 @@ export function JoinPage({ lang }: { lang: Lang }) {
       en: "One recruitment task from any of the four tracks",
     },
     disasterTaskRequirement: {
-      zh: "完成通感方向的一项招新任务",
-      en: "One recruitment task from the Communication-Sensing track",
+      zh: "三个方向中任选一项招新任务",
+      en: "One recruitment task from any of the three tracks",
     },
     profileRequirement: {
       zh: "简历或文字自我介绍（二选一）",
       en: "A résumé or a short written introduction (either is fine)",
     },
     submissionLabel: { zh: "个人介绍统一投递", en: "Send your introduction to" },
+    guideKicker: { zh: "新生指南", en: "New student guide" },
+    guideTitle: {
+      zh: "第一次配置环境，从这里开始",
+      en: "Start here for your first development setup",
+    },
+    guideDesc: {
+      zh: "开发环境、Git 协作、论文检索与 AI 工具，一页理清最常用的起步方法。",
+      en: "A concise guide to development environments, Git collaboration, literature search, and AI tools.",
+    },
+    guideAction: { zh: "阅读起步指南", en: "Read the guide" },
   } as const;
 
   return (
@@ -162,6 +172,30 @@ export function JoinPage({ lang }: { lang: Lang }) {
                 return <div key={area.slug}>{content}</div>;
               })}
             </div>
+
+            <Link
+              href={hrefFor("/join/getting-started", lang)}
+              className="group mt-12 grid border-y border-border-dark bg-white transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-ring md:grid-cols-[10rem_minmax(0,1fr)_auto] md:items-center"
+            >
+              <div className="border-b border-border px-5 py-5 md:border-r md:border-b-0 md:px-6 md:py-7">
+                <p className="font-semibold text-gold">{t(copy.guideKicker, lang)}</p>
+              </div>
+              <div className="px-5 pt-5 pb-3 md:px-8 md:py-7">
+                <h2 className="text-xl font-bold text-primary md:text-2xl">
+                  {t(copy.guideTitle, lang)}
+                </h2>
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-body-secondary md:text-base">
+                  {t(copy.guideDesc, lang)}
+                </p>
+              </div>
+              <div className="flex items-center gap-2 px-5 pt-1 pb-5 text-sm font-bold text-primary md:px-7 md:py-7 md:text-base">
+                <span>{t(copy.guideAction, lang)}</span>
+                <ArrowRight
+                  className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </div>
+            </Link>
           </Reveal>
         </div>
       </section>
