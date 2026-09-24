@@ -241,7 +241,7 @@ export const researchDirections: ResearchDirection[] = ([
         en: "Multimodal Sensing",
       },
       heroLead: {
-        zh: "WiFi 与 CSI 信号时刻穿行在病房与客厅之间，人体的呼吸、动作与姿态变化都会留下可测量的信号改变。麦克风拾取鼾声、咳嗽与交谈，摄像头则在特定合规场景中记录姿态、动作与场景信息。在数据处理层，机器学习与深度学习模型从各通道数据中提取特征，并将其映射为定位、活动、生命体征、姿态与行为，并实现房颤等心律异常的长期无接触检测。多模态融合由深度学习模型完成，把各通道的结果整合为统一的感知结果。在报告层，课题组用大语言模型（LLM）搭建了一体化的私人健康助手 Agent，整理观测结果、解释模型判断，支撑筛查、诊断与复诊。与江苏省人民医院的合作，让这条完整的技术链路在真实临床环境中得到验证。",
+        zh: "Wi-Fi与毫米波信号时刻穿行在病房与客厅之间，人体的呼吸、动作与姿态变化都会留下可测量的信号改变。麦克风拾取鼾声、咳嗽与交谈，摄像头则在特定合规场景中记录姿态、动作与场景信息。在数据处理层，机器学习与深度学习模型从各通道数据中提取特征，并将其映射为定位、活动、生命体征、姿态与行为，并实现房颤等心律异常的长期无接触检测。多模态融合由深度学习模型完成，把各通道的结果整合为统一的感知结果。在报告层，课题组用大语言模型（LLM）搭建了一体化的私人健康助手 Agent，整理观测结果、解释模型判断，支撑筛查、诊断与复诊。与江苏省人民医院的合作，让这条完整的技术链路在真实临床环境中得到验证。",
         en: "WiFi and CSI signals travel through wards and living rooms at all times, and the breathing, movements, and posture changes of the human body leave measurable traces in these signals. Microphones capture snoring, coughing, and conversation, while cameras record posture, motion, and scene information in specific compliant scenarios. At the data processing layer, machine learning and deep learning models extract features from the data of each channel and map them to localization, activity, vital signs, posture, and behavior, enabling long-term contactless detection of arrhythmias such as atrial fibrillation. Multimodal fusion is performed by deep learning models, which integrate the results of all channels into a unified perception outcome. At the reporting layer, the group has built an integrated personal health assistant agent on large language models (LLMs), which organizes observations, explains model judgments, and supports screening, diagnosis, and follow-up. The collaboration with Jiangsu Province Hospital validates this complete technical pipeline in real clinical settings.",
       },
       summary: {
@@ -264,8 +264,12 @@ export const researchDirections: ResearchDirection[] = ([
               en: "The research began with data collection. Using commercial devices, the group recorded large amounts of wireless signals in real rooms and annotated them with the true states of the people inside, then trained deep learning models to recognize human activities from the signals. Preliminary results confirmed technical feasibility, as deep learning models could determine from signal changes alone whether a room was occupied and what activity was taking place.",
             },
             {
-              zh: "WiFi 信道状态信息（CSI）能够反映人体最微小的动作，胸腔起伏、肢体移动都会在信道读数中留下特征。深度学习模型对这些特征逐层解析，把感知对象从动作推进到呼吸与心跳，形成无接触生命体征监测能力。",
-              en: "WiFi channel state information (CSI) reflects the smallest human motions, as chest movement and limb motion both leave features in the channel readings. Deep learning models parse these features layer by layer, extending the sensing target from activities to breathing and heartbeat, and forming a contactless vital sign monitoring capability.",
+              zh: "Wi-Fi 信道状态信息能够反映人体最微小的动作，胸腔起伏、肢体移动都会在信道读数中留下特征。深度学习模型对这些特征逐层解析，把感知对象从动作推进到呼吸与心跳，形成无接触生命体征监测能力。",
+              en: "Wi-Fi channel state information (CSI) reflects the smallest human motions, as chest movement and limb motion both leave features in the channel readings. Deep learning models parse these features layer by layer, extending the sensing target from activities to breathing and heartbeat, and forming a contactless vital sign monitoring capability.",
+            },
+            {
+              zh: "毫米波雷达提供了另一种无线观测方式。它通过分析人体反射回波中的距离、速度与微动信息，在不采集清晰图像的情况下感知人体位置、动作以及呼吸等状态。与 Wi-Fi 对信道变化的感知不同，毫米波雷达能够提供更直接的空间与运动信息，两者在不同场景中相互补充。",
+              en: "mmWave radar provides another form of wireless sensing. By analyzing the distance, velocity, and subtle motion information contained in signals reflected from the human body, it can perceive a person’s location, movements, and respiratory activity without capturing identifiable images. Unlike Wi-Fi sensing, which observes changes in the wireless channel, millimeter-wave radar provides more direct spatial and motion information. The two technologies complement each other across different scenarios.",
             },
             {
               zh: "语音是另一条信息通道。房间内已有的麦克风可以拾取鼾声、咳嗽、交谈与脚步，语音识别与音频深度学习模型将这些声音转化为睡眠质量与日常状态的信息。它与无线感知共享同样的部署优势，无接触、不打扰、易于扩展。",
@@ -276,8 +280,8 @@ export const researchDirections: ResearchDirection[] = ([
               en: "Vision provides the most informative observations, covering appearance, posture, motion, and scene. With visual deep learning models, camera frames can be converted into posture and behavior analysis, serving as a reference for the other channels. Privacy requirements define the role of vision in the system, where it works as a complementary channel in specific compliant scenarios and supplies details that wireless channels cannot provide.",
             },
             {
-              zh: "单一通道各有局限，多模态融合由此成为系统的基础。借助深度学习融合模型，无线信号、语音与视觉相互补充，感知结果在复杂环境中保持稳定。研究成果最终要回到真实环境中检验，与江苏省人民医院的合作，让算法在真实病房的数据与需求中持续打磨。",
-              en: "Each single channel has its own limitations, which makes multimodal fusion the foundation of the system. With deep learning fusion models, wireless signals, voice, and vision complement one another, keeping perception stable in complex environments. Research results must ultimately return to real environments for testing, and the collaboration with Jiangsu Province Hospital keeps the algorithms sharpened against real ward data and clinical needs.",
+              zh: "单一通道各有局限，多模态融合由此成为系统的基础。借助深度学习融合模型，Wi-Fi、毫米波雷达、语音与视觉相互补充，使感知结果在复杂环境中保持稳定。研究成果最终要回到真实环境中检验，与江苏省人民医院的合作，让算法在真实病房的数据与需求中持续打磨。",
+              en: "Each sensing modality has its own limitations, making multimodal fusion a foundation of the system. With deep learning-based fusion models, Wi-Fi, mmWave radar, audio, and vision complement one another, allowing the sensing results to remain reliable in complex environments. Ultimately, the research must be evaluated in real-world settings. Through collaboration with Jiangsu Province Hospital, the algorithms continue to be refined using data and practical requirements from real clinical environments.",
             },
           ],
         },

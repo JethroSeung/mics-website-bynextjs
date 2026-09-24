@@ -120,7 +120,7 @@ export const guideSections: GuideSection[] = [
       {
         title: { zh: "Python / PyCharm / VS Code", en: "Python / PyCharm / VS Code" },
         summary: {
-          zh: "Python 语法简洁、可读性强，又拥有成熟的科学计算、人工智能、数据分析、自动化和 Web 生态，因此在科研中非常常见。Python 解释器负责运行代码，PyCharm 和 VS Code 是编写与调试代码的工具，二选一即可。跑通第一个脚本后，再学习 pip、虚拟环境和 requirements.txt，避免不同项目的依赖互相冲突。",
+          zh: "Python 语法简洁、可读性强，又拥有成熟的科学计算、人工智能、数据分析、数学建模、自动化和 Web 生态，因此在科研中非常常见。Python 解释器负责运行代码，PyCharm 和 VS Code 是编写与调试代码的工具，二选一即可。跑通第一个脚本后，再学习 pip、虚拟环境和 requirements.txt，避免不同项目的依赖互相冲突。",
           en: "Python is popular because its readable syntax is backed by mature ecosystems for scientific computing, AI, data analysis, automation, and the web. The Python interpreter runs the code; PyCharm and VS Code are environments for writing and debugging it, and either one is enough. After your first script works, learn pip, virtual environments, and requirements.txt so projects do not conflict.",
         },
         meta: { zh: "解释型语言与开发工具 · Python Software Foundation / JetBrains / Microsoft", en: "Interpreted language and tools · Python Software Foundation / JetBrains / Microsoft" },
@@ -170,7 +170,7 @@ export const guideSections: GuideSection[] = [
       {
         title: { zh: "MATLAB", en: "MATLAB" },
         summary: {
-          zh: "MATLAB 以矩阵计算和工程工具箱见长，适合信号处理、通信实验、数据绘图与快速算法验证。它把许多常用工程算法封装成可直接调用的函数，新生可以先完成官方 MATLAB Onramp，学会脚本、矩阵和绘图，再根据具体任务选择工具箱，不必一次掌握全部功能。",
+          zh: "MATLAB 以矩阵计算、数学建模和工程工具箱见长，适合信号处理、通信实验、数据绘图与快速算法验证。它把许多常用工程算法封装成可直接调用的函数，新生可以先完成官方 MATLAB Onramp，学会脚本、矩阵和绘图，再根据具体任务选择工具箱，不必一次掌握全部功能。",
           en: "MATLAB is built around matrix computing and engineering toolboxes, making it useful for signal processing, communications experiments, plotting, and rapid algorithm validation. Many common engineering methods are available as ready-to-use functions. Begin with MATLAB Onramp, learn scripts, matrices, and plotting, then add toolboxes only when a task needs them.",
         },
         meta: { zh: "科学计算平台 · MathWorks", en: "Scientific computing platform · MathWorks" },
@@ -188,6 +188,46 @@ export const guideSections: GuideSection[] = [
           {
             label: { zh: "B站：MATLAB 官方入门", en: "Bilibili: MATLAB beginner tutorials" },
             href: bilibiliSearch("MATLAB中国 入门 官方"),
+            kind: "tutorial",
+          },
+        ],
+      },
+      {
+        title: {
+          zh: "JavaScript / TypeScript / Node.js / npm",
+          en: "JavaScript / TypeScript / Node.js / npm",
+        },
+        summary: {
+          zh: "JavaScript 是网页开发的基础语言，Node.js 让它能够脱离浏览器运行，也是现代前端工程、Next.js、后端服务和命令行工具的重要基础。npm 随 Node.js 一起使用，负责安装项目依赖和运行脚本；TypeScript 则在 JavaScript 上增加类型检查，更适合维护规模较大的项目。AI时代Node.js不单单服务于JS与TS，更是AI Agent本地运行不可或缺的环境基础。",
+          en: "JavaScript is the foundation of web development, while Node.js runs it outside the browser and underpins modern frontend tooling, Next.js, backend services, and command-line tools. npm manages project dependencies and scripts, and TypeScript adds type checking for larger codebases. This ecosystem is common for building AI interfaces, connecting model services, and creating tools, while Python remains more common for model training and data analysis.",
+        },
+        meta: {
+          zh: "Web 与应用开发运行时 · OpenJS Foundation / Microsoft",
+          en: "Web and application runtime · OpenJS Foundation / Microsoft",
+        },
+        note: {
+          zh: "新生优先安装官网标注的 LTS 长期支持版本，完成后用 node -v 和 npm -v 检查环境。先认识 package.json，学会 npm install 与 npm run dev；如果课程或项目指定了 Node.js 版本，应以项目要求为准。",
+          en: "Start with the official LTS release, then check the setup with node -v and npm -v. Learn what package.json records and how to use npm install and npm run dev. If a course or project requires a specific Node.js version, follow that requirement.",
+        },
+        links: [
+          {
+            label: { zh: "下载 Node.js LTS", en: "Download Node.js LTS" },
+            href: "https://nodejs.org/en/download",
+            kind: "official",
+          },
+          {
+            label: { zh: "npm 安装与入门文档", en: "npm installation guide" },
+            href: "https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/",
+            kind: "official",
+          },
+          {
+            label: { zh: "TypeScript 新手文档", en: "TypeScript for new programmers" },
+            href: "https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html",
+            kind: "official",
+          },
+          {
+            label: { zh: "B站：Node.js 与 npm 入门", en: "Bilibili: Node.js and npm basics" },
+            href: bilibiliSearch("Node.js npm package.json 入门"),
             kind: "tutorial",
           },
         ],

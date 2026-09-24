@@ -29,11 +29,6 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
       zh: "优先使用官网和官方文档。B站入口用于查找中文演示，请结合发布时间、软件版本和评论区判断是否仍然适用。",
       en: "Prefer official sites and documentation. Bilibili links are Chinese tutorial searches; check dates, software versions, and feedback before following them.",
     },
-    permissionTitle: { zh: "使用 AI 工程工具前", en: "Before using AI engineering tools" },
-    permissionBody: {
-      zh: "先提交或备份当前工作，确认工具能够访问的文件与命令。完成后查看差异、运行测试，并确保自己能够解释修改内容。",
-      en: "Commit or back up current work, then confirm which files and commands the tool can access. Afterwards, review the diff, run tests, and make sure you can explain every change.",
-    },
   } as const;
 
   return (
@@ -170,65 +165,67 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
                 </div>
 
                 <div className="mt-8 md:mt-10 md:pl-[6.5rem]">
-                  {section.entries.map((entry) => (
-                    <article
-                      key={t(entry.title, lang)}
-                      className="grid gap-3 border-t border-border py-6 first:border-border-dark md:grid-cols-[12rem_minmax(0,1fr)] md:gap-8 md:py-7"
-                    >
-                      <div>
-                        <h3 className="text-lg font-bold leading-snug text-body">{t(entry.title, lang)}</h3>
-                        {entry.meta ? (
-                          <p className="mt-2 text-xs leading-relaxed text-body-muted">
-                            {t(entry.meta, lang)}
-                          </p>
-                        ) : null}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="max-w-3xl text-base leading-relaxed text-body-secondary">
-                          {t(entry.summary, lang)}
-                        </p>
-                        {entry.access ? (
-                          <p className="mt-3 border-l-2 border-gold pl-3 text-sm font-semibold leading-relaxed text-primary">
-                            {t(entry.access, lang)}
-                          </p>
-                        ) : null}
-                        {entry.note ? (
-                          <p className="mt-3 border-l-2 border-gold pl-3 text-sm leading-relaxed text-body-muted">
-                            {t(entry.note, lang)}
-                          </p>
-                        ) : null}
-                        {entry.links.length > 0 ? (
-                          <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
-                            {entry.links.map((resource) => (
-                              <li key={resource.href}>
-                                <a
-                                  href={resource.href}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  className="group inline-flex items-baseline gap-1.5 text-sm font-semibold text-primary underline decoration-border-dark underline-offset-4 transition-colors hover:text-gold hover:decoration-gold focus-visible:outline-2 focus-visible:outline-ring"
-                                >
-                                  <span className="font-normal text-body-muted">
-                                    {t(kindLabels[resource.kind], lang)}
-                                  </span>
-                                  <span>{t(resource.label, lang)}</span>
-                                  <ArrowUpRight className="size-3.5 shrink-0" aria-hidden="true" />
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-                      </div>
-                    </article>
-                  ))}
+                  {section.entries.map((entry, entryIndex) => {
+                    const isPreface = section.id === "environment" && entryIndex === 0;
+                    const stripeIndex = section.id === "environment" ? entryIndex - 1 : entryIndex;
+                    const hasMutedBackground = isPreface || stripeIndex % 2 === 1;
 
-                  {section.id === "ai-tools" ? (
-                    <div className="border-y border-primary bg-primary-light/55 px-5 py-6 md:px-7">
-                      <h3 className="font-bold text-primary">{t(copy.permissionTitle, lang)}</h3>
-                      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-body-secondary md:text-base">
-                        {t(copy.permissionBody, lang)}
-                      </p>
-                    </div>
-                  ) : null}
+                    return (
+                      <article
+                        key={t(entry.title, lang)}
+                        className={`grid gap-3 border-t border-border/60 px-4 py-6 first:border-border-dark md:grid-cols-[12rem_minmax(0,1fr)] md:gap-8 md:px-5 md:py-7 ${
+                          hasMutedBackground ? "bg-[#fafbfc]" : "bg-white"
+                        }`}
+                      >
+                        <div>
+                          <h3 className="text-lg font-bold leading-snug text-[#17212b]">
+                            {t(entry.title, lang)}
+                          </h3>
+                          {entry.meta ? (
+                            <p className="mt-2 text-xs leading-relaxed text-body-muted">
+                              {t(entry.meta, lang)}
+                            </p>
+                          ) : null}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="max-w-3xl text-base leading-relaxed text-body-secondary">
+                            {t(entry.summary, lang)}
+                          </p>
+                          {entry.access ? (
+                            <p className="mt-3 border-l-2 border-gold pl-3 text-sm font-semibold leading-relaxed text-primary">
+                              {t(entry.access, lang)}
+                            </p>
+                          ) : null}
+                          {entry.note ? (
+                            <p className="mt-3 border-l-2 border-gold pl-3 text-sm leading-relaxed text-body-muted">
+                              {t(entry.note, lang)}
+                            </p>
+                          ) : null}
+                          {entry.links.length > 0 ? (
+                            <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                              {entry.links.map((resource) => (
+                                <li key={resource.href}>
+                                  <a
+                                    href={resource.href}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="group inline-flex items-baseline gap-1.5 text-sm font-semibold text-primary underline decoration-border-dark underline-offset-4 transition-colors hover:text-gold hover:decoration-gold focus-visible:outline-2 focus-visible:outline-ring"
+                                  >
+                                    <span className="font-normal text-body-muted">
+                                      {t(kindLabels[resource.kind], lang)}
+                                    </span>
+                                    <span>{t(resource.label, lang)}</span>
+                                    <ArrowUpRight className="size-3.5 shrink-0" aria-hidden="true" />
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : null}
+                        </div>
+                      </article>
+                    );
+                  })}
+
                 </div>
               </section>
             ))}

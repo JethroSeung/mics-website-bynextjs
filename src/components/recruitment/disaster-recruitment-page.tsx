@@ -32,7 +32,7 @@ import { hrefFor, t, type Lang, type Localized } from "@/data/site";
 const copy = {
   back: { zh: "返回招新方向", en: "Back to recruitment areas" },
   directionHeading: { zh: "灾害招新方向", en: "Disaster Recruitment Tracks" },
-  openNote: { zh: "三个方向均已开放", en: "All three tracks are open" },
+  openNote: { zh: "（任选其一即可）", en: "All three tracks are open" },
   preparing: { zh: "整理中", en: "Preparing" },
   lead: { zh: "方向负责人", en: "Track lead" },
   heroEyebrow: { zh: "自然灾害 · 通感方向", en: "Natural Disasters · Communication-Sensing" },

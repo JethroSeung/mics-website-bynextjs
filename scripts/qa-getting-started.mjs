@@ -52,6 +52,47 @@ const structure = await page.evaluate(() => {
     animationDuration: animationStyle?.animationDuration,
   };
 });
+const nodeEntry = await page.evaluate(() => {
+  const mainText = document.querySelector("main")?.textContent ?? "";
+  return {
+    hasTitle: mainText.includes("JavaScript / TypeScript / Node.js / npm"),
+    hasLtsGuidance: mainText.includes("LTS 长期支持版本"),
+    hasNodeLink: Boolean(document.querySelector('main a[href="https://nodejs.org/en/download"]')),
+    hasNpmLink: Boolean(document.querySelector('main a[href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/"]')),
+    hasTypeScriptLink: Boolean(document.querySelector('main a[href="https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html"]')),
+  };
+});
+const entryAppearance = await page.evaluate(() => {
+  const sectionRows = [...document.querySelectorAll("main section[id]")].map((section) => {
+    const rows = [...section.querySelectorAll(":scope > div:last-child > article")];
+    const stripedRows = section.id === "environment" ? rows.slice(1) : rows;
+
+    return {
+      id: section.id,
+      firstBackground: stripedRows[0] ? getComputedStyle(stripedRows[0]).backgroundColor : null,
+      secondBackground: stripedRows[1] ? getComputedStyle(stripedRows[1]).backgroundColor : null,
+    };
+  });
+  const titles = [...document.querySelectorAll("main section article h3")];
+  const environmentRows = [...document.querySelectorAll("main section#environment article")];
+
+  return {
+    allTitlesNearBlack: titles.every(
+      (title) => getComputedStyle(title).color === "rgb(23, 33, 43)"
+    ),
+    everySectionAlternates: sectionRows.every(
+      (section) =>
+        section.firstBackground === "rgb(255, 255, 255)" &&
+        section.secondBackground === "rgb(250, 251, 252)"
+    ),
+    prefaceIsMuted: environmentRows[0]
+      ? getComputedStyle(environmentRows[0]).backgroundColor === "rgb(250, 251, 252)"
+      : false,
+    aiToolsCalloutRemoved: !(document.querySelector("main")?.textContent ?? "").includes(
+      "使用 AI 工程工具前"
+    ),
+  };
+});
 results.push({
   name: "guide structure",
   pass:
@@ -65,8 +106,12 @@ results.push({
     structure.asideWidth === 196 &&
     structure.articleWidth > 1100 &&
     structure.animationName === "recruitment-track-enter" &&
-    structure.animationDuration === "0.4s",
+    structure.animationDuration === "0.4s" &&
+    Object.values(nodeEntry).every(Boolean) &&
+    Object.values(entryAppearance).every(Boolean),
   ...structure,
+  ...nodeEntry,
+  ...entryAppearance,
 });
 await page.screenshot({ path: "qa-guide-desktop.png", fullPage: true });
 
