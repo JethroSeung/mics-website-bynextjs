@@ -9,7 +9,7 @@ import { medengApplication, recruitmentAreas, recruitmentIntro } from "@/data/jo
 export function JoinPage({ lang }: { lang: Lang }) {
   const copy = {
     back: { zh: "返回首页招新区块", en: "Back to the homepage recruitment section" },
-    title: { zh: "本科生科研招新", en: "Undergraduate Research Recruitment" },
+    title: { zh: "本科生/研究生科研招新", en: "Undergraduate / Graduate Research Recruitment" },
     desc: {
       zh: "先选择你感兴趣的研究方向，再查看具体任务、参与方式与提交要求。",
       en: "Choose a research area first, then review its tasks, participation routes, and submission requirements.",
