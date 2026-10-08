@@ -93,7 +93,7 @@ export function HomePage({ lang }: { lang: Lang }) {
       zh: "首页展示部分课题组成员，完整名单可进入团队成员页面查看。",
       en: "Selected members are shown here. Visit the team page for the full list.",
     },
-    joinTitle: { zh: "本科生招新", en: "Undergraduate Recruitment" },
+    joinTitle: { zh: "本科生/研究生招新", en: "Undergraduate Recruitment" },
     viewAllMembers: { zh: "查看更多成员", en: "View all members" },
     viewMedengRecruitment: { zh: "详细了解医工交叉招新", en: "Explore medical-engineering recruitment" },
     viewDisasterRecruitment: { zh: "详细了解灾害感知招新", en: "Explore disaster-sensing recruitment" },

@@ -82,7 +82,7 @@ export const siteConfig = {
   },
   shortName: "MICS",
   affiliation: {
-    zh: "南京邮电大学 · 计算机学院",
+    zh: "南京邮电大学 · 计算机学院、软件学院、网络空间安全学院",
     en: "College of Computer Science, NJUPT",
   },
   intro: {
@@ -104,7 +104,7 @@ export const siteConfig = {
   heroSlides: [
     {
       eyebrow: "Multimodal Intelligent Communication and Sensing",
-      title: { zh: "多模态智能通信与感知", en: "Multimodal Intelligent Communication and Sensing" },
+      title: { zh: "多模态智能通信与感知课题组", en: "Multimodal Intelligent Communication and Sensing" },
       tagline: {
         zh: "面向健康监测场景与自然灾害救援，开展医工交叉多模态感知与通感计算研究。",
         en: "Research on integrated sensing and communication (ISAC) in natural disaster scenarios and medical-engineering multimodal sensing.",

@@ -194,8 +194,8 @@ export const guideSections: GuideSection[] = [
       },
       {
         title: {
-          zh: "JavaScript / TypeScript / Node.js / npm",
-          en: "JavaScript / TypeScript / Node.js / npm",
+          zh: "JavaScript / TypeScript / Node.js",
+          en: "JavaScript / TypeScript / Node.js",
         },
         summary: {
           zh: "JavaScript 是网页开发的基础语言，Node.js 让它能够脱离浏览器运行，也是现代前端工程、Next.js、后端服务和命令行工具的重要基础。npm 随 Node.js 一起使用，负责安装项目依赖和运行脚本；TypeScript 则在 JavaScript 上增加类型检查，更适合维护规模较大的项目。AI时代Node.js不单单服务于JS与TS，更是AI Agent本地运行不可或缺的环境基础。",
