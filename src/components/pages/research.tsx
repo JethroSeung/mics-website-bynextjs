@@ -71,18 +71,18 @@ export function ResearchPage({
       zh: "该方向的详细研究内容、研究计划与进展正在整理中，稍后发布。如需了解，欢迎通过上方邮箱与负责人联系。",
       en: "Detailed research content, plans and progress are being prepared. Feel free to contact the lead via email above.",
     },
-    recruitmentLabel: { zh: "本科生科研招新", en: "Undergraduate Recruitment" },
-    medengRecruitmentTitle: { zh: "医工交叉招新计划已开放", en: "Medical-engineering recruitment is now open" },
+    recruitmentLabel: { zh: "加入我们", en: "Join Us" },
+    medengRecruitmentTitle: { zh: "与我们交流医工交叉研究", en: "Discuss medical-engineering research with us" },
     medengRecruitmentDesc: {
-      zh: "查看毫米波、Wi-Fi / CSI、计算机视觉与语音四个方向的具体任务。",
-      en: "Explore specific tasks across millimeter-wave radar, WiFi / CSI, computer vision, and voice.",
+      zh: "欢迎报考研究生，也欢迎对科研感兴趣的本科生联系方向负责人交流。",
+      en: "We welcome prospective graduate applicants and undergraduates interested in research. Get in touch to discuss your interests.",
     },
-    disasterRecruitmentTitle: { zh: "灾害感知招新计划已开放", en: "Disaster-sensing recruitment is now open" },
+    disasterRecruitmentTitle: { zh: "与我们交流灾害感知研究", en: "Discuss disaster-sensing research with us" },
     disasterRecruitmentDesc: {
-      zh: "三个方向均已开放，可查看实验挑战、论文复现、论文汇报与通算系统赛题。",
-      en: "All three tracks are open, with experimental challenges, paper reproduction and presentation, and a communication-computing systems challenge.",
+      zh: "欢迎报考研究生，也欢迎对科研感兴趣的本科生联系方向负责人交流。",
+      en: "We welcome prospective graduate applicants and undergraduates interested in research. Get in touch to discuss your interests.",
     },
-    recruitmentCta: { zh: "查看招新计划", en: "View recruitment plan" },
+    recruitmentCta: { zh: "联系与报考", en: "Enquiries and graduate study" },
   } as const;
 
   const recruitmentCallout =
@@ -90,13 +90,13 @@ export function ResearchPage({
       ? {
           title: copy.medengRecruitmentTitle,
           desc: copy.medengRecruitmentDesc,
-          href: "/join/medeng",
+          href: "/join#medeng",
         }
       : direction.slug === "disaster"
         ? {
             title: copy.disasterRecruitmentTitle,
             desc: copy.disasterRecruitmentDesc,
-            href: "/join/disaster",
+            href: "/join#disaster",
           }
         : null;
 

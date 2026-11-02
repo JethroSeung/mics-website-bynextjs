@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/data/site";
 import { researchDirections } from "@/data/research";
-import { recruitmentTracks, recruitmentTrackPath } from "@/data/join";
 
 // 静态导出模式下元路由需显式声明为纯静态
 export const dynamic = "force-static";
@@ -17,11 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/team",
     "/join",
     "/join/getting-started",
-    "/join/disaster",
-    "/join/disaster/sensing-computing",
-    "/join/disaster/communication-computing",
     ...researchDirections.map((dir) => `/research/${dir.slug}`),
-    ...recruitmentTracks.map((track) => recruitmentTrackPath(track.slug)),
   ];
   const lastModified = new Date();
 

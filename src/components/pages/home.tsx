@@ -93,11 +93,11 @@ export function HomePage({ lang }: { lang: Lang }) {
       zh: "首页展示部分课题组成员，完整名单可进入团队成员页面查看。",
       en: "Selected members are shown here. Visit the team page for the full list.",
     },
-    joinTitle: { zh: "本科生/研究生招新", en: "Undergraduate / Graduate Recruitment" },
+    joinTitle: { zh: "加入我们（本科生/研究生）", en: "Join Us (Undergraduate / Graduate)" },
     viewAllMembers: { zh: "查看更多成员", en: "View all members" },
-    viewMedengRecruitment: { zh: "详细了解医工交叉招新", en: "Explore medical-engineering recruitment" },
-    viewDisasterRecruitment: { zh: "详细了解灾害感知招新", en: "Explore disaster-sensing recruitment" },
-    recruitmentOpen: { zh: "招新开放中", en: "Open now" },
+    viewMedengRecruitment: { zh: "联系医工交叉方向", en: "Contact the medical-engineering team" },
+    viewDisasterRecruitment: { zh: "联系灾害感知方向", en: "Contact the disaster-sensing team" },
+    recruitmentOpen: { zh: "科研交流", en: "Research enquiries" },
     profile: { zh: "个人简介", en: "Profile" },
     interests: { zh: "研究兴趣", en: "Research Interests" },
     homepage: { zh: "个人主页", en: "Homepage" },
@@ -214,19 +214,7 @@ export function HomePage({ lang }: { lang: Lang }) {
                   <dt className="text-xs font-semibold tracking-widest text-body-muted uppercase sm:text-sm">
                     {t(copy.interests, lang)}
                   </dt>
-                  <dd className="mt-2 flex flex-wrap gap-2 text-xs text-primary sm:text-sm lg:hidden">
-                    {t(supervisor.interests, lang)
-                      .split(lang === "zh" ? "、" : ", ")
-                      .map((interest) => (
-                        <span
-                          key={interest}
-                          className="rounded-full bg-primary-light px-3 py-1"
-                        >
-                          {interest}
-                        </span>
-                      ))}
-                  </dd>
-                  <dd className="mt-2.5 hidden text-base leading-relaxed text-body-secondary md:text-lg lg:block">
+                  <dd className="mt-2 text-sm leading-relaxed text-body-secondary sm:text-base md:text-lg lg:mt-2.5">
                     {t(supervisor.interests, lang)}
                   </dd>
                 </div>
@@ -368,7 +356,7 @@ export function HomePage({ lang }: { lang: Lang }) {
         </div>
       </section>
 
-      {/* 06 本科生招新：两个研究大方向均直接进入各自详情页。 */}
+      {/* 06 加入我们：方向交流与研究生报考入口。 */}
       <section id="join" aria-labelledby="join-title" className="bg-surface py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <Reveal className="mx-auto max-w-[980px]">
@@ -384,12 +372,12 @@ export function HomePage({ lang }: { lang: Lang }) {
               {[
                 {
                   area: medengRecruitment,
-                  href: "/join/medeng",
+                  href: "/join#medeng",
                   action: copy.viewMedengRecruitment,
                 },
                 {
                   area: disasterRecruitment,
-                  href: "/join/disaster",
+                  href: "/join#disaster",
                   action: copy.viewDisasterRecruitment,
                 },
               ].map((entry, index) => (

@@ -1,6 +1,6 @@
 /**
  * 成员数据（单一数据源：/team 全列表 + 首页精选）
- * 迁移自旧站 team.html / en/team.html（8 研究生 + 27 本科生 = 35 人）
+ * 初始数据迁移自旧站 team.html / en/team.html，后续随成员变动更新
  * 照片文件在任务 5 迁入 public/images/members/
  */
 
@@ -38,7 +38,7 @@ export const members: Member[] = [
     name: { zh: "刘何鑫", en: "Hexin Liu" },
     role: "master",
     email: "b21030920@163.com",
-    photo: "/images/members/liu-hexin.jpg",
+    photo: "/images/members/liu-hexin.webp",
     featured: true,
   },
   {
@@ -90,7 +90,7 @@ export const members: Member[] = [
     featured: true,
   },
 
-  // ===== 本科生（27）=====
+  // ===== 本科生 =====
   {
     id: "lu-zijian",
     name: { zh: "陆梓健", en: "Zijian Lu" },
@@ -161,7 +161,7 @@ export const members: Member[] = [
     name: { zh: "蒋十旭", en: "Shixu Jiang" },
     role: "undergraduate",
     email: "shixuj@acm.org",
-    photo: "/images/members/jiang-shixu.jpg",
+    photo: "/images/members/jiang-shixu.webp",
     featured: false,
   },
   {
@@ -177,7 +177,7 @@ export const members: Member[] = [
     name: { zh: "龚玮乐", en: "Weile Gong" },
     role: "undergraduate",
     email: "phare111@163.com",
-    photo: "/images/members/gong-weile.jpg",
+    photo: "/images/members/gong-weile.webp",
     featured: false,
   },
   {
@@ -185,7 +185,7 @@ export const members: Member[] = [
     name: { zh: "邱锐", en: "Rui Qiu" },
     role: "undergraduate",
     email: "19881608170@163.com",
-    photo: "/images/members/qiu-rui.jpg",
+    photo: "/images/members/qiu-rui.webp",
     featured: false,
   },
   {
@@ -209,7 +209,7 @@ export const members: Member[] = [
     name: { zh: "杨承轩", en: "Chengxuan Yang" },
     role: "undergraduate",
     email: "ycxuan4work@gmail.com",
-    photo: "/images/members/yang-chengxuan.jpg",
+    photo: "/images/members/yang-chengxuan.webp",
     featured: true,
     directionLead: "disaster",
   },
@@ -218,7 +218,7 @@ export const members: Member[] = [
     name: { zh: "张轩鸣", en: "Xuanming Zhang" },
     role: "undergraduate",
     email: "zhangxuanming7@163.com",
-    photo: "/images/members/zhang-xuanming.jpg",
+    photo: "/images/members/zhang-xuanming.webp",
     featured: false,
   },
   {
@@ -251,14 +251,6 @@ export const members: Member[] = [
     role: "undergraduate",
     email: "b24042205@outlook.com",
     photo: "/images/members/chen-qing.jpg",
-    featured: false,
-  },
-  {
-    id: "peng-wanting",
-    name: { zh: "彭婉婷", en: "Wanting Peng" },
-    role: "undergraduate",
-    email: "B25040308@njupt.edu.cn",
-    photo: "/images/members/peng-wanting.jpg",
     featured: false,
   },
   {
@@ -301,12 +293,109 @@ export const members: Member[] = [
     photo: "/images/members/yu-haoming.jpg",
     featured: false,
   },
+  // 2026 年新增本科生成员
   {
-    id: "xue-qianyi",
-    name: { zh: "薛谦益", en: "Qianyi Xue" },
+    id: "zhang-jiashu",
+    name: { zh: "张佳舒", en: "Jiashu Zhang" },
     role: "undergraduate",
-    email: "b24040527@njupt.edu.cn",
-    photo: "/images/members/xue-qianyi.jpg",
+    email: "zhangjiashu6672@outlook.com",
+    photo: "/images/members/zhang-jiashu.webp",
+    featured: false,
+  },
+  {
+    id: "feng-tianyu",
+    name: { zh: "冯天煜", en: "Tianyu Feng" },
+    role: "undergraduate",
+    email: "3080315330@qq.com",
+    photo: "/images/members/feng-tianyu.jpg",
+    featured: false,
+  },
+  {
+    id: "lan-yifei",
+    name: { zh: "兰一菲", en: "Yifei Lan" },
+    role: "undergraduate",
+    email: "b26010601@njupt.edu.cn",
+    photo: "/images/members/lan-yifei.webp",
+    featured: false,
+  },
+  {
+    id: "fang-juanran",
+    name: { zh: "房隽冉", en: "Juanran Fang" },
+    role: "undergraduate",
+    email: "13020080319@wo.cn",
+    photo: "/images/members/fang-juanran.webp",
+    featured: false,
+  },
+  {
+    id: "zha-xinhan",
+    name: { zh: "查昕含", en: "Xinhan Zha" },
+    role: "undergraduate",
+    email: "b25010405@njupt.edu.cn",
+    photo: "/images/members/zha-xinhan.webp",
+    featured: false,
+  },
+  {
+    id: "xu-ziyi",
+    name: { zh: "徐子奕", en: "Ziyi Xu" },
+    role: "undergraduate",
+    email: "xuziyi080826@gmail.com",
+    photo: "/images/members/xu-ziyi.webp",
+    featured: false,
+  },
+  {
+    id: "huan-tianhao",
+    name: { zh: "宦天昊", en: "Tianhao Huan" },
+    role: "undergraduate",
+    email: "lazarus_mission@outlook.com",
+    photo: "/images/members/huan-tianhao.jpg",
+    featured: false,
+  },
+  {
+    id: "cao-sihan",
+    name: { zh: "曹思涵", en: "Sihan Cao" },
+    role: "undergraduate",
+    email: "b26042104@njupt.edu.cn",
+    photo: "/images/members/cao-sihan.webp",
+    featured: false,
+  },
+  {
+    id: "yin-minghui",
+    name: { zh: "尹明辉", en: "Minghui Yin" },
+    role: "undergraduate",
+    email: "hopehope0723@qq.com",
+    photo: "/images/members/yin-minghui.webp",
+    featured: false,
+  },
+  {
+    id: "chen-pengpeng",
+    name: { zh: "陈鹏鹏", en: "Pengpeng Chen" },
+    role: "undergraduate",
+    email: "b25060321@njupt.edu.cn",
+    photo: "/images/members/chen-pengpeng.webp",
+    featured: false,
+  },
+  {
+    id: "feng-siying",
+    name: { zh: "冯思颖", en: "Siying Feng" },
+    role: "undergraduate",
+    email: "3428316475@qq.com",
+    photo: "/images/members/feng-siying.webp",
+    featured: false,
+  },
+  {
+    id: "che-jiahao",
+    name: { zh: "车加豪", en: "Jiahao Che" },
+    role: "undergraduate",
+    email: "3058616963@qq.com",
+    photo: "/images/members/che-jiahao.jpg",
+    featured: false,
+  },
+  {
+    id: "zhang-yinan",
+    name: { zh: "张忆楠", en: "Yinan Zhang" },
+    role: "undergraduate",
+    email: "672409501@qq.com",
+    photo: "/images/members/zhang-yinan.webp",
     featured: false,
   },
 ];

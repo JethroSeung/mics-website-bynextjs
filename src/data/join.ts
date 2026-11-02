@@ -1,7 +1,7 @@
 import type { Localized } from "./site";
 import { getMemberById } from "./members";
 
-export type RecruitmentStatus = "open" | "coming-soon";
+export type RecruitmentStatus = "open" | "coming-soon" | "closed";
 export type RecruitmentAreaSlug = "medeng" | "disaster";
 export type RecruitmentTrackSlug =
   | "mmwave"
@@ -58,7 +58,7 @@ export const recruitmentIntro: Localized = {
 export const recruitmentAreas: RecruitmentArea[] = [
   {
     slug: "medeng",
-    status: "open",
+    status: "closed",
     eyebrow: "Medical Engineering",
     title: { zh: "医工交叉", en: "Medical Engineering" },
     description: {
@@ -66,8 +66,8 @@ export const recruitmentAreas: RecruitmentArea[] = [
       en: "Explore contactless health sensing through millimeter-wave radar, WiFi, computer vision, and voice.",
     },
     detail: {
-      zh: "本轮招新计划已发布，包含挑战赛、论文复现、论文汇报与开放式任务。",
-      en: "The current plan is open, with challenges, paper reproduction, presentations, and open-ended tasks.",
+      zh: "融合无线、视觉与语音信息，探索面向医疗健康的多模态感知方法。",
+      en: "Combine wireless, visual, and audio information to study multimodal sensing for healthcare.",
     },
     trackLabels: [
       { zh: "毫米波", en: "mmWave" },
@@ -78,7 +78,7 @@ export const recruitmentAreas: RecruitmentArea[] = [
   },
   {
     slug: "disaster",
-    status: "open",
+    status: "closed",
     eyebrow: "Disaster Sensing",
     title: { zh: "灾害感知", en: "Disaster Sensing" },
     description: {
@@ -86,8 +86,8 @@ export const recruitmentAreas: RecruitmentArea[] = [
       en: "Study the coordination of communication, sensing, and intelligent analysis in natural-disaster scenarios.",
     },
     detail: {
-      zh: "通信感知一体化、灾害感知与智能分析、AI 驱动的通信与计算三个方向现已开放。",
-      en: "Integrated Communication and Sensing, Disaster Sensing and Intelligent Analysis, and AI-Driven Communication and Computing are now open.",
+      zh: "研究通信感知一体化、灾害感知与智能分析，以及 AI 驱动的通信与计算。",
+      en: "Research spans integrated communication and sensing, disaster sensing and intelligent analysis, and AI-driven communication and computing.",
     },
     trackLabels: [
       { zh: "通感", en: "Communication-Sensing" },

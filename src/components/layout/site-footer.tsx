@@ -12,10 +12,10 @@ export function SiteFooter({ lang }: { lang: Lang }) {
 
   return (
     <footer className="mt-section border-t border-border bg-surface">
-      <div className="mx-auto w-full max-w-[1600px] px-5 py-8 md:px-8 lg:py-10">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-8">
+      <div className="w-full px-5 py-8 md:px-8 lg:px-[3vw] lg:py-10">
+        <div className="grid grid-cols-1 gap-6 lg:flex lg:items-start lg:justify-between lg:gap-x-[clamp(24px,3vw,64px)]">
           {/* 1. 课题组简介 */}
-          <div className="flex flex-col gap-3 lg:max-w-[280px]">
+          <div className="flex min-w-0 flex-col gap-3 lg:w-[clamp(220px,20vw,280px)]">
             <div className="flex items-center gap-2">
               <Image
                 src="/images/mics-logo.png"
@@ -35,7 +35,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
 
           {/* 2. 快速链接 */}
           <nav
-            className="min-w-0"
+            className="min-w-0 lg:shrink-0"
             aria-label={lang === "zh" ? "页脚快速链接" : "Quick links"}
           >
             <h3 className="mb-3 text-sm font-bold tracking-wide text-foreground">
@@ -56,7 +56,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
           </nav>
 
           {/* 3. 合作单位 */}
-          <div>
+          <div className="min-w-0 lg:max-w-[280px]">
             <h3 className="mb-3 text-sm font-bold tracking-wide text-foreground">
               {lang === "zh" ? "合作单位" : "Partners"}
             </h3>
@@ -71,7 +71,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
                     alt={`${t(partner.name, lang)} logo`}
                     width={40}
                     height={40}
-                    className="size-8 rounded-md border border-border object-contain p-1 lg:size-10"
+                    className="size-8 shrink-0 rounded-md border border-border object-contain p-1 lg:size-10"
                   />
                   <span className="text-sm leading-snug text-body-secondary">
                     {t(partner.name, lang)}
@@ -82,7 +82,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
           </div>
 
           {/* 4. 联系方式 */}
-          <div className="min-w-0">
+          <div className="min-w-0 lg:w-max lg:max-w-[38%]">
             <h3 className="mb-3 text-sm font-bold tracking-wide text-foreground">
               {lang === "zh" ? "联系方式" : "Contact"}
             </h3>

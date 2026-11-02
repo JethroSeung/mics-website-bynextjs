@@ -3,36 +3,28 @@ import { Activity, ArrowLeft, ArrowRight, Mail, RadioTower } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/reveal";
 import { disasterApplication } from "@/data/disaster-recruitment";
-import { hrefFor, t, type Lang } from "@/data/site";
-import { medengApplication, recruitmentAreas, recruitmentIntro } from "@/data/join";
+import { hrefFor, siteConfig, t, type Lang } from "@/data/site";
+import { medengApplication, recruitmentAreas } from "@/data/join";
 
 export function JoinPage({ lang }: { lang: Lang }) {
   const copy = {
-    back: { zh: "返回首页招新区块", en: "Back to the homepage recruitment section" },
-    title: { zh: "本科生/研究生科研招新", en: "Undergraduate / Graduate Research Recruitment" },
+    back: { zh: "返回首页", en: "Back to home" },
+    title: { zh: "加入我们", en: "Join Us" },
     desc: {
-      zh: "先选择你感兴趣的研究方向，再查看具体任务、参与方式与提交要求。",
-      en: "Choose a research area first, then review its tasks, participation routes, and submission requirements.",
+      zh: "欢迎对多模态感知、通信与人工智能交叉研究感兴趣的同学了解课题组，与我们交流研究兴趣。",
+      en: "Explore our research in multimodal sensing, communication, and AI, and get in touch to discuss your interests.",
     },
-    open: { zh: "招新开放中", en: "Open now" },
-    comingSoon: { zh: "即将开放", en: "Coming soon" },
-    explore: { zh: "查看医工交叉招新计划", en: "Explore the medical-engineering plan" },
-    exploreDisaster: { zh: "查看灾害感知招新计划", en: "Explore the disaster-sensing plan" },
-    requirementsTitle: { zh: "报名需同时完成", en: "Complete both to apply" },
-    required: { zh: "报名必需", en: "Required" },
-    taskRequirement: {
-      zh: "四个方向中任意一项招新任务",
-      en: "One recruitment task from any of the four tracks",
+    undergraduate: { zh: "本科生科研交流", en: "Undergraduate research enquiries" },
+    undergraduateDesc: {
+      zh: "欢迎对技术感兴趣，动手能力强且有意愿参与科研的本科生联系下方对应方向负责人。请在邮件中简单介绍自己的个人情况、兴趣、学习情况和希望参与的方向。我们将在邮件中进行回复。",
+      en: "Undergraduates with an interest in technology, strong practical skills, and a willingness to participate in research are welcome to email the relevant area contact below. Please briefly introduce yourself, your interests, academic background, and preferred research area. We will reply by email.",
     },
-    disasterTaskRequirement: {
-      zh: "三个方向中任选一项招新任务",
-      en: "One recruitment task from any of the three tracks",
+    graduate: { zh: "欢迎报考研究生", en: "Prospective graduate students" },
+    graduateDesc: {
+      zh: "欢迎有志于计算机，通信，人工智能等领域的同学报考研究生，并提前联系导师交流研究兴趣。具体招生信息以学校当年公布的通知为准。我们期待在南邮见到优秀的各位。",
+      en: "We welcome applications for graduate study from students interested in computer science, communication, artificial intelligence, and related fields. Please contact the supervisor in advance to discuss your research interests. Refer to NJUPT’s official admissions notices for the relevant year for specific requirements. We look forward to welcoming talented students like you to NJUPT.",
     },
-    profileRequirement: {
-      zh: "简历或文字自我介绍（二选一）",
-      en: "A résumé or a short written introduction (either is fine)",
-    },
-    submissionLabel: { zh: "个人介绍统一投递", en: "Send your introduction to" },
+    contactLabel: { zh: "方向联系人", en: "Area contact" },
     guideKicker: { zh: "新生指南", en: "New student guide" },
     guideTitle: {
       zh: "第一次配置环境，从这里开始",
@@ -74,31 +66,37 @@ export function JoinPage({ lang }: { lang: Lang }) {
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <Reveal className="mx-auto max-w-[1152px]">
             <h2 id="join-directions-title" className="sr-only">
-              {lang === "zh" ? "招新方向" : "Recruitment areas"}
+              {lang === "zh" ? "研究方向与联系人" : "Research areas and contacts"}
             </h2>
-            <p className="max-w-3xl text-base leading-relaxed text-body-secondary md:text-lg">
-              {t(recruitmentIntro, lang)}
-            </p>
+            <div className="flex max-w-4xl flex-col gap-8 md:gap-10">
+              <div>
+                <h3 className="text-lg font-bold text-primary">{t(copy.graduate, lang)}</h3>
+                <p className="mt-3 text-base leading-relaxed text-body-secondary">{t(copy.graduateDesc, lang)}</p>
+                <p className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-base">
+                  <span>{t(siteConfig.supervisor.name, lang)}</span>
+                  <a href={`mailto:${siteConfig.contact.email}`} className="break-all text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-ring">
+                    {siteConfig.contact.email}
+                  </a>
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-primary">{t(copy.undergraduate, lang)}</h3>
+                <p className="mt-3 text-base leading-relaxed text-body-secondary">{t(copy.undergraduateDesc, lang)}</p>
+              </div>
+            </div>
 
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               {recruitmentAreas.map((area, index) => {
                 const Icon = index === 0 ? Activity : RadioTower;
                 const isDisaster = area.slug === "disaster";
                 const application = isDisaster ? disasterApplication : medengApplication;
-                const destination = isDisaster ? "/join/disaster" : "/join/medeng";
-                const taskRequirement = isDisaster
-                  ? copy.disasterTaskRequirement
-                  : copy.taskRequirement;
-                const exploreLabel = isDisaster ? copy.exploreDisaster : copy.explore;
                 const content = (
-                  <article className="flex h-full min-h-[360px] flex-col rounded-2xl border border-border bg-surface-elevated p-7 shadow-card md:p-9">
+                  <article id={area.slug} className="scroll-mt-28 flex h-full min-h-[360px] flex-col rounded-2xl border border-border bg-surface-elevated p-7 shadow-card md:p-9">
                     <div className="flex items-start justify-between gap-5">
                       <span className="flex size-14 items-center justify-center rounded-xl bg-primary-light text-primary">
                         <Icon className="size-7" aria-hidden="true" />
                       </span>
-                      <span className="rounded-full border border-gold/40 bg-primary-light px-3 py-1 text-sm font-semibold text-gold">
-                        {area.status === "open" ? t(copy.open, lang) : t(copy.comingSoon, lang)}
-                      </span>
+
                     </div>
                     <p className="mt-8 text-xs font-bold tracking-[0.16em] text-gold uppercase">
                       {area.eyebrow}
@@ -112,60 +110,23 @@ export function JoinPage({ lang }: { lang: Lang }) {
                     <p className="mt-3 text-base leading-relaxed text-body-secondary">
                       {t(area.detail, lang)}
                     </p>
-                    <ul className="mt-5 flex flex-wrap gap-2" aria-label={lang === "zh" ? "招新方向" : "Recruitment tracks"}>
+                    <ul className="mt-5 flex flex-wrap gap-2" aria-label={lang === "zh" ? "研究方向" : "Research tracks"}>
                       {area.trackLabels.map((label) => (
                         <li key={t(label, lang)} className="rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold text-body-secondary">
                           {t(label, lang)}
                         </li>
                       ))}
                     </ul>
-                    {area.status === "open" ? (
-                      <>
-                        <div className="mt-6 rounded-xl border border-gold/30 bg-white p-5">
-                          <div className="flex flex-wrap items-center justify-between gap-2">
-                            <p className="text-sm font-bold text-primary">
-                              {t(copy.requirementsTitle, lang)}
-                            </p>
-                            <span className="rounded-full bg-primary-light px-2.5 py-1 text-xs font-semibold text-gold">
-                              {t(copy.required, lang)}
-                            </span>
-                          </div>
-                          <ol className="mt-3 divide-y divide-border text-sm leading-relaxed text-body-secondary">
-                            <li className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-2 py-2 first:pt-0">
-                              <span className="font-semibold text-gold" aria-hidden="true">01</span>
-                              <span>{t(taskRequirement, lang)}</span>
-                            </li>
-                            <li className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-2 py-2 last:pb-0">
-                              <span className="font-semibold text-gold" aria-hidden="true">02</span>
-                              <span>{t(copy.profileRequirement, lang)}</span>
-                            </li>
-                          </ol>
-                          <div className="mt-4 border-t border-border pt-4">
-                            <p className="text-xs font-semibold tracking-wide text-body-muted uppercase">
-                              {t(copy.submissionLabel, lang)}
-                            </p>
-                            <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold text-body">
-                              <Mail className="size-4 shrink-0 text-gold" aria-hidden="true" />
-                              {t(application.recipient.name, lang)}
-                              <span aria-hidden="true" className="text-border-dark">·</span>
-                              <a
-                                href={`mailto:${application.recipient.email}?subject=${encodeURIComponent(t(application.subject, lang))}`}
-                                className="break-all text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-ring"
-                              >
-                                {application.recipient.email}
-                              </a>
-                            </p>
-                          </div>
-                        </div>
-                        <Link
-                          href={hrefFor(destination, lang)}
-                          className="mt-auto inline-flex items-center gap-2 self-start pt-8 text-base font-bold text-primary transition-colors hover:text-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
-                        >
-                          {t(exploreLabel, lang)}
-                          <ArrowRight className="size-4" aria-hidden="true" />
-                        </Link>
-                      </>
-                    ) : null}
+                    <div className="mt-auto pt-7">
+                      <div className="border-t border-border pt-5">
+                        <p className="text-sm text-body-muted">{t(copy.contactLabel, lang)}</p>
+                        <p className="mt-2 font-semibold text-body">{t(application.recipient.name, lang)}</p>
+                        <a href={`mailto:${application.recipient.email}`} className="mt-2 inline-flex items-start gap-2 text-base text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-ring">
+                          <Mail className="mt-1 size-4 shrink-0" aria-hidden="true" />
+                          <span className="break-all">{application.recipient.email}</span>
+                        </a>
+                      </div>
+                    </div>
                   </article>
                 );
 

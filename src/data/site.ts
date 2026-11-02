@@ -83,7 +83,7 @@ export const siteConfig = {
   shortName: "MICS",
   affiliation: {
     zh: "南京邮电大学 · 计算机学院、软件学院、网络空间安全学院",
-    en: "College of Computer Science, NJUPT",
+    en: "College of Computer Science, College of Software, and College of Cyberspace Security, NJUPT",
   },
   intro: {
     zh: "多模态智能通信与感知课题组隶属于南京邮电大学计算机学院，由左益平老师指导，围绕自然灾害场景下的通感计算与医工交叉多模态感知开展研究。",
@@ -144,7 +144,7 @@ export const siteConfig = {
         { zh: "自主实践", en: "Independent Practice" },
       ],
       actions: [
-        { label: { zh: "查看招新信息", en: "Recruitment Info" }, href: "/join", style: "primary" },
+        { label: { zh: "加入我们", en: "Join Us" }, href: "/join", style: "primary" },
       ],
     },
   ],
@@ -153,15 +153,15 @@ export const siteConfig = {
     personEn: "Yiping Zuo",
     email: "zuoyiping@njupt.edu.cn",
     affiliation: {
-      zh: "南京邮电大学计算机学院",
-      en: "College of Computer Science, NJUPT",
+      zh: "南京邮电大学计算机学院、软件学院、网络空间安全学院",
+      en: "College of Computer Science, College of Software, and College of Cyberspace Security, NJUPT",
     },
   },
   /** 导师信息（迁移自旧站 index.html / en/index.html，任务 5 迁入照片） */
   supervisor: {
     name: { zh: "左益平", en: "Yiping Zuo" },
     title: { zh: "讲师 / 硕士生导师", en: "Lecturer / Master Supervisor" },
-    photo: "/images/supervisor/zuo-yiping.jpg",
+    photo: "/images/supervisor/zuo-yiping.webp",
     homepage:
       "https://yjs.njupt.edu.cn/dsgl/nocontrol/college/dsfcxq.htm?dsJbxxId=22f2f2c29c3c46178ac1f0f92911e65d",
     homepageLabel: { zh: "南京邮电大学导师主页", en: "Supervisor homepage (NJUPT)" },
@@ -170,8 +170,8 @@ export const siteConfig = {
       en: "Yiping Zuo is a lecturer and master supervisor at the School of Computer Science, NJUPT, and received her Ph.D. from Southeast University. She has served as a reviewer for IEEE TWC, TVT, TCOM, and TMC, led the NSFC Young Scientists Fund project and a Jiangsu higher education basic science project, and participated in an NSFC special project.",
     },
     interests: {
-      zh: "多模态感知、无线通信、人工智能、边缘计算、通信感知一体化",
-      en: "Multimodal sensing, wireless communication, artificial intelligence, edge computing, and integrated sensing and communication",
+      zh: "多模态感知、无线通信、人工智能、边缘计算、通信感知一体化、计算机视觉、计算机听觉",
+      en: "Multimodal sensing, wireless communication, artificial intelligence, edge computing, integrated sensing and communication, computer vision, and computer audition",
     },
   },
   partners: [

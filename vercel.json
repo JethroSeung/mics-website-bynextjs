@@ -10,6 +10,26 @@
       "source": "/en/research/pain",
       "destination": "/en/research/disaster",
       "permanent": true
+    },
+    {
+      "source": "/join/medeng/:path*",
+      "destination": "/join",
+      "permanent": false
+    },
+    {
+      "source": "/join/disaster/:path*",
+      "destination": "/join",
+      "permanent": false
+    },
+    {
+      "source": "/en/join/medeng/:path*",
+      "destination": "/en/join",
+      "permanent": false
+    },
+    {
+      "source": "/en/join/disaster/:path*",
+      "destination": "/en/join",
+      "permanent": false
     }
   ]
 }
