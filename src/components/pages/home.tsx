@@ -360,7 +360,7 @@ export function HomePage({ lang }: { lang: Lang }) {
       <section id="join" aria-labelledby="join-title" className="bg-surface py-section">
         <div className="mx-auto w-full max-w-content px-6 md:px-8">
           <Reveal className="mx-auto max-w-[980px]">
-            <div className="text-center">
+            <div className={lang === "en" ? "text-center [&>div]:max-w-none" : "text-center"}>
               <SectionHeading
                 eyebrow="06 / Join Us"
                 title={t(copy.joinTitle, lang)}

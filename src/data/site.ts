@@ -83,7 +83,7 @@ export const siteConfig = {
   shortName: "MICS",
   affiliation: {
     zh: "南京邮电大学 · 计算机学院、软件学院、网络空间安全学院",
-    en: "College of Computer Science, College of Software, and College of Cyberspace Security, NJUPT",
+    en: "College of Computer Science, NJUPT",
   },
   intro: {
     zh: "多模态智能通信与感知课题组隶属于南京邮电大学计算机学院，由左益平老师指导，围绕自然灾害场景下的通感计算与医工交叉多模态感知开展研究。",
@@ -154,7 +154,7 @@ export const siteConfig = {
     email: "zuoyiping@njupt.edu.cn",
     affiliation: {
       zh: "南京邮电大学计算机学院、软件学院、网络空间安全学院",
-      en: "College of Computer Science, College of Software, and College of Cyberspace Security, NJUPT",
+      en: "College of Computer Science, NJUPT",
     },
   },
   /** 导师信息（迁移自旧站 index.html / en/index.html，任务 5 迁入照片） */
