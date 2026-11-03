@@ -414,6 +414,14 @@ export const members: Member[] = [
     photo: "/images/members/wu-yuecheng.webp",
     featured: false,
   },
+  {
+    id: "wang-jingqi",
+    name: { zh: "王京琪", en: "Jingqi Wang" },
+    role: "undergraduate",
+    email: "wangjingqi816@outlook.com",
+    photo: "/images/members/wang-jingqi.webp",
+    featured: false,
+  },
 ];
 
 /** 首页精选成员（16 人：8 研究生全部 + 指定本科生 8 人，顺序与数据文件一致） */
