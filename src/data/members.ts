@@ -398,6 +398,22 @@ export const members: Member[] = [
     photo: "/images/members/zhang-yinan.webp",
     featured: false,
   },
+  {
+    id: "zhou-tao",
+    name: { zh: "周涛", en: "Tao Zhou" },
+    role: "undergraduate",
+    email: "McGradyJay1@gmail.com",
+    photo: "/images/members/zhou-tao.webp",
+    featured: false,
+  },
+  {
+    id: "wu-yuecheng",
+    name: { zh: "吴悦诚", en: "Yuecheng Wu" },
+    role: "undergraduate",
+    email: "2409876868@qq.com",
+    photo: "/images/members/wu-yuecheng.webp",
+    featured: false,
+  },
 ];
 
 /** 首页精选成员（16 人：8 研究生全部 + 指定本科生 8 人，顺序与数据文件一致） */
