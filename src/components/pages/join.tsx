@@ -25,6 +25,8 @@ export function JoinPage({ lang }: { lang: Lang }) {
       en: "We welcome applications for graduate study from students interested in computer science, communication, artificial intelligence, and related fields. Please contact the supervisor in advance to discuss your research interests. Refer to NJUPT’s official admissions notices for the relevant year for specific requirements. We look forward to welcoming talented students like you to NJUPT.",
     },
     contactLabel: { zh: "方向联系人", en: "Area contact" },
+    medengTasks: { zh: "查看医工交叉招新任务", en: "View medical-engineering recruitment tasks" },
+    disasterTasks: { zh: "查看灾害感知招新任务", en: "View disaster-sensing recruitment tasks" },
     guideKicker: { zh: "新生指南", en: "New student guide" },
     guideTitle: {
       zh: "第一次配置环境，从这里开始",
@@ -70,9 +72,9 @@ export function JoinPage({ lang }: { lang: Lang }) {
             </h2>
             <div className="flex max-w-4xl flex-col gap-8 md:gap-10">
               <div>
-                <h3 className="text-lg font-bold text-primary">{t(copy.graduate, lang)}</h3>
-                <p className="mt-3 text-base leading-relaxed text-body-secondary">{t(copy.graduateDesc, lang)}</p>
-                <p className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-base">
+                <h3 className="text-lg font-extrabold text-primary md:text-[calc(1.125rem+4pt)]">{t(copy.graduate, lang)}</h3>
+                <p className="mt-3 text-base leading-relaxed text-body-secondary md:text-[calc(1rem+2pt)]">{t(copy.graduateDesc, lang)}</p>
+                <p className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-base md:text-[calc(1rem+2pt)]">
                   <span>{t(siteConfig.supervisor.name, lang)}</span>
                   <a href={`mailto:${siteConfig.contact.email}`} className="break-all text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-ring">
                     {siteConfig.contact.email}
@@ -80,8 +82,8 @@ export function JoinPage({ lang }: { lang: Lang }) {
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-bold text-primary">{t(copy.undergraduate, lang)}</h3>
-                <p className="mt-3 text-base leading-relaxed text-body-secondary">{t(copy.undergraduateDesc, lang)}</p>
+                <h3 className="text-lg font-extrabold text-primary md:text-[calc(1.125rem+4pt)]">{t(copy.undergraduate, lang)}</h3>
+                <p className="mt-3 text-base leading-relaxed text-body-secondary md:text-[calc(1rem+2pt)]">{t(copy.undergraduateDesc, lang)}</p>
               </div>
             </div>
 
@@ -126,6 +128,15 @@ export function JoinPage({ lang }: { lang: Lang }) {
                           <span className="break-all">{application.recipient.email}</span>
                         </a>
                       </div>
+                      {area.status === "open" ? (
+                        <Link
+                          href={hrefFor(isDisaster ? "/join/disaster" : "/join/medeng", lang)}
+                          className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-dark focus-visible:outline-2 focus-visible:outline-ring"
+                        >
+                          <span>{t(isDisaster ? copy.disasterTasks : copy.medengTasks, lang)}</span>
+                          <ArrowRight className="size-4 shrink-0" aria-hidden="true" />
+                        </Link>
+                      ) : null}
                     </div>
                   </article>
                 );

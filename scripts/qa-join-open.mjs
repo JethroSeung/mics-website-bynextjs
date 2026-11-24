@@ -42,8 +42,8 @@ try {
       const result = await page.evaluate(() => ({
         overflow: document.documentElement.scrollWidth - innerWidth,
         cards: document.querySelectorAll("article#medeng,article#disaster").length,
-        oldLinks: [...document.querySelectorAll("a")].some((a) =>
-          ["/join/medeng", "/join/disaster"].some((p) => (a.getAttribute("href") ?? "").includes(p))),
+        taskLinks: [...document.querySelectorAll("article#medeng a,article#disaster a")]
+          .map((a) => a.getAttribute("href")).filter((href) => href && !href.startsWith("mailto:")),
         emails: [...document.querySelectorAll("a[href^=mailto]")].map((a) => a.getAttribute("href")),
         closed: /本轮本科生集中招新已结束|This round of undergraduate recruitment has closed/.test(document.body.textContent),
         graduateFirst: (() => {
@@ -56,7 +56,8 @@ try {
           return second.top >= first.bottom && Math.abs(first.left - second.left) < 1;
         })(),
       }));
-      if (result.overflow > 1 || result.cards !== 2 || result.oldLinks || result.closed || !result.graduateFirst ||
+      if (result.overflow > 1 || result.cards !== 2 || result.closed || !result.graduateFirst ||
+          !["/join/medeng", "/join/disaster"].every((route) => result.taskLinks.includes(prefix + route)) ||
           !["barcaxu@outlook.com", "ycxuan4work@gmail.com", "zuoyiping@njupt.edu.cn"].every((email) => result.emails.includes("mailto:" + email))) {
         throw new Error(JSON.stringify(result));
       }
@@ -66,17 +67,51 @@ try {
       }
     }
   }
+  const detailRoutes = [
+    "/join/medeng", "/join/medeng/wifi-csi", "/join/medeng/computer-vision", "/join/medeng/voice",
+    "/join/disaster", "/join/disaster/sensing-computing", "/join/disaster/communication-computing",
+  ];
+  for (const width of [375, 1440]) {
+    await page.setViewport({ width, height: 1000 });
+    for (const prefix of ["", "/en"]) {
+      for (const route of detailRoutes) {
+        const response = await page.goto(`http://127.0.0.1:${server.address().port}${prefix}${route}`, { waitUntil: "networkidle0" });
+        if (response.status() !== 200 || !await page.$("h1")) throw new Error("Missing detail: " + prefix + route);
+        const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
+        if (overflow > 1) throw new Error(`Detail overflow ${width}: ${prefix}${route}: ${overflow}`);
+        const tabs = await page.$$("[role=tab]");
+        if (tabs.length > 1) {
+          await tabs[1].click();
+          if (await tabs[1].evaluate((tab) => tab.getAttribute("aria-selected")) !== "true") throw new Error("Task tab failed: " + route);
+        }
+        const navSelector = width >= 1040 ? "aside nav a" : "main nav a";
+        const navCount = await page.$$eval(navSelector, (links) => links.filter((link) => link.getBoundingClientRect().width > 0).length);
+        const expected = route.includes("/medeng") ? 4 : 3;
+        if (navCount !== expected) throw new Error("Track navigation: " + prefix + route + ": " + navCount);
+        console.log("PASS detail", width, prefix + route);
+      }
+      await page.goto(`http://127.0.0.1:${server.address().port}${prefix || "/"}`, { waitUntil: "networkidle0" });
+      for (const area of ["medeng", "disaster"]) {
+        if (!await page.$(`main a[href="${prefix}/join/${area}"]`)) throw new Error("Missing homepage task entry");
+        await page.goto(`http://127.0.0.1:${server.address().port}${prefix}/research/${area}`, { waitUntil: "networkidle0" });
+        if (!await page.$(`a[href="${prefix}/join#${area}"]`)) throw new Error("Research contact entry changed");
+        await page.goto(`http://127.0.0.1:${server.address().port}${prefix || "/"}`, { waitUntil: "networkidle0" });
+      }
+    }
+  }
   if (errors.length) throw new Error(errors.join("\n"));
   const sitemap = fs.readFileSync("out/sitemap.xml", "utf8");
   const { redirects } = JSON.parse(fs.readFileSync("vercel.json", "utf8"));
   for (const prefix of ["", "/en"]) {
     for (const area of ["medeng", "disaster"]) {
       const oldPath = `${prefix}/join/${area}`;
-      if (sitemap.includes(oldPath) || fs.existsSync("out" + oldPath + ".html")) throw new Error("Old route exported: " + oldPath);
-      if (!redirects.some((rule) => rule.source === oldPath + "/:path*" && rule.destination === prefix + "/join" && rule.permanent === false)) throw new Error("Missing redirect: " + oldPath);
+      if (!sitemap.includes(oldPath) || !fs.existsSync("out" + oldPath + ".html")) throw new Error("Missing restored route: " + oldPath);
+      if (redirects.some((rule) => rule.source.startsWith(oldPath))) throw new Error("Recruitment redirect still active: " + oldPath);
     }
+    for (const route of detailRoutes) if (!sitemap.includes(prefix + route)) throw new Error("Missing sitemap detail");
   }
-  console.log("PASS route removal, sitemap, redirect configuration and browser console");
+  if (!redirects.some((rule) => rule.source === "/research/pain" && rule.destination === "/research/disaster")) throw new Error("Historical redirect removed");
+  console.log("PASS restored routes, entries, task tabs, sitemap, redirect configuration and browser console");
 } finally {
   if (browser) await browser.close();
   server.close();

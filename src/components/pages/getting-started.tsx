@@ -15,15 +15,7 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
   const copy = {
     back: { zh: "返回加入我们", en: "Back to Join Us" },
     title: { zh: "新生起步指南", en: "New Student Guide" },
-    desc: {
-      zh: "从配置第一套开发环境开始，逐步学会代码协作、论文检索和负责任地使用 AI。这里不是必装清单，按当前课程或任务选择即可。",
-      en: "Start with one development setup, then learn code collaboration, literature search, and responsible AI use. This is not a mandatory install list—choose what your current course or task needs.",
-    },
     routeTitle: { zh: "建议从这四步开始", en: "Start with these four steps" },
-    routeNote: {
-      zh: "不用等到“全部学会”才开始参与项目。先跑通一个最小流程，再在真实任务中逐步补齐。",
-      en: "Do not wait until you know everything. Complete one minimal workflow, then learn through real tasks.",
-    },
     contents: { zh: "本页目录", en: "On this page" },
     resourceNote: {
       zh: "优先使用官网和官方文档。B站入口用于查找中文演示，请结合发布时间、软件版本和评论区判断是否仍然适用。",
@@ -52,7 +44,6 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
                 title={t(copy.title, lang)}
                 titleId="guide-page-title"
                 as="h1"
-                desc={t(copy.desc, lang)}
                 tone="dark"
               />
             </div>
@@ -60,9 +51,6 @@ export function GettingStartedPage({ lang }: { lang: Lang }) {
             <div className="mt-10 md:mt-12">
               <div className="max-w-2xl">
                 <h2 className="text-xl font-bold text-white">{t(copy.routeTitle, lang)}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-white/70 md:text-base">
-                  {t(copy.routeNote, lang)}
-                </p>
               </div>
 
               <ol className="relative mt-8 grid gap-7 md:grid-cols-4 md:gap-0">

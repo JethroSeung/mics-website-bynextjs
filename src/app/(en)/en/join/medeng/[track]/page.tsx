@@ -1,4 +1,3 @@
-// Archived recruitment route; restore under src/app when the next round opens.
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { RecruitmentTrackPage } from "@/components/recruitment/recruitment-track-page";
@@ -22,9 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const track = getRecruitmentTrack(slug);
   if (!track || slug === "mmwave") return {};
   return {
-    title: `医工交叉招新 · ${t(track.shortTitle, "zh")}`,
-    description: t(track.description, "zh"),
-    alternates: alternatesFor(`/join/medeng/${slug}`, "zh"),
+    title: `Medical-Engineering Recruitment · ${t(track.shortTitle, "en")}`,
+    description: t(track.description, "en"),
+    alternates: alternatesFor(`/join/medeng/${slug}`, "en"),
   };
 }
 
@@ -32,5 +31,5 @@ export default async function Page({ params }: Props) {
   const { track: slug } = await params;
   const track = getRecruitmentTrack(slug);
   if (!track || slug === "mmwave") notFound();
-  return <RecruitmentTrackPage lang="zh" trackSlug={track.slug as RecruitmentTrackSlug} />;
+  return <RecruitmentTrackPage lang="en" trackSlug={track.slug as RecruitmentTrackSlug} />;
 }

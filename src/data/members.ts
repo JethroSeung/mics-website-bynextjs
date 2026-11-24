@@ -415,6 +415,14 @@ export const members: Member[] = [
     featured: false,
   },
   {
+    id: "zhang-yutong",
+    name: { zh: "张毓桐", en: "zhang-yutong" },
+    role: "undergraduate",
+    email: "zhangxinxin1101@gmail.com",
+    photo: "/images/members/zhang-yutong.webp",
+    featured: false,
+  },
+  {
     id: "wang-jingqi",
     name: { zh: "王京琪", en: "Jingqi Wang" },
     role: "undergraduate",

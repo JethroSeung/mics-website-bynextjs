@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { HeroSlider } from "@/components/home/hero-slider";
+import { Hero } from "@/components/home/hero";
 import { ResearchCard } from "@/components/home/research-card";
 import { MemberCard } from "@/components/member-card";
 import { SectionHeading } from "@/components/section-heading";
@@ -68,7 +68,7 @@ const homepageMembers = homepageMemberIds.map((id) => {
 });
 
 /**
- * 首页（zh/en 共享）：hero 轮播 → 课题组介绍 → 导师介绍 → 研究方向 → 实验平台 → 成员精选 → 招新 CTA
+ * 首页（zh/en 共享）：静态 Hero → 课题组介绍 → 导师介绍 → 研究方向 → 实验平台 → 成员精选 → 招新 CTA
  * 区块编号 01-06（学术成果区块去向待定 §13-W3，暂不展示）
  */
 export function HomePage({ lang }: { lang: Lang }) {
@@ -95,8 +95,8 @@ export function HomePage({ lang }: { lang: Lang }) {
     },
     joinTitle: { zh: "加入我们（本科生/研究生）", en: "Join Us (Undergraduate / Graduate)" },
     viewAllMembers: { zh: "查看更多成员", en: "View all members" },
-    viewMedengRecruitment: { zh: "联系医工交叉方向", en: "Contact the medical-engineering team" },
-    viewDisasterRecruitment: { zh: "联系灾害感知方向", en: "Contact the disaster-sensing team" },
+    viewMedengRecruitment: { zh: "查看医工交叉招新任务", en: "View medical-engineering recruitment tasks" },
+    viewDisasterRecruitment: { zh: "查看灾害感知招新任务", en: "View disaster-sensing recruitment tasks" },
     recruitmentOpen: { zh: "科研交流", en: "Research enquiries" },
     profile: { zh: "个人简介", en: "Profile" },
     interests: { zh: "研究兴趣", en: "Research Interests" },
@@ -118,7 +118,7 @@ export function HomePage({ lang }: { lang: Lang }) {
 
   return (
     <>
-      <HeroSlider slides={siteConfig.heroSlides} lang={lang} />
+      <Hero slide={siteConfig.heroSlides[0]} lang={lang} />
 
       {/* 01 课题组介绍 */}
       <section id="about" aria-labelledby="about-title" className="bg-surface py-section">
@@ -372,12 +372,12 @@ export function HomePage({ lang }: { lang: Lang }) {
               {[
                 {
                   area: medengRecruitment,
-                  href: "/join#medeng",
+                  href: "/join/medeng",
                   action: copy.viewMedengRecruitment,
                 },
                 {
                   area: disasterRecruitment,
-                  href: "/join#disaster",
+                  href: "/join/disaster",
                   action: copy.viewDisasterRecruitment,
                 },
               ].map((entry, index) => (

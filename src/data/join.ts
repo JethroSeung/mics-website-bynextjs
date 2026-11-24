@@ -58,7 +58,7 @@ export const recruitmentIntro: Localized = {
 export const recruitmentAreas: RecruitmentArea[] = [
   {
     slug: "medeng",
-    status: "closed",
+    status: "open",
     eyebrow: "Medical Engineering",
     title: { zh: "医工交叉", en: "Medical Engineering" },
     description: {
@@ -78,7 +78,7 @@ export const recruitmentAreas: RecruitmentArea[] = [
   },
   {
     slug: "disaster",
-    status: "closed",
+    status: "open",
     eyebrow: "Disaster Sensing",
     title: { zh: "灾害感知", en: "Disaster Sensing" },
     description: {

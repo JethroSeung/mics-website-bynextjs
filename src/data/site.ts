@@ -71,7 +71,7 @@ export interface HeroSlide {
   eyebrow: string;
   title: Localized;
   tagline: Localized;
-  pills: readonly Localized[];
+  pills: readonly (Localized & { href?: string })[];
   actions: readonly HeroAction[];
 }
 
@@ -110,11 +110,10 @@ export const siteConfig = {
         en: "Research on integrated sensing and communication (ISAC) in natural disaster scenarios and medical-engineering multimodal sensing.",
       },
       pills: [
-        { zh: "医工多模态感知", en: "Multimodal Sensing" },
-        { zh: "灾害场景通感计算", en: "ISAC Computing" }
+        { zh: "医工多模态感知", en: "Multimodal Sensing", href: "/research/medeng" },
+        { zh: "灾害场景通感计算", en: "ISAC Computing", href: "/research/disaster" }
       ],
       actions: [
-        { label: { zh: "了解课题组", en: "About the Group" }, href: "#about", style: "primary" },
         { label: { zh: "加入我们", en: "Join Us" }, href: "/join", style: "secondary" },
       ],
     },

@@ -1,4 +1,3 @@
-// Archived recruitment route; restore under src/app when the next round opens.
 import type { Metadata } from "next";
 import { DisasterRecruitmentPage } from "@/components/recruitment/disaster-recruitment-page";
 import { alternatesFor } from "@/data/site";

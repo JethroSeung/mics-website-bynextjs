@@ -167,7 +167,8 @@ assert.equal(await count("main a[href='/join/medeng']"), 1, "medical-engineering
 assert.equal(await count("main a[href='/join/disaster']"), 1, "disaster-sensing card should link onward");
 assert.equal(await count("main a[href^='mailto:barcaxu@outlook.com']"), 1, "medical-engineering card should include the application email");
 assert.equal(await count("main a[href^='mailto:ycxuan4work@gmail.com']"), 1, "disaster-sensing card should include the application email");
-assert.match(await page.$eval("main", (element) => element.textContent ?? ""), /报名需同时完成[\s\S]*任意一项招新任务[\s\S]*简历或文字自我介绍/);
+assert.match(await page.$eval("main", (element) => element.textContent ?? ""), /欢迎报考研究生[\s\S]*本科生科研交流/);
+assert.match(await page.$eval("main", (element) => element.textContent ?? ""), /查看医工交叉招新任务[\s\S]*查看灾害感知招新任务/);
 assert.equal(await count("a a"), 0, "the card should not contain nested interactive links");
 const joinOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 assert.ok(joinOverflow <= 1, `join page should not overflow horizontally (overflow: ${joinOverflow}px)`);
@@ -220,10 +221,10 @@ await page.goto(`${baseUrl}/`, { waitUntil: "networkidle0" });
 assert.equal(await count("main a[href='/join/medeng']"), 1, "homepage should link directly to medical-engineering recruitment");
 assert.equal(await count("main a[href='/join/disaster']"), 1, "homepage should link directly to disaster-sensing recruitment");
 await page.goto(`${baseUrl}/research/medeng`, { waitUntil: "networkidle0" });
-assert.equal(await count("main a[href='/join/medeng']"), 1, "medical-engineering research page should expose the recruitment callout");
+assert.equal(await count("main a[href='/join#medeng']"), 1, "medical-engineering research page should keep the contact callout");
 await page.goto(`${baseUrl}/research/disaster`, { waitUntil: "networkidle0" });
 assert.equal(await count("main a[href='/join/medeng']"), 0, "disaster research page should not show the medical-engineering callout");
-assert.equal(await count("main a[href='/join/disaster']"), 1, "disaster research page should expose the disaster recruitment callout");
+assert.equal(await count("main a[href='/join#disaster']"), 1, "disaster research page should keep the disaster contact callout");
 
 const sitemap = await (await fetch(`${baseUrl}/sitemap.xml`)).text();
 for (const route of routes) {
