@@ -165,7 +165,7 @@ for (const track of tracks) {
 
     const normalizeUrl = (value, type) => {
       if (type === "src" && /vquala-face-quality\.png$/i.test(value)) {
-        return "/images/recruitment/vquala-face-quality.png";
+        return "/images/recruitment/vquala-face-quality.webp";
       }
       if (type === "href" && value.startsWith("#")) {
         return `#${slug}-${value.slice(1)}`;

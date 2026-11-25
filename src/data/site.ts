@@ -177,17 +177,17 @@ export const siteConfig = {
     {
       id: "futurecomm-lab",
       name: { zh: "东南大学 FutureComm Lab", en: "FutureComm Lab, SEU" },
-      logo: "/images/futurecomm-lab-logo.jpg",
+      logo: "/images/futurecomm-lab-logo.webp",
     },
     {
       id: "jiangsu-province-hospital",
       name: { zh: "江苏省人民医院", en: "Jiangsu Province Hospital" },
-      logo: "/images/jiangsu-province-hospital-logo.jpg",
+      logo: "/images/jiangsu-province-hospital-logo.webp",
     },
     {
       id: "china-comservice",
       name: { zh: "中国通信服务", en: "China Comservice" },
-      logo: "/images/china-comservice.jpg",
+      logo: "/images/china-comservice.webp",
     },
   ] as Partner[],
   nav: [

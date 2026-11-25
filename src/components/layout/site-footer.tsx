@@ -18,7 +18,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
           <div className="flex min-w-0 flex-col gap-3 lg:w-[clamp(220px,20vw,280px)]">
             <div className="flex items-center gap-2">
               <Image
-                src="/images/mics-logo.png"
+                src="/images/mics-logo.webp"
                 alt=""
                 width={32}
                 height={32}

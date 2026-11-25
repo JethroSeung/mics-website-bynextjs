@@ -24,7 +24,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
           className="flex min-w-0 flex-1 items-center gap-3 overflow-hidden focus-visible:outline-2 focus-visible:outline-ring"
         >
           <Image
-            src="/images/njupt-logo.png"
+            src="/images/njupt-logo.webp"
             alt={lang === "zh" ? "南京邮电大学校徽" : "NJUPT emblem"}
             width={48}
             height={48}
@@ -33,7 +33,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
           />
           <span aria-hidden="true" className="h-8 w-px bg-border-dark sm:h-10 lg:h-12" />
           <Image
-            src="/images/mics-logo.png"
+            src="/images/mics-logo.webp"
             alt=""
             width={48}
             height={48}

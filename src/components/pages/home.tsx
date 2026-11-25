@@ -32,7 +32,7 @@ const platforms = [
   },
   {
     no: "03",
-    image: "/images/platform/mmwave-awr1843.png",
+    image: "/images/platform/mmwave-awr1843.webp",
     name: { zh: "毫米波雷达平台", en: "Millimeter-Wave Radar Platform" },
     description: {
       zh: "基于 TI AWR1843 77GHz 雷达输出三维点云，为胸腔微动、姿态和步态感知提供高质量原始数据。",
@@ -41,7 +41,7 @@ const platforms = [
   },
   {
     no: "04",
-    image: "/images/platform/turtlebot4-platform.jpeg",
+    image: "/images/platform/turtlebot4-platform.webp",
     name: { zh: "TurtleBot4 移动平台", en: "TurtleBot4 Mobile Platform" },
     description: {
       zh: "作为移动验证平台，支持搭载激光雷达、深度相机等传感器，在动态场景下验证多传感器融合算法。",

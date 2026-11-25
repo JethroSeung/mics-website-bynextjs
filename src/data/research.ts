@@ -362,7 +362,7 @@ export const researchDirections: ResearchDirection[] = ([
               en: "The group collaborates closely with Jiangsu Province Hospital, where projects such as contactless atrial fibrillation monitoring based on millimeter-wave radar are already advancing in real clinical settings. Real hospital data and the practical needs of physicians are both the starting point and the benchmark of this sensing system.",
             },
             figure: {
-              src: "/images/research/medeng/hospital-collaboration.jpg",
+              src: "/images/research/medeng/hospital-collaboration.webp",
               alt: {
                 zh: "江苏省人民医院毫米波雷达无接触心电监测项目推进会现场",
                 en: "Collaboration meeting at Jiangsu Province Hospital for millimeter-wave radar contactless cardiac monitoring",
@@ -413,7 +413,7 @@ export const researchDirections: ResearchDirection[] = ([
             en: "The group has built an integrated real-time acquisition platform combining millimeter-wave radar, WiFi, and infrared sensing, supporting synchronized multi-source data collection and algorithm validation for vital sign monitoring and complex scene experiments.",
           },
           figure: {
-            src: "/images/research/medeng/multimodal-realtime-platform.jpg",
+            src: "/images/research/medeng/multimodal-realtime-platform.webp",
             alt: {
               zh: "毫米波、WiFi 与红外一体化实时采集平台实验现场",
               en: "Millimeter-wave, WiFi, and infrared integrated real-time acquisition platform",

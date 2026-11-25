@@ -183,7 +183,7 @@ const activeTrackVisible = await page.$eval("main nav a[aria-current='page']", (
 assert.equal(activeTrackVisible, true, "the active mobile track should be fully visible");
 const detailOverflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 assert.ok(detailOverflow <= 1, `detail page should not overflow horizontally (overflow: ${detailOverflow}px)`);
-assert.equal(await count("img[src='/images/recruitment/vquala-face-quality.png']"), 1);
+assert.equal(await count("img[src='/images/recruitment/vquala-face-quality.webp']"), 1);
 await page.screenshot({ path: path.join(os.tmpdir(), "mics-recruitment-mobile.png"), fullPage: false });
 await page.$eval("[aria-labelledby^='application-guide-']", (element) =>
   element.scrollIntoView({ block: "start" }),
